@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import styled from "styled-components";
 
 import NavBar from "./Navbar";
 import Logo from "./Logo";
@@ -11,6 +10,8 @@ const Nav = () => {
   const toggleMenu = () => {
     setShowResponsiveMenu((prev) => !prev);
   };
+
+  console.log(showResponsiveMenu);
 
   return (
     <>
