@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 
 import NavBar from "./Navbar";
 import Logo from "./Logo";
@@ -11,15 +12,18 @@ const Nav = () => {
     setShowResponsiveMenu((prev) => !prev);
   };
 
-  console.log(showResponsiveMenu);
-
   return (
-    <>
+    <StyledNav>
       <Logo />
       <NavBar showMenu={showResponsiveMenu} toggleMenu={toggleMenu} />
       <MenuIcon showMenu={showResponsiveMenu} toggleMenu={toggleMenu} />
-    </>
+    </StyledNav>
   );
 };
+
+const StyledNav = styled.nav`
+  display: flex;
+  justify-content: space-between;
+`;
 
 export default Nav;

@@ -21,7 +21,7 @@ const IconWrapper = styled.div`
   width: 3em;
   display: ${(props) => (props.display ? "none" : "block")};
 
-  @media (min-width: 499px) {
+  @media (min-width: 460px) {
     display: none;
   }
 `;

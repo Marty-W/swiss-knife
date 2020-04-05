@@ -15,7 +15,7 @@ const Logo = () => (
 const LogoWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 1 0.5em;
+  margin: 1em 0.5em;
   & svg {
     height: 3em;
   }
