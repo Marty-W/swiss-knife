@@ -97,6 +97,7 @@ const NavbarWrapper = styled.div`
   @media (min-width: 460px) {
     position: initial;
     display: flex;
+    justify-content: flex-end;
     height: auto;
     width: 70%;
   }
