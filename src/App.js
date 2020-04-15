@@ -1,8 +1,8 @@
 import React from "react";
-import styled from "styled-components";
-import { BrowserRouter as Router, Switch, Link, Route } from "react-router-dom";
+import styled from "styled-components/macro";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-import Nav from "./UI/Nav";
+import Navbar from "./UI/Navbar/Navbar";
 import Home from "./Sections/Home/Home";
 import Pomodoro from "./Sections/Pomodoro/Pomodoro";
 import Todo from "./Sections/Todo/Todo";
@@ -14,7 +14,7 @@ const App = () => {
   return (
     <BodyWrapper>
       <Router>
-        <Nav />
+        <Navbar />
         <Switch>
           <Route exact path="/">
             <Home />

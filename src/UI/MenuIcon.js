@@ -1,7 +1,7 @@
 import React from "react";
 
 import { ReactComponent as Menu } from "../assets/svgs/menu.svg";
-import styled from "styled-components";
+import styled from "styled-components/macro";
 
 const MenuIcon = ({ showMenu, toggleMenu }) => {
   return (
