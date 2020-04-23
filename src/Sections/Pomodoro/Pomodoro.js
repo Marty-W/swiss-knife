@@ -4,7 +4,6 @@ import { useInterval } from "../../hooks/useInterval";
 import styled from "styled-components/macro";
 
 import Timer from "./Timer";
-import TimerButtons from "./TimerButtons";
 
 const Pomodoro = () => {
   const [currentSesh, setCurrentSesh] = useState(Duration.fromMillis(0));
@@ -13,9 +12,16 @@ const Pomodoro = () => {
 
   useInterval(() => {
     if (pomoRunning && !isPaused) {
-      setCurrentSesh((prev) => prev.minus(1000));
+      setCurrentSesh((prev) => {
+        if (prev.as("milliseconds") > 0) {
+          return prev.minus(1000);
+        } else {
+          setPomoRunning(false);
+          return setCurrentSesh(Duration.fromMillis(0));
+        }
+      });
     }
-  }, 1000);
+  }, 100);
 
   const startSesh = () => {
     const startMoment = DateTime.local();

@@ -24,7 +24,14 @@ const Timer = ({
       {pomoRunning ? (
         <Modal>
           <StyledModalTimer>
-            <span>{currentSesh.toFormat("mm:ss")}</span>
+            <h2
+              css={`
+                color: white;
+              `}
+            >
+              Focus...
+            </h2>
+            <StyledTicker>{currentSesh.toFormat("mm:ss")}</StyledTicker>
             <TimerButtons
               pomoRunning={pomoRunning}
               handleReset={handleReset}
@@ -44,7 +51,7 @@ const Timer = ({
           >
             <FontAwesomeIcon icon={faChevronLeft} />
           </StyledButton>
-          <span>{currentSesh.toFormat("mm:ss")}</span>
+          <StyledTicker>{currentSesh.toFormat("mm:ss")}</StyledTicker>
           <StyledButton
             onClick={() => handleSessionLength("i")}
             pomoRunning={pomoRunning}
@@ -71,22 +78,21 @@ const StyledModalTimer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 
   & span {
     font-size: 2rem;
     color: white;
-    margin: 0 auto;
+  }
+
+  & button {
+    color: white;
   }
 `;
 
 const StyledTimer = styled.p`
   font-size: 2rem;
   text-align: center;
-
-  & span {
-    margin: 0 1em;
-    user-select: none;
-  }
 `;
 
 const StyledButton = styled.button`
@@ -95,6 +101,12 @@ const StyledButton = styled.button`
   border: none;
   font-size: 1.5rem;
   display: ${(props) => (props.pomoRunning ? "none" : "inline-block")};
+`;
+
+const StyledTicker = styled.span`
+  display: inline-block;
+  margin: 0 auto;
+  user-select: none;
 `;
 
 export default Timer;
