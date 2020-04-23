@@ -6,23 +6,22 @@ import { ReactComponent as Knife } from "./../assets/svgs/swiss-army-knife.svg";
 const Logo = () => (
   <LogoWrapper>
     <Knife />
-    <LogoText>
-      Swiss <span>Knife</span>
-    </LogoText>
+    <LogoText>Swiss Knife</LogoText>
   </LogoWrapper>
 );
 
 const LogoWrapper = styled.div`
+  width: 100%;
+  text-align: center;
   display: flex;
+  justify-content: center;
   align-items: center;
-  margin: 1em 0.5em;
   & svg {
     height: 3em;
   }
 `;
 
 const LogoText = styled.span`
-  display: block;
   font-family: "Amatic SC", sans-serif;
   margin-left: 0.5em;
   font-size: 1.3em;

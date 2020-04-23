@@ -1,56 +1,70 @@
-import React from "react";
+import React, { useState } from "react";
+import { DateTime, Interval, Duration } from "luxon";
+import { useInterval } from "../../hooks/useInterval";
 import styled from "styled-components/macro";
-import { Route, Switch, Link } from "react-router-dom";
 
-import Card from "../../UI/Card";
-import { ReactComponent as Break } from "../../assets/svgs/break.svg";
-import { ReactComponent as Free } from "../../assets/svgs/free.svg";
+import Timer from "./Timer";
+import TimerButtons from "./TimerButtons";
 
 const Pomodoro = () => {
+  const [currentSesh, setCurrentSesh] = useState(Duration.fromMillis(0));
+  const [pomoRunning, setPomoRunning] = useState(false);
+  const [isPaused, setIsPaused] = useState(false);
+
+  useInterval(() => {
+    if (pomoRunning && !isPaused) {
+      setCurrentSesh((prev) => prev.minus(1000));
+    }
+  }, 1000);
+
+  const startSesh = () => {
+    const startMoment = DateTime.local();
+    const finishedMoment = startMoment.plus({ minutes: currentSesh.minutes });
+    const momentDuration = Interval.fromDateTimes(
+      startMoment,
+      finishedMoment
+    ).toDuration();
+    setCurrentSesh(momentDuration);
+    setPomoRunning(true);
+  };
+
+  const handleSessionLength = (type) => {
+    setCurrentSesh((prev) => {
+      return type === "i"
+        ? prev.plus({ minutes: 1 })
+        : prev.minus({ minutes: 1 });
+    });
+  };
+
+  const handlePause = () => {
+    setIsPaused((prev) => !prev);
+  };
+
+  const handleReset = () => {
+    setPomoRunning(false);
+    setCurrentSesh(Duration.fromMillis(0));
+  };
+
   return (
-    <>
-      <h1
-        css={`
-          text-align: center;
-        `}
-      >
-        Pomodoro
-      </h1>
-      <CardWrapper>
-        <Link to="/pomodoro/freemode">
-          <Card>
-            <h2>Free Mode</h2>
-            <Free />
-            <p>
-              My style. Just pick a duration for your session and break and
-              cycle these two. You can change the time after each.
-            </p>
-          </Card>
-        </Link>
-        <Link to="/pomodoro/breakmode">
-          <Card>
-            <h2>Break Mode</h2>
-            <Break />
-            <p>
-              Classic Pomodoro style, developed by Francesco Cirillo. Pick your
-              session duration, break duration and number of sessions to have a
-              large break.{" "}
-            </p>
-          </Card>
-        </Link>
-      </CardWrapper>
-    </>
+    <PomoWrapper>
+      <h1>Pomodoro</h1>
+      <Timer
+        handleSessionLength={handleSessionLength}
+        pomoRunning={pomoRunning}
+        currentSesh={currentSesh}
+        handleReset={handleReset}
+        handlePause={handlePause}
+        isPaused={isPaused}
+        startSesh={startSesh}
+      />
+    </PomoWrapper>
   );
 };
 
-const CardWrapper = styled.div`
+const PomoWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
-
-  @media (min-width: 490px) {
-    flex-direction: row;
-  }
+  justify-content: center;
 `;
 
 export default Pomodoro;

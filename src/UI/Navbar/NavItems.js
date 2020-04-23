@@ -12,20 +12,28 @@ import {
 const NavItems = () => (
   <StyledUl>
     <li>
-      <FontAwesomeIcon icon={faTachometerAlt} />
-      <Link to="/">Dashboard</Link>
+      <Link to="/">
+        <FontAwesomeIcon icon={faTachometerAlt} />
+        <span>Dashboard</span>
+      </Link>
     </li>
     <li>
-      <FontAwesomeIcon icon={faHourglassHalf} />
-      <Link to="/pomodoro">Pomo</Link>
+      <Link to="/pomodoro">
+        <FontAwesomeIcon icon={faHourglassHalf} />
+        <span>Pomo</span>
+      </Link>
     </li>
     <li>
-      <FontAwesomeIcon icon={faRedoAlt} />
-      <Link to="/habits">Habits</Link>
+      <Link to="/habits">
+        <FontAwesomeIcon icon={faRedoAlt} />
+        <span>Habits</span>
+      </Link>
     </li>
     <li>
-      <FontAwesomeIcon icon={faClipboardCheck} />
-      <Link to="/todo">Todos</Link>
+      <Link to="/todo">
+        <FontAwesomeIcon icon={faClipboardCheck} />
+        <span>Todos</span>
+      </Link>
     </li>
   </StyledUl>
 );
@@ -39,7 +47,7 @@ const StyledUl = styled.ul`
   justify-content: space-around;
   align-items: center;
 
-  & li {
+  & li a {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -48,6 +56,7 @@ const StyledUl = styled.ul`
   & svg {
     color: white;
     display: block;
+    padding: 0.1em;
   }
 
   & a {

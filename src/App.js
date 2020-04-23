@@ -7,14 +7,13 @@ import Home from "./Sections/Home/Home";
 import Pomodoro from "./Sections/Pomodoro/Pomodoro";
 import Todo from "./Sections/Todo/Todo";
 import Habits from "./Sections/Habits/Habits";
-import FreeMode from "./Sections/Pomodoro/FreeMode/FreeMode";
-import BreakMode from "./Sections/Pomodoro/BreakMode/BreakMode";
+import Logo from "./UI/Logo";
 
 const App = () => {
   return (
     <BodyWrapper>
       <Router>
-        <Navbar />
+        <Logo />
         <Switch>
           <Route exact path="/">
             <Home />
@@ -28,9 +27,8 @@ const App = () => {
           <Route path="/habits">
             <Habits />
           </Route>
-          <Route component={FreeMode} path="/pomodoro/freemode" />
-          <Route component={BreakMode} path="/pomodoro/breakmode" />
         </Switch>
+        <Navbar />
       </Router>
     </BodyWrapper>
   );
