@@ -1,39 +1,43 @@
 {
+  "env": {
+    "browser": true,
+    "es6": true
+  },
   "extends": [
-    "eslint:recommended",
-    "plugin:import/errors",
-    "plugin:react/recommended",
+    "airbnb",
+    "airbnb/hooks",
     "plugin:jsx-a11y/recommended",
     "prettier",
     "prettier/react"
   ],
-  "rules": {
-    "react/prop-types": 0,
-    "react-hooks/rules-of-hooks": "error",
-    "no-console": "warn"
+  "globals": {
+    "Atomics": "readonly",
+    "SharedArrayBuffer": "readonly"
   },
-  "plugins": [
-    "react",
-    "import",
-    "jsx-a11y",
-    "react-hooks",
-    "better-styled-components"
-  ],
   "parserOptions": {
-    "ecmaVersion": 2020,
-    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
-    }
+    },
+    "ecmaVersion": 2018,
+    "sourceType": "module"
   },
-  "env": {
-    "es6": true,
-    "browser": true,
-    "node": true
-  },
-  "settings": {
-    "react": {
-      "version": "detect"
-    }
+  "plugins": ["jsx-a11y", "prettier"],
+  "rules": {
+    "prettier/prettier": ["error"],
+    "semi": 0,
+    "no-restricted-imports": [
+      "error",
+      {
+        "paths": [
+          {
+            "name": "styled-components",
+            "message": "Please import from styled-components/macro."
+          }
+        ],
+        "patterns": ["!styled-components/macro"]
+      }
+    ],
+    "react/prop-types": 0,
+    "react/jsx-props-no-spreading": 0
   }
 }
