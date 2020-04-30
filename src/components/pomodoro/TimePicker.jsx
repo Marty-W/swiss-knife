@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import styled from 'styled-components/macro'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,7 +7,7 @@ import {
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
-const Ticker = ({ duration, dispatch }) => (
+const TimePicker = ({ duration, dispatch }) => (
   <StyledTimer>
     <StyledButton
       disabled={duration.as('milliseconds') === 0}
@@ -43,4 +43,4 @@ const StyledTicker = styled.span`
   user-select: none;
 `
 
-export default Ticker
+export default TimePicker

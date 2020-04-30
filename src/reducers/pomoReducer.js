@@ -24,14 +24,6 @@ const pomoReducer = (state, action) => {
         duration: Duration.fromMillis(1000),
         isRunning: false,
       }
-    case 'POMO_TICK':
-      return {
-        ...state,
-        duration:
-          state.duration.as('milliseconds') > 0
-            ? state.duration.minus(1000)
-            : state.duration,
-      }
     default:
       throw new Error('Unexpected action')
   }
