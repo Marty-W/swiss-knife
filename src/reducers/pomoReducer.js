@@ -18,11 +18,27 @@ const pomoReducer = (state, action) => {
         isRunning: true,
         timeEntries: state.timeEntries.push([DateTime.local()]),
       }
-    case 'POMO_STOP':
+    case 'POMO_ABORT':
       return {
         ...state,
-        duration: Duration.fromMillis(1000),
+        duration: Duration.fromMillis(0),
         isRunning: false,
+      }
+    case 'POMO_END':
+      return {
+        ...state,
+        isRunning: true,
+        isBreak: true,
+      }
+    case 'POMO_BREAK':
+      return {
+        ...state,
+        isBreak: true,
+      }
+    case 'POMO_PAUSE':
+      return {
+        ...state,
+        isPaused: !state.isPaused,
       }
     default:
       throw new Error('Unexpected action')

@@ -11,25 +11,28 @@ import pomoReducer from '../reducers/pomoReducer'
 const initPomoState = {
   duration: Duration.fromMillis(0),
   isRunning: false,
+  isPaused: false,
+  isBreak: false,
   timeEntries: [],
 }
 
 const Pomodoro = () => {
   const [pomoState, dispatch] = useReducer(pomoReducer, initPomoState)
+  const { duration, isRunning, isPaused } = pomoState
 
   return (
     <>
-      {pomoState.isRunning && (
+      {isRunning && (
         <FocusMode
-          duration={pomoState.duration}
-          isRunning={pomoState.isRunning}
-          isPaused={pomoState.isPaused}
+          duration={duration}
+          isRunning={isRunning}
+          isPaused={isPaused}
           dispatch={dispatch}
         />
       )}
       <PomoWrapper>
         <h1>Pomodoro</h1>
-        <TimePicker duration={pomoState.duration} dispatch={dispatch} />
+        <TimePicker duration={duration} dispatch={dispatch} />
         <Button onClick={() => dispatch({ type: 'POMO_START' })}>Start</Button>
       </PomoWrapper>
     </>

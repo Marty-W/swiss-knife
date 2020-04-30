@@ -3,10 +3,12 @@ import styled from 'styled-components/macro'
 
 import Button from '../UI/Button'
 
-const TimerButtons = ({ dispatch, handlePause, isPaused }) => (
+const TimerButtons = ({ dispatch, isPaused }) => (
   <StyledButtons>
-    <Button onClick={handlePause}>{isPaused ? 'Continue' : 'Pause'}</Button>
-    <Button onClick={() => dispatch({ type: 'POMO_STOP' })}>Reset</Button>
+    <Button onClick={() => dispatch({ type: 'POMO_PAUSE' })}>
+      {isPaused ? 'Continue' : 'Pause'}
+    </Button>
+    <Button onClick={() => dispatch({ type: 'POMO_ABORT' })}>Abort</Button>
   </StyledButtons>
 )
 

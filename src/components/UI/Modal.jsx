@@ -25,7 +25,7 @@ const StyledModal = styled.div`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.9);
-  z-index: 10;
+  z-index: 1;
 `
 
 export default Modal
