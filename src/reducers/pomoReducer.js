@@ -1,4 +1,4 @@
-import { DateTime, Duration } from 'luxon'
+import { Duration } from 'luxon'
 
 const pomoReducer = (state, action) => {
   switch (action.type) {
@@ -15,30 +15,28 @@ const pomoReducer = (state, action) => {
     case 'POMO_START':
       return {
         ...state,
-        isRunning: true,
-        timeEntries: state.timeEntries.push([DateTime.local()]),
+        isModalOpen: true,
+        isPomoRunning: true,
+        isPomoPaused: false,
       }
     case 'POMO_ABORT':
       return {
         ...state,
         duration: Duration.fromMillis(0),
-        isRunning: false,
-      }
-    case 'POMO_END':
-      return {
-        ...state,
-        isRunning: true,
-        isBreak: true,
-      }
-    case 'POMO_BREAK':
-      return {
-        ...state,
-        isBreak: true,
+        isPomoRunning: false,
+        isModalOpen: false,
       }
     case 'POMO_PAUSE':
       return {
         ...state,
-        isPaused: !state.isPaused,
+        isPomoRunning: false,
+        isPomoPaused: !state.isPaused,
+      }
+    case 'POMO_CONTINUE':
+      return {
+        ...state,
+        isPomoRunning: true,
+        isPomoPaused: false,
       }
     default:
       throw new Error('Unexpected action')

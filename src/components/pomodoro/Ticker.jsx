@@ -1,20 +1,23 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { Duration } from 'luxon'
 
 import { useInterval } from '../../hooks/useInterval'
+import { PomoContext } from '../../context/pomoContext'
 
-const Ticker = ({ duration, isPaused }) => {
+const Ticker = () => {
   const [localSessionLength, setLocalSessionLength] = useState(() =>
     Duration.fromMillis(0)
   )
+  const [state] = useContext(PomoContext)
+  const { duration, isPomoRunning } = state
 
   useEffect(() => {
     setLocalSessionLength(duration)
   }, [duration])
 
   useInterval(() => {
-    if (!isPaused) {
+    if (isPomoRunning) {
       setLocalSessionLength((prev) => {
         if (prev.as('milliseconds') > 0) {
           return prev.minus(1000)
@@ -24,14 +27,13 @@ const Ticker = ({ duration, isPaused }) => {
     }
   }, 1000)
 
-  return <StyledTimeLeft>{localSessionLength.toFormat('mm:ss')}</StyledTimeLeft>
+  return <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
 }
 
 export default Ticker
 
-const StyledTimeLeft = styled.span`
+const StyledTicker = styled.span`
   color: ${(props) => props.theme.colors.dark};
   font-size: 1.8rem;
   margin: 1em;
-  z-index: 10;
 `

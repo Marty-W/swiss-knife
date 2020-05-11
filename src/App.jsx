@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import { PomoContextProvider } from './context/pomoContext'
 
 import Navbar from './components/UI/Navbar/Navbar'
 import Home from './pages/Home'
@@ -19,7 +20,9 @@ const App = () => {
             <Home />
           </Route>
           <Route exact path="/pomodoro">
-            <Pomodoro />
+            <PomoContextProvider>
+              <Pomodoro />
+            </PomoContextProvider>
           </Route>
           <Route path="/todo">
             <Todo />

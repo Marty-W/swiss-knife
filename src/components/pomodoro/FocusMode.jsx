@@ -1,25 +1,30 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled, { keyframes } from 'styled-components/macro'
+import { PomoContext } from '../../context/pomoContext'
 
 import Modal from '../UI/Modal'
-import Ticker from './TimeLeft'
+import Ticker from './Ticker'
 import TimerHeading from './TimerHeading'
 import TimerButtons from './TimerButtons'
-import TimePicker from './TimePicker'
 
-const FocusMode = ({ dispatch, duration, isBreak, isPaused }) => (
-  <>
+const FocusMode = () => {
+  const [state] = useContext(PomoContext)
+  const { isPomoPaused, duration } = state
+
+  return (
     <Modal>
       <FocusWrapper>
-        <TimerHeading isBreak={isBreak} />
-        {isBreak && <TimePicker duration={duration} dispatch={dispatch} />}
-        <Ticker duration={duration} isPaused={isPaused} />
-        <TimerButtons dispatch={dispatch} isPaused={isPaused} />
+        <TimerHeading />
+        <Ticker />
+        <TimerButtons />
       </FocusWrapper>
-      <TickAnimationDiv duration={duration.as('seconds')} isPaused={isPaused} />
+      <TickAnimationDiv
+        duration={duration.as('seconds')}
+        isPaused={isPomoPaused}
+      />
     </Modal>
-  </>
-)
+  )
+}
 
 const fillAnimation = keyframes`
   from {
@@ -38,7 +43,10 @@ const FocusWrapper = styled.div`
   align-items: center;
   justify-content: center;
   position: relative;
-  z-index: -1;
+
+  & > * {
+    z-index: 10;
+  }
 `
 
 const TickAnimationDiv = styled.div`

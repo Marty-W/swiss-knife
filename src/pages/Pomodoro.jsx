@@ -1,38 +1,21 @@
-import React, { useReducer } from 'react'
-import { Duration } from 'luxon'
+import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 
 import TimePicker from '../components/pomodoro/TimePicker'
 import Button from '../components/UI/Button'
 import FocusMode from '../components/pomodoro/FocusMode'
-
-import pomoReducer from '../reducers/pomoReducer'
-
-const initPomoState = {
-  duration: Duration.fromMillis(0),
-  isRunning: false,
-  isPaused: false,
-  isBreak: false,
-  timeEntries: [],
-}
+import { PomoContext } from '../context/pomoContext'
 
 const Pomodoro = () => {
-  const [pomoState, dispatch] = useReducer(pomoReducer, initPomoState)
-  const { duration, isRunning, isPaused } = pomoState
+  const [state, dispatch] = useContext(PomoContext)
+  const { isModalOpen } = state
 
   return (
     <>
-      {isRunning && (
-        <FocusMode
-          duration={duration}
-          isRunning={isRunning}
-          isPaused={isPaused}
-          dispatch={dispatch}
-        />
-      )}
+      {isModalOpen && <FocusMode />}
       <PomoWrapper>
         <h1>Pomodoro</h1>
-        <TimePicker duration={duration} dispatch={dispatch} />
+        <TimePicker />
         <Button onClick={() => dispatch({ type: 'POMO_START' })}>Start</Button>
       </PomoWrapper>
     </>
@@ -41,6 +24,7 @@ const Pomodoro = () => {
 
 const PomoWrapper = styled.div`
   display: flex;
+
   flex-direction: column;
   text-align: center;
   height: 100%;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -7,20 +7,27 @@ import {
   faChevronLeft,
 } from '@fortawesome/free-solid-svg-icons'
 
-const TimePicker = ({ duration, dispatch }) => (
-  <StyledTimer>
-    <StyledButton
-      disabled={duration.as('milliseconds') === 0}
-      onClick={() => dispatch({ type: 'DUR_MINUS' })}
-    >
-      <FontAwesomeIcon icon={faChevronLeft} />
-    </StyledButton>
-    <StyledTicker>{duration.toFormat('mm:ss')}</StyledTicker>
-    <StyledButton onClick={() => dispatch({ type: 'DUR_PLUS' })}>
-      <FontAwesomeIcon icon={faChevronRight} />
-    </StyledButton>
-  </StyledTimer>
-)
+import { PomoContext } from '../../context/pomoContext'
+
+const TimePicker = () => {
+  const [state, dispatch] = useContext(PomoContext)
+  const { duration } = state
+
+  return (
+    <StyledTimer>
+      <StyledButton
+        disabled={duration.as('milliseconds') === 0}
+        onClick={() => dispatch({ type: 'DUR_MINUS' })}
+      >
+        <FontAwesomeIcon icon={faChevronLeft} />
+      </StyledButton>
+      <StyledTicker>{duration.toFormat('mm:ss')}</StyledTicker>
+      <StyledButton onClick={() => dispatch({ type: 'DUR_PLUS' })}>
+        <FontAwesomeIcon icon={faChevronRight} />
+      </StyledButton>
+    </StyledTimer>
+  )
+}
 
 const StyledTimer = styled.p`
   font-size: 2rem;
