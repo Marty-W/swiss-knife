@@ -27,7 +27,7 @@ const Ticker = () => {
     }
     if (localSessionLength.as('milliseconds') === 0) {
       if (!isBreak) {
-        dispatch({ type: 'BREAK_SET' })
+        dispatch({ type: 'POMO_FINISH' })
       } else if (isBreak) {
         dispatch({ type: 'POMO_ABORT' })
       }

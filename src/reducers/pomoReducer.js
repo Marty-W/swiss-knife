@@ -12,6 +12,16 @@ const pomoReducer = (state, action) => {
         ...state,
         duration: state.duration.plus(Duration.fromObject({ minutes: 5 })),
       }
+    case 'BREAK_PLUS':
+      return {
+        ...state,
+        duration: state.duration.plus(Duration.fromObject({ minutes: 1 })),
+      }
+    case 'BREAK_MINUS':
+      return {
+        ...state,
+        duration: state.duration.minus(Duration.fromObject({ minutes: 1 })),
+      }
     case 'POMO_START':
       return {
         ...state,
@@ -40,7 +50,7 @@ const pomoReducer = (state, action) => {
         ...state,
         isPaused: false,
       }
-    case 'BREAK_SET':
+    case 'POMO_FINISH':
       return {
         ...state,
         isBreak: true,
@@ -48,6 +58,7 @@ const pomoReducer = (state, action) => {
         isRunning: false,
         isPomo: false,
         isModalOpen: true,
+        duration: Duration.fromMillis(0),
       }
     case 'BREAK_START':
       return {

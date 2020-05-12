@@ -7,6 +7,7 @@ import Ticker from './Ticker'
 import TimePicker from './TimePicker'
 import TimerHeading from './TimerHeading'
 import TimerButtons from './TimerButtons'
+import TimerEstimate from './TimerEstimate'
 
 const FocusMode = () => {
   const [state] = useContext(PomoContext)
@@ -15,6 +16,7 @@ const FocusMode = () => {
   return (
     <Modal>
       <FocusWrapper>
+        <TimerEstimate />
         <TimerHeading />
         {isRunning && <Ticker />}
         {!isRunning && <TimePicker />}

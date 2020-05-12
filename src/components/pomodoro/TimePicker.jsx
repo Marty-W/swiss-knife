@@ -13,18 +13,34 @@ const TimePicker = () => {
   const [state, dispatch] = useContext(PomoContext)
   const { duration, isBreak } = state
 
+  const handlePlus = () => {
+    if (isBreak) {
+      dispatch({ type: 'BREAK_PLUS' })
+    } else {
+      dispatch({ type: 'DUR_PLUS' })
+    }
+  }
+
+  const handleMinus = () => {
+    if (isBreak) {
+      dispatch({ type: 'BREAK_MINUS' })
+    } else {
+      dispatch({ type: 'DUR_MINUS' })
+    }
+  }
+
   return (
     <StyledTimer>
       <StyledButton
         disabled={duration.as('milliseconds') === 0}
-        onClick={() => dispatch({ type: 'DUR_MINUS' })}
+        onClick={handleMinus}
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </StyledButton>
       <StyledTicker isBreak={isBreak}>
         {duration.toFormat('mm:ss')}
       </StyledTicker>
-      <StyledButton onClick={() => dispatch({ type: 'DUR_PLUS' })}>
+      <StyledButton onClick={handlePlus}>
         <FontAwesomeIcon icon={faChevronRight} />
       </StyledButton>
     </StyledTimer>
