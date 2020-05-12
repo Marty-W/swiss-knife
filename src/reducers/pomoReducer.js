@@ -16,27 +16,44 @@ const pomoReducer = (state, action) => {
       return {
         ...state,
         isModalOpen: true,
-        isPomoRunning: true,
-        isPomoPaused: false,
+        isRunning: true,
+        isPomo: true,
+        isPaused: false,
+        isBreak: false,
       }
     case 'POMO_ABORT':
       return {
         ...state,
         duration: Duration.fromMillis(0),
-        isPomoRunning: false,
+        isRunning: false,
         isModalOpen: false,
+        isPomo: false,
+        isBreak: false,
       }
     case 'POMO_PAUSE':
       return {
         ...state,
-        isPomoRunning: false,
-        isPomoPaused: !state.isPaused,
+        isPaused: true,
       }
     case 'POMO_CONTINUE':
       return {
         ...state,
-        isPomoRunning: true,
-        isPomoPaused: false,
+        isPaused: false,
+      }
+    case 'BREAK_SET':
+      return {
+        ...state,
+        isBreak: true,
+        isPaused: true,
+        isRunning: false,
+        isPomo: false,
+        isModalOpen: true,
+      }
+    case 'BREAK_START':
+      return {
+        ...state,
+        isPaused: false,
+        isRunning: true,
       }
     default:
       throw new Error('Unexpected action')

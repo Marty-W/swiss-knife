@@ -6,8 +6,10 @@ import pomoReducer from '../reducers/pomoReducer'
 const initPomoState = {
   duration: Duration.fromMillis(0),
   isModalOpen: false,
-  isPomoRunning: false,
-  isPomoPaused: false,
+  isRunning: false,
+  isPaused: false,
+  isBreak: false,
+  isPomo: false,
 }
 
 const PomoContext = createContext()

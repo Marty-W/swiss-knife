@@ -9,15 +9,15 @@ const Ticker = () => {
   const [localSessionLength, setLocalSessionLength] = useState(() =>
     Duration.fromMillis(0)
   )
-  const [state] = useContext(PomoContext)
-  const { duration, isPomoRunning } = state
+  const [state, dispatch] = useContext(PomoContext)
+  const { duration, isRunning, isPaused, isBreak } = state
 
   useEffect(() => {
     setLocalSessionLength(duration)
   }, [duration])
 
   useInterval(() => {
-    if (isPomoRunning) {
+    if (isRunning && !isPaused) {
       setLocalSessionLength((prev) => {
         if (prev.as('milliseconds') > 0) {
           return prev.minus(1000)
@@ -25,9 +25,20 @@ const Ticker = () => {
         return prev
       })
     }
+    if (localSessionLength.as('milliseconds') === 0) {
+      if (!isBreak) {
+        dispatch({ type: 'BREAK_SET' })
+      } else if (isBreak) {
+        dispatch({ type: 'POMO_ABORT' })
+      }
+    }
   }, 1000)
 
-  return <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
+  return (
+    <>
+      <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
+    </>
+  )
 }
 
 export default Ticker

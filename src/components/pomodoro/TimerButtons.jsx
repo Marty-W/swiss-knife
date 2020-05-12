@@ -6,18 +6,29 @@ import { PomoContext } from '../../context/pomoContext'
 
 const TimerButtons = () => {
   const [state, dispatch] = useContext(PomoContext)
-  const { isPomoPaused } = state
+  const { isPaused, isBreak, isRunning } = state
 
   const handlePomoPause = () => {
-    dispatch({ type: isPomoPaused ? 'POMO_CONTINUE' : 'POMO_PAUSE' })
+    dispatch({ type: isPaused ? 'POMO_CONTINUE' : 'POMO_PAUSE' })
   }
 
   return (
     <StyledButtons>
-      <Button onClick={handlePomoPause}>
-        {isPomoPaused ? 'Continue' : 'Pause'}
-      </Button>
-      <Button onClick={() => dispatch({ type: 'POMO_ABORT' })}>Abort</Button>
+      {isBreak && !isRunning && (
+        <Button onClick={() => dispatch({ type: 'BREAK_START' })}>
+          Start break
+        </Button>
+      )}
+      {!isBreak && (
+        <>
+          <Button onClick={handlePomoPause}>
+            {isPaused ? 'Continue' : 'Pause'}
+          </Button>
+          <Button onClick={() => dispatch({ type: 'POMO_ABORT' })}>
+            Abort
+          </Button>
+        </>
+      )}
     </StyledButtons>
   )
 }

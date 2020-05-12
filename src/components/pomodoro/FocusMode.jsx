@@ -4,23 +4,26 @@ import { PomoContext } from '../../context/pomoContext'
 
 import Modal from '../UI/Modal'
 import Ticker from './Ticker'
+import TimePicker from './TimePicker'
 import TimerHeading from './TimerHeading'
 import TimerButtons from './TimerButtons'
 
 const FocusMode = () => {
   const [state] = useContext(PomoContext)
-  const { isPomoPaused, duration } = state
+  const { isRunning, isPaused, isPomo, duration } = state
 
   return (
     <Modal>
       <FocusWrapper>
         <TimerHeading />
-        <Ticker />
+        {isRunning && <Ticker />}
+        {!isRunning && <TimePicker />}
         <TimerButtons />
       </FocusWrapper>
       <TickAnimationDiv
         duration={duration.as('seconds')}
-        isPaused={isPomoPaused}
+        isPaused={isPaused}
+        isPomo={isPomo}
       />
     </Modal>
   )
@@ -50,7 +53,8 @@ const FocusWrapper = styled.div`
 `
 
 const TickAnimationDiv = styled.div`
-  background-color: ${(props) => props.theme.colors.red};
+  background-color: ${(props) =>
+    props.isPomo ? props.theme.colors.red : 'green'};
   width: 100%;
   position: absolute;
   bottom: 0;

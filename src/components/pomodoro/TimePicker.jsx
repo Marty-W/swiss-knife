@@ -11,7 +11,7 @@ import { PomoContext } from '../../context/pomoContext'
 
 const TimePicker = () => {
   const [state, dispatch] = useContext(PomoContext)
-  const { duration } = state
+  const { duration, isBreak } = state
 
   return (
     <StyledTimer>
@@ -21,7 +21,9 @@ const TimePicker = () => {
       >
         <FontAwesomeIcon icon={faChevronLeft} />
       </StyledButton>
-      <StyledTicker>{duration.toFormat('mm:ss')}</StyledTicker>
+      <StyledTicker isBreak={isBreak}>
+        {duration.toFormat('mm:ss')}
+      </StyledTicker>
       <StyledButton onClick={() => dispatch({ type: 'DUR_PLUS' })}>
         <FontAwesomeIcon icon={faChevronRight} />
       </StyledButton>
@@ -44,7 +46,8 @@ const StyledButton = styled.button`
 `
 
 const StyledTicker = styled.span`
-  color: ${(props) => props.theme.colors.white};
+  color: ${(props) =>
+    props.isBreak ? props.theme.colors.dark : props.theme.colors.white};
   display: inline-block;
   margin: 0 auto;
   user-select: none;
