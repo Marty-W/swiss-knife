@@ -7,13 +7,13 @@ import { PomoContext } from '../../context/pomoContext'
 const TimerEstimate = () => {
   const [seshEnd, setSeshEnd] = useState()
   const [state] = useContext(PomoContext)
-  const { duration } = state
+  const { duration, isPaused } = state
 
   useEffect(() => {
     const now = DateTime.local()
     const seshEnds = now.plus(duration).toLocaleString(DateTime.TIME_SIMPLE)
     setSeshEnd(seshEnds)
-  }, [duration])
+  }, [duration, isPaused])
 
   return (
     <>
