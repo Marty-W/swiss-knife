@@ -62,8 +62,7 @@ const StyledButton = styled.button`
 `
 
 const StyledTicker = styled.span`
-  color: ${(props) =>
-    props.isBreak ? props.theme.colors.dark : props.theme.colors.white};
+  color: ${(props) => props.theme.colors.white};
   display: inline-block;
   margin: 0 auto;
   user-select: none;

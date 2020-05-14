@@ -34,6 +34,7 @@ const theme = {
     purple: '#3B3355',
     white: '#EAF2EF',
     dark: '#0F1020',
+    green: '#283618',
   },
 }
 

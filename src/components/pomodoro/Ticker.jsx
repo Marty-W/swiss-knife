@@ -44,7 +44,7 @@ const Ticker = () => {
 export default Ticker
 
 const StyledTicker = styled.span`
-  color: ${(props) => props.theme.colors.dark};
-  font-size: 1.8rem;
+  color: ${(props) => props.theme.colors.white};
+  font-size: 2.3rem;
   margin: 1em;
 `

@@ -11,13 +11,14 @@ const TimerHeading = () => {
     <StyledTimerHeading>
       {isBreak
         ? 'Break time. Pick duration of break and go grab yourself some coffee!'
-        : 'Focus...'}
+        : 'Focus Time !'}
     </StyledTimerHeading>
   )
 }
 
 const StyledTimerHeading = styled.h2`
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.colors.white};
+  font-size: 2rem;
 `
 
 export default TimerHeading

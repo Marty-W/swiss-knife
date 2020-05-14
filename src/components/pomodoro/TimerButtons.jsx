@@ -39,8 +39,8 @@ const StyledButtons = styled.div`
   justify-content: space-around;
 
   & button {
-    border-color: ${(props) => props.theme.colors.dark};
-    color: ${(props) => props.theme.colors.dark};
+    border-color: ${(props) => props.theme.colors.white};
+    color: ${(props) => props.theme.colors.white};
   }
 `
 

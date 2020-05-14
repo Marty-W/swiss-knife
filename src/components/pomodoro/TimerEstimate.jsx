@@ -23,10 +23,11 @@ const TimerEstimate = () => {
 }
 
 const StyledEstimate = styled.span`
-  color: ${(props) => props.theme.colors.dark};
+  color: ${(props) => props.theme.colors.white};
   position: fixed;
   top: 0.2em;
   right: 0.2em;
+  padding: 0.5em;
 `
 
 export default TimerEstimate
