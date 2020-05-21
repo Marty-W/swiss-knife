@@ -1,26 +1,34 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Card from '../../UI/Card'
+import Card from '../UI/Card'
 
 const Info = () => (
   <InfoWrapper>
-    <Card>
+    <PomoInfo>
       <p>
-        Most Pomo apps let you define short breaks, long breaks and I don't find
-        that really helpful.
+        This is the simplest and maybe the most efficient productivity tool in
+        my arsenal. Just set a timer for the time period that suits you, start
+        the timer, focus on your task, take a break and repeat.
       </p>
-    </Card>
-    <Card>Rigid systems dont work very well with my flow</Card>
+    </PomoInfo>
+    <PomoInfo>
+      <p>
+        I am not a big fan of rigid timers with set time so I skipped that
+        feature. What suits me the best is to adjust the time based on my
+        current attention span. Sometimes its 15, sometimes 50 minutes.
+      </p>
+    </PomoInfo>
   </InfoWrapper>
 )
 
 const InfoWrapper = styled.div`
   display: flex;
+  flex-direction: column;
+`
 
-  & p {
-    font-size: 0.8em;
-  }
+const PomoInfo = styled(Card)`
+  font-size: 1.8rem;
 `
 
 export default Info

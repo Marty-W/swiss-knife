@@ -4,11 +4,13 @@ import styled from 'styled-components/macro'
 const Card = ({ children }) => <SCard>{children}</SCard>
 
 const SCard = styled.div`
-  background-color: ${(props) => props.theme.colors.white};
-  color: ${(props) => props.theme.colors.dark};
+  border: 2px solid ${(props) => props.theme.colors.red};
+  color: ${(props) => props.theme.colors.white};
   padding: 0.5em 1em;
   border-radius: 4px;
   margin: 1em;
+  text-align: left;
+  line-height: 1.5;
 `
 
 export default Card

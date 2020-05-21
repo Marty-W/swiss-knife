@@ -14,9 +14,9 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-         font-family: 'Oswald', sans-serif;
-         background: ${(props) => props.theme.colors.dark};
-         color: ${(props) => props.theme.colors.white}
+         font-family: 'Raleway', sans-serif;
+         background: #0F1020;
+         color: #EAF2EF;
     }
 
     h1 {
@@ -24,18 +24,4 @@ const GlobalStyle = createGlobalStyle`
     }
 `
 
-const theme = {
-  fonts: {
-    heading: 'Amatic SC',
-  },
-  colors: {
-    grey: '#303036',
-    red: '#CC2936',
-    purple: '#3B3355',
-    white: '#EAF2EF',
-    dark: '#0F1020',
-    green: '#283618',
-  },
-}
-
-export { GlobalStyle, theme }
+export default GlobalStyle

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components/macro'
+import { useHistory } from 'react-router-dom'
 
 const modalRoot = document.getElementById('modal')
 
-const Modal = ({ children }) => {
+const Modal = ({ children, type }) => {
   const elRef = useRef(null)
   if (!elRef.current) {
     elRef.current = document.createElement('div')
@@ -15,17 +16,42 @@ const Modal = ({ children }) => {
     return () => modalRoot.removeChild(elRef.current)
   }, [])
 
-  return createPortal(<StyledModal>{children}</StyledModal>, elRef.current)
+  const history = useHistory()
+
+  return createPortal(
+    type === 'center' ? (
+      <StyledCenterModal onClick={history.goBack}>
+        <div>{children}</div>
+      </StyledCenterModal>
+    ) : (
+      <StyledFullModal>{children}</StyledFullModal>
+    ),
+    elRef.current
+  )
 }
 
-const StyledModal = styled.div`
-  position: absolute;
+const StyledFullModal = styled.div`
+  position: fixed;
   top: 0;
   left: 0;
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.95);
-  z-index: 1;
+  z-index: 10;
+`
+
+const StyledCenterModal = styled(StyledFullModal)`
+  background-color: rgba(0, 0, 0, 0.8);
+  & > div {
+    background-color: #eaf2ef;
+    color: #000;
+    position: fixed;
+    width: 80%;
+    height: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `
 
 export default Modal

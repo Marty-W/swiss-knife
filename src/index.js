@@ -1,19 +1,19 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { ThemeProvider } from 'styled-components/macro'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import './index.css'
 
-import { theme, GlobalStyle } from './theme/global-style'
+import GlobalStyle from './theme/global-style'
+import Theme from './context/Theme'
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
+    <Theme>
       <GlobalStyle />
       <App />
-    </ThemeProvider>
+    </Theme>
   </React.StrictMode>,
   document.getElementById('root')
 )

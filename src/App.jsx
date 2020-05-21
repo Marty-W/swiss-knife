@@ -9,12 +9,16 @@ import Pomodoro from './pages/Pomodoro'
 import Todo from './pages/Todo'
 import Habits from './pages/Habits'
 import Header from './components/UI/Header'
+import Auth from './pages/Auth'
 
 const App = () => {
   return (
     <BodyWrapper>
       <Router>
         <Header />
+        <Route exact path="/auth">
+          <Auth />
+        </Route>
         <Switch>
           <Route exact path="/">
             <Home />

@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import { Link } from 'react-router-dom'
 
 import { ReactComponent as Knife } from '../../assets/svgs/swiss-army-knife.svg'
-import Avatar from './Avatar'
+import Button from './Button'
 
 const Header = () => (
   <LogoWrapper>
     <Logo />
-    <Avatar />
+    <Link to="/auth">
+      <SignInButton>Sign In</SignInButton>
+    </Link>
   </LogoWrapper>
 )
 
@@ -27,6 +30,22 @@ const Logo = styled(Knife)`
 const LogoWrapper = styled.div`
   width: 100%;
   margin-bottom: 4em;
+`
+
+const SignInButton = styled(Button)`
+  position: fixed;
+  right: 1em;
+  top: 1em;
+  padding: 0.2em 1em;
+  margin: 0;
+  &:hover {
+    background: ${(props) => props.theme.colors.white};
+  }
+
+  a {
+    text-decoration: none;
+    background: inherit;
+  }
 `
 
 export default Header
