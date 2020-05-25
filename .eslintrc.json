@@ -7,7 +7,7 @@
     "airbnb",
     "airbnb/hooks",
     "plugin:jsx-a11y/recommended",
-    "prettier",
+    "plugin:prettier/recommended",
     "prettier/react"
   ],
   "globals": {

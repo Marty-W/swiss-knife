@@ -2,6 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { PomoContextProvider } from './context/pomoContext'
+import { AuthProvider } from './context/authContext'
 
 import Navbar from './components/UI/Navbar/Navbar'
 import Home from './pages/Home'
@@ -14,29 +15,23 @@ import Auth from './pages/Auth'
 const App = () => {
   return (
     <BodyWrapper>
-      <Router>
-        <Header />
-        <Route exact path="/auth">
-          <Auth />
-        </Route>
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-          <Route exact path="/pomodoro">
-            <PomoContextProvider>
-              <Pomodoro />
-            </PomoContextProvider>
-          </Route>
-          <Route path="/todo">
-            <Todo />
-          </Route>
-          <Route path="/habits">
-            <Habits />
-          </Route>
-        </Switch>
-        <Navbar />
-      </Router>
+      <AuthProvider>
+        <Router>
+          <Header />
+          <Route exact path="/auth" component={Auth} />
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/pomodoro">
+              <PomoContextProvider>
+                <Pomodoro />
+              </PomoContextProvider>
+            </Route>
+            <Route path="/todo" component={Todo} />
+            <Route path="/habits" component={Habits} />
+          </Switch>
+          <Navbar />
+        </Router>
+      </AuthProvider>
     </BodyWrapper>
   )
 }

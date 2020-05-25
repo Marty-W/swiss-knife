@@ -1,7 +1,6 @@
 import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components/macro'
-import { useHistory } from 'react-router-dom'
 
 const modalRoot = document.getElementById('modal')
 
@@ -16,11 +15,9 @@ const Modal = ({ children, type }) => {
     return () => modalRoot.removeChild(elRef.current)
   }, [])
 
-  const history = useHistory()
-
   return createPortal(
     type === 'center' ? (
-      <StyledCenterModal onClick={history.goBack}>
+      <StyledCenterModal>
         <div>{children}</div>
       </StyledCenterModal>
     ) : (

@@ -1,18 +1,32 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
+import { AuthContext } from '../../context/authContext'
+import { auth } from '../../utils/firebase'
 
 import { ReactComponent as Knife } from '../../assets/svgs/swiss-army-knife.svg'
 import Button from './Button'
 
-const Header = () => (
-  <LogoWrapper>
-    <Logo />
-    <Link to="/auth">
-      <SignInButton>Sign In</SignInButton>
-    </Link>
-  </LogoWrapper>
-)
+const Header = () => {
+  const { currentUser } = useContext(AuthContext)
+
+  const signOutUser = () => {
+    auth.signOut().catch((err) => console.log(err))
+  }
+
+  return (
+    <LogoWrapper>
+      <Logo />
+      {currentUser ? (
+        <SignButton onClick={signOutUser}>Log Out</SignButton>
+      ) : (
+        <Link to="/auth">
+          <SignButton>Sign In</SignButton>
+        </Link>
+      )}
+    </LogoWrapper>
+  )
+}
 
 const Logo = styled(Knife)`
   fill: ${(props) => props.theme.colors.white};
@@ -32,7 +46,7 @@ const LogoWrapper = styled.div`
   margin-bottom: 4em;
 `
 
-const SignInButton = styled(Button)`
+const SignButton = styled(Button)`
   position: fixed;
   right: 1em;
   top: 1em;

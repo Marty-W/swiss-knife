@@ -4,7 +4,7 @@ import styled from 'styled-components/macro'
 const Heading = ({ children }) => <StyledHeading>{children}</StyledHeading>
 
 const StyledHeading = styled.h1`
-  font-family: ${(props) => props.theme.fonts.heading};
+  font-family: ${(props) => props.theme.fonts.dec};
   font-weight: bold;
   color: ${(props) => props.theme.colors.white};
   letter-spacing: 1.5px;
