@@ -9,18 +9,24 @@ import { auth, db } from '../../utils/firebase'
 import Button from '../UI/Button'
 
 const Form = () => {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  const [userEmail, setUserEmail] = useState('')
+  const [userPassword, setUserPassword] = useState('')
+
   const history = useHistory()
 
   const handleSignUp = async (e) => {
     e.preventDefault()
     try {
-      const token = await auth.createUserWithEmailAndPassword(email, password)
-      const { uid } = token.user
-      await db.collection('users').doc(uid).set({
-        pomoGoal: 0,
-      })
+      const token = await auth.createUserWithEmailAndPassword(
+        userEmail,
+        userPassword
+      )
+      const { uid, email } = token.user
+      const acc = {
+        uid,
+        email,
+      }
+      await db.collection('users').doc(uid).set(acc)
     } catch (err) {
       console.log(err)
     }
@@ -30,7 +36,7 @@ const Form = () => {
   const handleSignIn = async (e) => {
     e.preventDefault()
     try {
-      await auth.signInWithEmailAndPassword(email, password)
+      await auth.signInWithEmailAndPassword(userEmail, userPassword)
     } catch (err) {
       console.log(err)
     }
@@ -39,23 +45,25 @@ const Form = () => {
   return (
     <StyledForm>
       <label htmlFor="email">
-        <FontAwesomeIcon icon={faUser} />
+        <StyledIcon icon={faUser} />
         <input
           type="email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
+          onChange={(e) => setUserEmail(e.target.value)}
+          value={userEmail}
           id="email"
           placeholder="email"
+          required
         />
       </label>
       <label htmlFor="password">
-        <FontAwesomeIcon icon={faKey} />
+        <StyledIcon icon={faKey} />
         <input
           type="password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
+          onChange={(e) => setUserPassword(e.target.value)}
+          value={userPassword}
           id="password"
           placeholder="password"
+          required
         />
       </label>
       <ButtonWrapper>
@@ -69,14 +77,25 @@ const Form = () => {
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin: 1em 0;
 `
 const SignButton = styled(Button)`
   width: 40%;
   margin: 0 auto;
+
+  &:hover {
+    background-color: ${(props) => props.theme.colors.red};
+    color: ${(props) => props.theme.colors.white};
+  }
 `
 const SignUpButton = styled(SignButton)`
   background-color: ${(props) => props.theme.colors.red};
   color: ${(props) => props.theme.colors.white};
+
+  &:hover {
+    color: ${(props) => props.theme.colors.red};
+    background-color: ${(props) => props.theme.colors.white};
+  }
 `
 
 const StyledForm = styled.form`
@@ -84,16 +103,22 @@ const StyledForm = styled.form`
   flex-direction: column;
 
   & label {
-    margin: 1em 0;
+    margin: 0.8em 0;
   }
 
   & input {
     outline: none;
     border: none;
     width: 80%;
-    padding: 0.4em;
+    padding: 0.6em 1em;
     margin: 0 0 0 0.5em;
+    border-radius: 10px;
   }
+`
+
+const StyledIcon = styled(FontAwesomeIcon)`
+  font-size: 1.2rem;
+  margin: 0 0.4rem;
 `
 
 export default Form
