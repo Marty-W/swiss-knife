@@ -6,10 +6,8 @@ import Button from '../components/UI/Button'
 import FocusMode from '../components/pomodoro/FocusMode'
 import Info from '../components/pomodoro/Info'
 import Heading from '../components/UI/Heading'
-import DailyGoal from '../components/pomodoro/DailyGoal'
 
 import { PomoContext } from '../context/pomoContext'
-import { db } from '../utils/firebase'
 
 const Pomodoro = () => {
   const [state, dispatch] = useContext(PomoContext)
@@ -19,14 +17,6 @@ const Pomodoro = () => {
     dispatch({ type: 'POMO_START' })
   }
 
-  db.collection('pomodoros')
-    .get()
-    .then((snapshot) => {
-      snapshot.docs.forEach((doc) => {
-        console.log(doc.data())
-      })
-    })
-
   return (
     <>
       {isModalOpen && <FocusMode />}
@@ -35,7 +25,6 @@ const Pomodoro = () => {
         <TimePicker />
         <StartButton onClick={handlePomoStart}>Start</StartButton>
         <Info />
-        <DailyGoal />
       </PomoWrapper>
     </>
   )

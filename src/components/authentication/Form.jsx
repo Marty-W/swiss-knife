@@ -11,6 +11,7 @@ import Button from '../UI/Button'
 const Form = () => {
   const [userEmail, setUserEmail] = useState('')
   const [userPassword, setUserPassword] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const history = useHistory()
 
@@ -27,20 +28,20 @@ const Form = () => {
         email,
       }
       await db.collection('users').doc(uid).set(acc)
+      history.push('/')
     } catch (err) {
-      console.log(err)
+      setErrorMessage(err.message)
     }
-    history.push('/')
   }
 
   const handleSignIn = async (e) => {
     e.preventDefault()
     try {
       await auth.signInWithEmailAndPassword(userEmail, userPassword)
+      history.push('/')
     } catch (err) {
-      console.log(err)
+      setErrorMessage(err.message)
     }
-    history.push('/')
   }
   return (
     <StyledForm>
@@ -66,6 +67,7 @@ const Form = () => {
           required
         />
       </label>
+      {errorMessage && <StyledError>{errorMessage}</StyledError>}
       <ButtonWrapper>
         <SignButton onClick={handleSignIn}>Sign In</SignButton>
         <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
@@ -119,6 +121,11 @@ const StyledForm = styled.form`
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 1.2rem;
   margin: 0 0.4rem;
+`
+
+const StyledError = styled.p`
+  color: ${(props) => props.theme.colors.red};
+  font-size: 0.7rem;
 `
 
 export default Form

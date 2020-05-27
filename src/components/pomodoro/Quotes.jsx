@@ -3,25 +3,38 @@ import styled from 'styled-components/macro'
 
 import Redo from '../UI/Redo'
 
+// TODO better error handling, maybe simulate internet fall
+
 const Quotes = () => {
   const [quote, setQuote] = useState()
+  const [error, setError] = useState()
 
   useEffect(() => {
     fetchNewQuote()
   }, [])
 
   const fetchNewQuote = async () => {
-    const response = await fetch(
-      'http://quotes.stormconsultancy.co.uk/random.json'
-    )
-    const quoteObj = await response.json()
-    setQuote(quoteObj.quote)
+    try {
+      const response = await fetch(
+        'http://quotes.stormconsultancy.co.uk/random.json'
+      )
+      const quoteObj = await response.json()
+      setQuote(quoteObj.quote)
+    } catch (err) {
+      setError(err)
+    }
   }
 
   return (
     <QuotesWrapper>
-      <Redo onClick={fetchNewQuote} />
-      <StyledQuote>{quote}</StyledQuote>
+      {error ? (
+        <p>{error}</p>
+      ) : (
+        <>
+          <Redo onClick={fetchNewQuote} />
+          <StyledQuote>{quote}</StyledQuote>
+        </>
+      )}
     </QuotesWrapper>
   )
 }

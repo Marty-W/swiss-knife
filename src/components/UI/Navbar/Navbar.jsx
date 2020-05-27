@@ -12,7 +12,7 @@ const Navbar = () => {
 }
 
 const StyledNavbar = styled.nav`
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 5.5vh;
   bottom: 0;
