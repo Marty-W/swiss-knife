@@ -16,6 +16,9 @@ const Info = () => {
     if (!showCard1 || !showCard2) {
       setShowBulb(true)
     }
+    if (showCard1 && showCard2) {
+      setShowBulb(false)
+    }
   }, [showCard1, showCard2])
 
   const handleShowAll = () => {

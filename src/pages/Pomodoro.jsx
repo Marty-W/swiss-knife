@@ -6,6 +6,7 @@ import Button from '../components/UI/Button'
 import FocusMode from '../components/pomodoro/FocusMode'
 import Info from '../components/pomodoro/Info'
 import Heading from '../components/UI/Heading'
+import DailyGoal from '../components/pomodoro/DailyGoal'
 
 import { PomoContext } from '../context/pomoContext'
 
@@ -24,6 +25,7 @@ const Pomodoro = () => {
         <Heading>Pomodoro</Heading>
         <TimePicker />
         <StartButton onClick={handlePomoStart}>Start</StartButton>
+        <DailyGoal />
         <Info />
       </PomoWrapper>
     </>
