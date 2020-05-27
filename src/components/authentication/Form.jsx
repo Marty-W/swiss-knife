@@ -4,9 +4,10 @@ import styled from 'styled-components/macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faKey, faUser } from '@fortawesome/free-solid-svg-icons'
 
-import { auth, db } from '../../utils/firebase'
+import { auth } from '../../utils/firebase'
 
 import Button from '../UI/Button'
+import ErrorMsg from '../UI/ErrorMsg'
 
 const Form = () => {
   const [userEmail, setUserEmail] = useState('')
@@ -18,16 +19,7 @@ const Form = () => {
   const handleSignUp = async (e) => {
     e.preventDefault()
     try {
-      const token = await auth.createUserWithEmailAndPassword(
-        userEmail,
-        userPassword
-      )
-      const { uid, email } = token.user
-      const acc = {
-        uid,
-        email,
-      }
-      await db.collection('users').doc(uid).set(acc)
+      await auth.createUserWithEmailAndPassword(userEmail, userPassword)
       history.push('/')
     } catch (err) {
       setErrorMessage(err.message)
@@ -67,7 +59,7 @@ const Form = () => {
           required
         />
       </label>
-      {errorMessage && <StyledError>{errorMessage}</StyledError>}
+      {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
       <ButtonWrapper>
         <SignButton onClick={handleSignIn}>Sign In</SignButton>
         <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
@@ -121,11 +113,6 @@ const StyledForm = styled.form`
 const StyledIcon = styled(FontAwesomeIcon)`
   font-size: 1.2rem;
   margin: 0 0.4rem;
-`
-
-const StyledError = styled.p`
-  color: ${(props) => props.theme.colors.red};
-  font-size: 0.7rem;
 `
 
 export default Form

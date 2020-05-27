@@ -55,6 +55,7 @@ const StyledSlider = styled(Slider)`
 const Minutes = styled.p`
   grid-area: minutes;
   align-self: start;
+  user-select: none;
   span {
     color: ${(props) => props.theme.colors.red};
     display: block;

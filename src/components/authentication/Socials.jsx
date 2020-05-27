@@ -1,31 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faGoogle } from '@fortawesome/free-brands-svg-icons'
 
-import { auth, db, Google } from '../../utils/firebase'
+import { auth, Google } from '../../utils/firebase'
+
+import ErrorMsg from '../UI/ErrorMsg'
 
 const Socials = () => {
+  const [errorMsg, setErrorMsg] = useState()
   const history = useHistory()
 
   const signInWithGoogle = async () => {
     try {
-      const result = await auth.signInWithRedirect(Google)
-      const { uid } = result.user
-      console.log(result)
-      await db.collection('users').doc(uid).set({
-        pomoGoal: 0,
-      })
+      await auth.signInWithPopup(Google)
+      history.push('/')
     } catch (err) {
-      console.log(err)
+      setErrorMsg(err.message)
     }
-
-    history.push('/')
   }
 
   return (
     <SocialsWrapper>
+      {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
       <StyledIcon icon={faGoogle} onClick={signInWithGoogle} />
     </SocialsWrapper>
   )
