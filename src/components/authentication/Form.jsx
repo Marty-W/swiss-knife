@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faKey, faUser } from '@fortawesome/free-solid-svg-icons'
+import { FaUserShield, FaKey } from 'react-icons/fa'
 
 import { auth } from '../../utils/firebase'
 
@@ -38,7 +37,7 @@ const Form = () => {
   return (
     <StyledForm>
       <label htmlFor="email">
-        <StyledIcon icon={faUser} />
+        <FaUserShield />
         <input
           type="email"
           onChange={(e) => setUserEmail(e.target.value)}
@@ -49,7 +48,7 @@ const Form = () => {
         />
       </label>
       <label htmlFor="password">
-        <StyledIcon icon={faKey} />
+        <FaKey />
         <input
           type="password"
           onChange={(e) => setUserPassword(e.target.value)}
@@ -108,11 +107,11 @@ const StyledForm = styled.form`
     margin: 0 0 0 0.5em;
     border-radius: 10px;
   }
-`
 
-const StyledIcon = styled(FontAwesomeIcon)`
-  font-size: 1.2rem;
-  margin: 0 0.4rem;
+  & svg {
+    font-size: 1.2rem;
+    margin: 0 0.4rem;
+  }
 `
 
 export default Form

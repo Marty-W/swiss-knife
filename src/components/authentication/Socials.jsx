@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faGoogle } from '@fortawesome/free-brands-svg-icons'
+import { FcGoogle } from 'react-icons/fc'
 
 import { auth, Google } from '../../utils/firebase'
 
@@ -24,7 +23,7 @@ const Socials = () => {
   return (
     <SocialsWrapper>
       {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-      <StyledIcon icon={faGoogle} onClick={signInWithGoogle} />
+      <StyledGoogle onClick={signInWithGoogle} />
     </SocialsWrapper>
   )
 }
@@ -35,11 +34,10 @@ const SocialsWrapper = styled.div`
   margin-top: 2em;
 `
 
-const StyledIcon = styled(FontAwesomeIcon)`
+const StyledGoogle = styled(FcGoogle)`
   font-size: 2rem;
 
   &:hover {
-    color: ${(props) => props.theme.colors.red};
     cursor: pointer;
   }
 `

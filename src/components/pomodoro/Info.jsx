@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faLightbulb } from '@fortawesome/free-solid-svg-icons'
+import { GoLightBulb } from 'react-icons/go'
 
 import useStickyState from '../../hooks/useStickyState'
 
@@ -28,7 +27,7 @@ const Info = () => {
 
   return (
     <InfoWrapper>
-      {showBulb && <LightBulb icon={faLightbulb} onClick={handleShowAll} />}
+      {showBulb && <LightBulb onClick={handleShowAll} />}
       <PomoInfo show={showCard1} setShow={setShowCard1}>
         <p>
           This is the simplest and maybe the most efficient productivity tool in
@@ -56,7 +55,7 @@ const PomoInfo = styled(Card)`
   font-size: 1.8rem;
 `
 
-const LightBulb = styled(FontAwesomeIcon)`
+const LightBulb = styled(GoLightBulb)`
   &:hover {
     color: yellow;
   }

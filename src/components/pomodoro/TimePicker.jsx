@@ -1,11 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-  faChevronRight,
-  faChevronLeft,
-} from '@fortawesome/free-solid-svg-icons'
+import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
 
 import { PomoContext } from '../../context/pomoContext'
 
@@ -35,13 +31,13 @@ const TimePicker = () => {
         disabled={duration.as('milliseconds') === 0}
         onClick={handleMinus}
       >
-        <FontAwesomeIcon icon={faChevronLeft} />
+        <GoChevronLeft />
       </StyledButton>
       <StyledTicker isBreak={isBreak}>
         {duration.toFormat('mm:ss')}
       </StyledTicker>
       <StyledButton onClick={handlePlus}>
-        <FontAwesomeIcon icon={faChevronRight} />
+        <GoChevronRight />
       </StyledButton>
     </StyledTimer>
   )
@@ -59,6 +55,11 @@ const StyledButton = styled.button`
   border: none;
   font-size: 1.5rem;
   color: ${(props) => props.theme.colors.red};
+
+  //todo repair outline
+  svg:active {
+    outline: none;
+  }
 `
 
 const StyledTicker = styled.span`

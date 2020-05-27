@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { useSpring, animated, config } from 'react-spring'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faUndoAlt } from '@fortawesome/free-solid-svg-icons'
+import { FaUndoAlt } from 'react-icons/fa'
 
 const Redo = ({ onClick }) => {
   const [clicks, setClicks] = useState(1)
@@ -18,12 +17,10 @@ const Redo = ({ onClick }) => {
     onClick()
   }
 
-  return (
-    <StyledRedo icon={faUndoAlt} onClick={handleOnClick} style={animateProps} />
-  )
+  return <StyledRedo onClick={handleOnClick} style={animateProps} />
 }
 
-const StyledRedo = styled(animated(FontAwesomeIcon))`
+const StyledRedo = styled(animated(FaUndoAlt))`
   color: ${(props) => props.theme.colors.white};
 `
 

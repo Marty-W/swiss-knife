@@ -1,34 +1,33 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faHourglassHalf,
-  faHome,
-  faRedoAlt,
-  faClipboardCheck,
-} from '@fortawesome/free-solid-svg-icons'
+  AiOutlineHome,
+  AiOutlineHourglass,
+  AiOutlineRedo,
+} from 'react-icons/ai'
+import { FcTodoList } from 'react-icons/fc'
 
 const NavItems = () => (
   <StyledUl>
     <li>
       <Link to="/">
-        <FontAwesomeIcon icon={faHome} />
+        <AiOutlineHome />
       </Link>
     </li>
     <li>
       <Link to="/pomodoro">
-        <FontAwesomeIcon icon={faHourglassHalf} />
+        <AiOutlineHourglass />
       </Link>
     </li>
     <li>
       <Link to="/habits">
-        <FontAwesomeIcon icon={faRedoAlt} />
+        <AiOutlineRedo />
       </Link>
     </li>
     <li>
       <Link to="/todo">
-        <FontAwesomeIcon icon={faClipboardCheck} />
+        <FcTodoList />
       </Link>
     </li>
   </StyledUl>
@@ -60,6 +59,7 @@ const StyledUl = styled.ul`
     &:hover {
       color: ${(props) => props.theme.colors.dark};
     }
+    //todo repair blue color
   }
 `
 

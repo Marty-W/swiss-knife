@@ -47,11 +47,12 @@ const LogoWrapper = styled.div`
 `
 
 const SignButton = styled(Button)`
-  position: fixed;
+  position: absolute;
   right: 1em;
   top: 1em;
-  padding: 0.2em 1em;
+  padding: 0.4em 1em;
   margin: 0;
+  border-width: 3px;
   &:hover {
     background: ${(props) => props.theme.colors.white};
   }

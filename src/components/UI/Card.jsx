@@ -1,15 +1,14 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { AiOutlineClose } from 'react-icons/ai'
 
 const Card = ({ children, show, setShow }) => {
   return (
     <>
       {show && (
         <SCard>
-          <StyledCloseButton icon={faTimes} onClick={() => setShow(false)} />
+          <StyledCloseButton onClick={() => setShow(false)} />
           {children}
         </SCard>
       )}
@@ -28,7 +27,7 @@ const SCard = styled.div`
   position: relative;
 `
 
-const StyledCloseButton = styled(FontAwesomeIcon)`
+const StyledCloseButton = styled(AiOutlineClose)`
   position: absolute;
   font-size: 1rem;
   top: 0.3em;

@@ -1,7 +1,6 @@
 import React, { useState } from 'react'
 import styled from 'styled-components/macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons'
+import { AiFillCheckCircle } from 'react-icons/ai'
 
 import Slider from 'rc-slider/lib/Slider'
 import 'rc-slider/assets/index.css'
@@ -29,7 +28,7 @@ const DailyGoal = () => {
       <Minutes>
         <span>{dailyGoal}</span> minutes
       </Minutes>
-      <Check icon={faCheckCircle} />
+      <Check />
     </DailyGoalWrapper>
   )
 }
@@ -64,7 +63,7 @@ const Minutes = styled.p`
   }
 `
 
-const Check = styled(FontAwesomeIcon)`
+const Check = styled(AiFillCheckCircle)`
   color: ${(props) => props.theme.colors.red};
   font-size: 1.8rem;
   cursor: pointer;

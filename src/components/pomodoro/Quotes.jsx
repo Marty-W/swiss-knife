@@ -2,12 +2,11 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import Redo from '../UI/Redo'
-
-// TODO better error handling, maybe simulate internet fall
+import ErrorMsg from '../UI/ErrorMsg'
 
 const Quotes = () => {
   const [quote, setQuote] = useState()
-  const [error, setError] = useState()
+  const [errorMsg, setErrorMsg] = useState()
 
   useEffect(() => {
     fetchNewQuote()
@@ -16,19 +15,19 @@ const Quotes = () => {
   const fetchNewQuote = async () => {
     try {
       const response = await fetch(
-        'http://quotes.stormconsultancy.co.uk/random.json'
+        'https://programming-quotes-api.herokuapp.com/quotes/random'
       )
       const quoteObj = await response.json()
-      setQuote(quoteObj.quote)
+      setQuote(quoteObj.en)
     } catch (err) {
-      setError(err)
+      setErrorMsg(err)
     }
   }
 
   return (
     <QuotesWrapper>
-      {error ? (
-        <p>{error}</p>
+      {errorMsg ? (
+        <ErrorMsg>{errorMsg}</ErrorMsg>
       ) : (
         <>
           <Redo onClick={fetchNewQuote} />

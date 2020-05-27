@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTimes } from '@fortawesome/free-solid-svg-icons'
+import { AiOutlineClose } from 'react-icons/ai'
 
 import { useHistory } from 'react-router-dom'
 
@@ -15,7 +14,7 @@ const Auth = () => {
   return (
     <Modal type="center">
       <SignInWrapper>
-        <StyledCloseButton icon={faTimes} onClick={() => history.push('/')} />
+        <StyledCloseButton onClick={() => history.push('/')} />
         <StyledH2>Login</StyledH2>
         <p>login using your socials or your username and password</p>
         <Form />
@@ -36,7 +35,7 @@ const StyledH2 = styled.h2`
   font-family: ${(props) => props.theme.fonts.dec};
 `
 
-const StyledCloseButton = styled(FontAwesomeIcon)`
+const StyledCloseButton = styled(AiOutlineClose)`
   position: fixed;
   font-size: 1.2rem;
   top: 0.5em;
