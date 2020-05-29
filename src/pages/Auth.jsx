@@ -27,6 +27,10 @@ const Auth = () => {
 const SignInWrapper = styled.div`
   text-align: center;
   line-height: 1.3;
+
+  p {
+    padding: 0 0.9em;
+  }
 `
 
 const StyledH2 = styled.h2`

@@ -4,6 +4,7 @@ import styled from 'styled-components/macro'
 
 const modalRoot = document.getElementById('modal')
 
+// TODO fix button styling
 const Modal = ({ children, type }) => {
   const elRef = useRef(null)
   if (!elRef.current) {
@@ -44,7 +45,7 @@ const StyledCenterModal = styled(StyledFullModal)`
     color: #000;
     position: fixed;
     width: 80%;
-    height: 50%;
+    height: 55%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);

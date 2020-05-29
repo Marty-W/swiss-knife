@@ -31,7 +31,7 @@ const Socials = () => {
 const SocialsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
-  margin-top: 2em;
+  margin-top: 1.5em;
 `
 
 const StyledGoogle = styled(FcGoogle)`

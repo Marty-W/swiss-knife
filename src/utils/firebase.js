@@ -2,6 +2,8 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
+// TODO dod security rules
+
 const firebaseConfig = {
   apiKey: 'AIzaSyAuiCjW-agJ6NMOSUsLc3jLLvgGKEgcRbk',
   authDomain: 'swiss-knife-61060.firebaseapp.com',
