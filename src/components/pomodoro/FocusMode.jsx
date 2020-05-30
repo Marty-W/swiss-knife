@@ -7,7 +7,6 @@ import Ticker from './Ticker'
 import TimePicker from './TimePicker'
 import TimerHeading from './TimerHeading'
 import TimerButtons from './TimerButtons'
-import TimerEstimate from './TimerEstimate'
 import Quotes from './Quotes'
 
 const FocusMode = () => {
@@ -17,7 +16,6 @@ const FocusMode = () => {
   return (
     <Modal>
       <FocusWrapper>
-        <TimerEstimate />
         <TimerHeading />
         {isRunning && <Ticker />}
         {!isRunning && <TimePicker />}

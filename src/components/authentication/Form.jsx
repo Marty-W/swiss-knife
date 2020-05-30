@@ -58,11 +58,11 @@ const Form = () => {
           required
         />
       </label>
-      {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
       <ButtonWrapper>
         <SignButton onClick={handleSignIn}>Sign In</SignButton>
         <SignUpButton onClick={handleSignUp}>Sign Up</SignUpButton>
       </ButtonWrapper>
+      {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
     </StyledForm>
   )
 }

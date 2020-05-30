@@ -5,6 +5,8 @@ import { Duration } from 'luxon'
 import { useInterval } from '../../hooks/useInterval'
 import { PomoContext } from '../../context/pomoContext'
 
+import TimerEstimate from './TimerEstimate'
+
 const Ticker = () => {
   const [localSessionLength, setLocalSessionLength] = useState(() =>
     Duration.fromMillis(0)
@@ -42,6 +44,7 @@ const Ticker = () => {
   return (
     <>
       <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
+      <TimerEstimate localSesh={localSessionLength} />
     </>
   )
 }
