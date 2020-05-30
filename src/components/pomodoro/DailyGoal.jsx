@@ -1,12 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { AiFillCheckCircle } from 'react-icons/ai'
-
 import Slider from 'rc-slider/lib/Slider'
+import { db } from '../../utils/firebase'
+import { AuthContext } from '../../context/authContext'
+
 import 'rc-slider/assets/index.css'
 
 const DailyGoal = () => {
   const [dailyGoal, setDailyGoal] = useState(0)
+  const [isDailyset, setIsDailySet] = useState(false)
+
+  const { currentUser } = useContext(AuthContext)
+
+  const syncDailyGoal = async () => {
+    if (!currentUser) {
+      window.localStorage.setItem('dailyGoal', dailyGoal)
+    } else {
+      const { uid } = currentUser
+      await db.collection('users').doc(uid).update({
+        'pomo.dailyGoal': dailyGoal,
+      })
+    }
+    setIsDailySet(true)
+  }
 
   return (
     <DailyGoalWrapper>
@@ -28,7 +45,7 @@ const DailyGoal = () => {
       <Minutes>
         <span>{dailyGoal}</span> minutes
       </Minutes>
-      <Check />
+      <Check onClick={syncDailyGoal} />
     </DailyGoalWrapper>
   )
 }
