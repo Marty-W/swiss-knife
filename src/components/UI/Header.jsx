@@ -11,7 +11,7 @@ const Header = () => {
   const { currentUser } = useContext(AuthContext)
 
   const signOutUser = () => {
-    auth.signOut().catch((err) => console.log(err))
+    auth.signOut()
   }
 
   return (

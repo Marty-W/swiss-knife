@@ -19,8 +19,8 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
     } else {
       try {
         const { uid } = currentUser
-        await db.collection('users').doc(uid).update({
-          'pomo.dailyGoal': dailyGoal,
+        await db.doc(`users/${uid}/pomo/stats`).update({
+          dailyGoal,
         })
       } catch (err) {
         console.log(err)
