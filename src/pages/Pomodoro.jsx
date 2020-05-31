@@ -7,6 +7,7 @@ import FocusMode from '../components/pomodoro/FocusMode'
 import Info from '../components/pomodoro/Info'
 import Heading from '../components/UI/Heading'
 import DailyGoal from '../components/pomodoro/DailyGoalSetter'
+import TimeEntries from '../components/pomodoro/TimeEntries'
 
 import { PomoContext } from '../context/pomoContext'
 import { AuthContext } from '../context/authContext'
@@ -14,6 +15,7 @@ import { db } from '../utils/firebase'
 import useLocalStorage from '../hooks/useLocalStorage'
 
 const Pomodoro = () => {
+  const [entries, setEntries] = useState()
   const [state, dispatch] = useContext(PomoContext)
   const { isModalOpen } = state
   const [isGoalSet, setIsGoalSet] = useLocalStorage(false, 'goalSet')
@@ -46,6 +48,7 @@ const Pomodoro = () => {
         <TimePicker />
         <StartButton onClick={handlePomoStart}>Start</StartButton>
         {!isGoalSet && <DailyGoal handleGoalSet={setIsGoalSet} />}
+        <TimeEntries />
         <Info />
       </PomoWrapper>
     </>
