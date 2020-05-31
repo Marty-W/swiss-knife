@@ -51,7 +51,7 @@ const Ticker = () => {
   const pushTimeEntries = async () => {
     const { uid } = currentUser
     try {
-      const entriesRef = db.doc(`users/${uid}/pomo/stats`)
+      const entriesRef = db.doc(`users/${uid}/pomo/timeEntries`)
       await entriesRef.update({
         timeEntries: firebase.firestore.FieldValue.arrayUnion(
           createTimeEntries()
