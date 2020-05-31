@@ -2,13 +2,13 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { GoLightBulb } from 'react-icons/go'
 
-import useStickyState from '../../hooks/useStickyState'
+import useLocalStorage from '../../hooks/useLocalStorage'
 
 import Card from '../UI/Card'
 
 const Info = () => {
-  const [showCard1, setShowCard1] = useStickyState(true, 'card1')
-  const [showCard2, setShowCard2] = useStickyState(true, 'card2')
+  const [showCard1, setShowCard1] = useLocalStorage(true, 'card1')
+  const [showCard2, setShowCard2] = useLocalStorage(true, 'card2')
   const [showBulb, setShowBulb] = useState(false)
 
   useEffect(() => {

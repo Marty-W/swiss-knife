@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import styled from 'styled-components/macro'
 
 import TimePicker from '../components/pomodoro/TimePicker'
@@ -6,13 +6,14 @@ import Button from '../components/UI/Button'
 import FocusMode from '../components/pomodoro/FocusMode'
 import Info from '../components/pomodoro/Info'
 import Heading from '../components/UI/Heading'
-import DailyGoal from '../components/pomodoro/DailyGoal'
+import DailyGoal from '../components/pomodoro/DailyGoalSetter'
 
 import { PomoContext } from '../context/pomoContext'
 
 const Pomodoro = () => {
   const [state, dispatch] = useContext(PomoContext)
   const { isModalOpen } = state
+  const [isGoalSet, setIsGoalSet] = useState(false)
 
   const handlePomoStart = () => {
     dispatch({ type: 'POMO_START' })
@@ -25,7 +26,7 @@ const Pomodoro = () => {
         <Heading>Pomodoro</Heading>
         <TimePicker />
         <StartButton onClick={handlePomoStart}>Start</StartButton>
-        <DailyGoal />
+        {!isGoalSet && <DailyGoal handleGoalSet={setIsGoalSet} />}
         <Info />
       </PomoWrapper>
     </>
