@@ -4,13 +4,17 @@ import { Duration } from 'luxon'
 
 import { useInterval } from '../../hooks/useInterval'
 import { PomoContext } from '../../context/pomoContext'
+import { AuthContext } from '../../context/authContext'
+import { db, firebase } from '../../utils/firebase'
 
 import TimerEstimate from './TimerEstimate'
 
 const Ticker = () => {
+  const [startTime] = useState(() => Date.now())
   const [localSessionLength, setLocalSessionLength] = useState(() =>
     Duration.fromMillis(0)
   )
+  const { currentUser } = useContext(AuthContext)
   const [state, dispatch] = useContext(PomoContext)
   const { duration, isRunning, isPaused, isBreak } = state
 
@@ -30,12 +34,33 @@ const Ticker = () => {
     }
     if (localSessionLength.as('milliseconds') === 0) {
       if (!isBreak) {
+        pushTimeEntries()
         dispatch({ type: 'POMO_FINISH' })
       } else if (isBreak) {
         dispatch({ type: 'POMO_ABORT' })
       }
     }
-  }, 1000)
+  }, 10)
+
+  const createTimeEntries = () => ({
+    startTime,
+    endTime: Date.now(),
+    durationInMinutes: duration.as('minutes'),
+  })
+
+  const pushTimeEntries = async () => {
+    const { uid } = currentUser
+    try {
+      const entriesRef = db.doc(`users/${uid}/pomo/stats`)
+      await entriesRef.update({
+        timeEntries: firebase.firestore.FieldValue.arrayUnion(
+          createTimeEntries()
+        ),
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   const handleDocumentTitle = (timeLeft) => {
     document.title = timeLeft.toFormat('mm:ss')

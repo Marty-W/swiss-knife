@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import TimePicker from '../components/pomodoro/TimePicker'
@@ -9,11 +9,30 @@ import Heading from '../components/UI/Heading'
 import DailyGoal from '../components/pomodoro/DailyGoalSetter'
 
 import { PomoContext } from '../context/pomoContext'
+import { AuthContext } from '../context/authContext'
+import { db } from '../utils/firebase'
+import useLocalStorage from '../hooks/useLocalStorage'
 
 const Pomodoro = () => {
   const [state, dispatch] = useContext(PomoContext)
   const { isModalOpen } = state
-  const [isGoalSet, setIsGoalSet] = useState(false)
+  const [isGoalSet, setIsGoalSet] = useLocalStorage(false, 'goalSet')
+  const [dailyGoal, setDailyGoal] = useState(0)
+  const [completedGoal, setCompletedGoal] = useState(0)
+  const { currentUser } = useContext(AuthContext)
+
+  useEffect(() => {
+    if (currentUser) {
+      const { uid } = currentUser
+      const fetchData = async () => {
+        await db.doc(`users/${uid}/pomo/stats/`).onSnapshot((snapshot) => {
+          setDailyGoal(snapshot.data().dailyGoal)
+          setCompletedGoal(snapshot.data().completed)
+        })
+      }
+      fetchData()
+    }
+  }, [currentUser])
 
   const handlePomoStart = () => {
     dispatch({ type: 'POMO_START' })
