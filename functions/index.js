@@ -22,5 +22,6 @@ exports.createUserDb = functions
     pomoStatsRef.set({
       dailyGoal: 0,
       completed: 0,
+      timeEntries: [],
     })
   })
