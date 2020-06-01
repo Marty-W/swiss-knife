@@ -1,20 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import { AiOutlineClose } from 'react-icons/ai'
-
-const Card = ({ children, show, setShow }) => {
-  return (
-    <>
-      {show && (
-        <SCard>
-          <StyledCloseButton onClick={() => setShow(false)} />
-          {children}
-        </SCard>
-      )}
-    </>
-  )
-}
+const Card = ({ children }) => <SCard>{children}</SCard>
 
 const SCard = styled.div`
   border: 2px solid ${(props) => props.theme.colors.red};
@@ -25,14 +12,6 @@ const SCard = styled.div`
   text-align: left;
   line-height: 1.5;
   position: relative;
-`
-
-const StyledCloseButton = styled(AiOutlineClose)`
-  position: absolute;
-  font-size: 1rem;
-  top: 0.3em;
-  right: 0.6em;
-  cursor: pointer;
 `
 
 export default Card

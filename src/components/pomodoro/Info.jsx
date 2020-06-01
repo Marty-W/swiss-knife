@@ -4,7 +4,7 @@ import { GoLightBulb } from 'react-icons/go'
 
 import useLocalStorage from '../../hooks/useLocalStorage'
 
-import Card from '../UI/Card'
+import InfoCard from '../UI/InfoCard'
 
 const Info = () => {
   const [showCard1, setShowCard1] = useLocalStorage(true, 'card1')
@@ -51,7 +51,7 @@ const InfoWrapper = styled.div`
   flex-direction: column;
 `
 
-const PomoInfo = styled(Card)`
+const PomoInfo = styled(InfoCard)`
   font-size: 1.8rem;
 `
 
