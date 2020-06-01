@@ -40,7 +40,7 @@ const Ticker = () => {
         dispatch({ type: 'POMO_ABORT' })
       }
     }
-  }, 10)
+  }, 1000)
 
   const createTimeEntries = () => ({
     startTime,

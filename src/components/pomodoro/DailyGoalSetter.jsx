@@ -14,9 +14,7 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
   const { currentUser } = useContext(AuthContext)
 
   const syncDailyGoal = async () => {
-    if (!currentUser) {
-      window.localStorage.setItem('dailyGoal', dailyGoal)
-    } else {
+    if (currentUser) {
       try {
         const { uid } = currentUser
         await db.doc(`users/${uid}/pomo/stats`).update({
