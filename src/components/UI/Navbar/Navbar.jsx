@@ -12,13 +12,10 @@ const Navbar = () => {
 }
 
 const StyledNavbar = styled.nav`
-  position: fixed;
+  position: sticky;
   width: 100%;
-  height: 5.5vh;
   bottom: 0;
-  left: 0;
-  background-color: ${(props) => props.theme.colors.red};
-  box-shadow: 0px -3px 11px 0px rgba(204, 41, 54, 0.52);
+  background-color: ${(props) => props.theme.colors.primary};
 `
 
 export default Navbar

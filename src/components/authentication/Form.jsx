@@ -5,8 +5,8 @@ import { FaUserShield, FaKey } from 'react-icons/fa'
 
 import { auth } from '../../utils/firebase'
 
-import Button from '../UI/Button'
-import ErrorMsg from '../UI/ErrorMsg'
+import Button from '../UI/Button.styles'
+import ErrorMsg from '../UI/ErrorMsg.styles'
 
 const Form = () => {
   const [userEmail, setUserEmail] = useState('')

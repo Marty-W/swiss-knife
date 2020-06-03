@@ -3,63 +3,43 @@ import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
 import {
   AiOutlineHome,
-  AiOutlineHourglass,
   AiOutlineRedo,
+  AiOutlineUnorderedList,
 } from 'react-icons/ai'
-import { FcTodoList } from 'react-icons/fc'
+import { IoIosTimer } from 'react-icons/io'
 
 const NavItems = () => (
-  <StyledUl>
-    <li>
-      <Link to="/">
-        <AiOutlineHome />
-      </Link>
-    </li>
-    <li>
-      <Link to="/pomodoro">
-        <AiOutlineHourglass />
-      </Link>
-    </li>
-    <li>
-      <Link to="/habits">
-        <AiOutlineRedo />
-      </Link>
-    </li>
-    <li>
-      <Link to="/todo">
-        <FcTodoList />
-      </Link>
-    </li>
-  </StyledUl>
+  <Wrapper>
+    <Link to="/">
+      <AiOutlineHome />
+    </Link>
+
+    <Link to="/pomodoro">
+      <IoIosTimer />
+    </Link>
+
+    <Link to="/habits">
+      <AiOutlineRedo />
+    </Link>
+
+    <Link to="/todo">
+      <AiOutlineUnorderedList />
+    </Link>
+  </Wrapper>
 )
 
-const StyledUl = styled.ul`
-  list-style: none;
-  display: flex;
+const Wrapper = styled.div`
   width: 100%;
   height: 100%;
+  display: flex;
   justify-content: space-around;
   align-items: center;
-
-  & li {
-    flex: 1;
-    border-right: 1px solid ${(props) => props.theme.colors.white};
-  }
-
-  & li:last-of-type {
-    border: none;
-  }
+  stroke-width: 50%;
 
   & svg {
-    color: ${(props) => props.theme.colors.white};
-    display: block;
-    margin: 0 auto;
-    position: relative;
-
-    &:hover {
-      color: ${(props) => props.theme.colors.dark};
-    }
-    //todo repair blue color
+    color: ${(props) => props.theme.colors.tertiary};
+    font-size: 1.5rem;
+    stroke-width: 2;
   }
 `
 

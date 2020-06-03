@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import Redo from '../UI/Redo'
-import ErrorMsg from '../UI/ErrorMsg'
+import ErrorMsg from '../UI/ErrorMsg.styles'
 
 const Quotes = () => {
   const [quote, setQuote] = useState()
