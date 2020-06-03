@@ -2,6 +2,7 @@
 import React, { useEffect, useState, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { DateTime } from 'luxon'
+import uuid from 'react-uuid'
 
 import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
@@ -49,7 +50,7 @@ const TimeEntries = () => {
           const { formattedStartTime, formattedEndTime, duration } = entry
           return (
             <Entry
-              key={new Date()}
+              key={uuid()}
               start={formattedStartTime}
               end={formattedEndTime}
               dur={duration}
