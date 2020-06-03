@@ -37,12 +37,13 @@ const App = () => {
 }
 
 const BodyWrapper = styled.div`
-  padding: 0.5em 1em;
   width: 100vw;
   height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-rows: 10% auto 6%;
+  grid-template-areas:
+    'head'
+    'content';
 `
 
 export default App

@@ -5,7 +5,7 @@ import { DateTime } from 'luxon'
 
 import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
-import Card from '../UI/Card'
+import Card from '../UI/Card.styles'
 import Entry from './Entry'
 
 const TimeEntries = () => {
@@ -39,58 +39,37 @@ const TimeEntries = () => {
   }, [currentUser])
 
   return (
-    <StyledCard>
-      <StyledHeading>Session History</StyledHeading>
-      <StyledList>
-        <StyledHead>
-          <span>Started</span>
-          <span>Ended</span>
-          <span>Length</span>
-        </StyledHead>
-        {entries &&
-          entries.map((entry) => {
-            const { formattedStartTime, formattedEndTime, duration } = entry
-            return (
-              <Entry
-                key={new Date()}
-                start={formattedStartTime}
-                end={formattedEndTime}
-                dur={duration}
-              />
-            )
-          })}
-      </StyledList>
-    </StyledCard>
+    <Wrapper>
+      <span>Started</span>
+      <span>Ended</span>
+      <span>Duration(m)</span>
+      <span>Rating</span>
+      {entries &&
+        entries.map((entry) => {
+          const { formattedStartTime, formattedEndTime, duration } = entry
+          return (
+            <Entry
+              key={new Date()}
+              start={formattedStartTime}
+              end={formattedEndTime}
+              dur={duration}
+            />
+          )
+        })}
+    </Wrapper>
   )
 }
 
-const StyledCard = styled(Card)`
-  color: ${(props) => props.theme.colors.white};
-`
-
-const StyledHeading = styled.h2`
-  text-align: center;
-  font-size: 1.6rem;
-  margin-bottom: 0.5em;
-  font-weight: bold;
-  letter-spacing: 1.6px;
-`
-
-const StyledList = styled.div`
+const Wrapper = styled(Card)`
+  grid-area: history;
   display: grid;
-  grid-template-columns: minmax(10px, 50px) repeat(3, 1fr);
-  grid-auto-rows: minmax(25px, 1fr);
-  grid-row-gap: 10px;
-`
-
-const StyledHead = styled.div`
-  grid-column: 2 / -1;
-  grid-row: 1;
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 1fr;
   place-items: center;
-  color: ${(props) => props.theme.colors.red};
-  font-size: 1.2rem;
+
+  & div:nth-child(odd) {
+    background-color: ${(props) => props.theme.colors.primary};
+  }
 `
 
 export default TimeEntries

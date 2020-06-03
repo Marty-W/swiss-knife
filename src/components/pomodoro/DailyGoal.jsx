@@ -4,8 +4,9 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 import Slider from 'rc-slider/lib/Slider'
 import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
-
 import 'rc-slider/assets/index.css'
+
+import Card from '../UI/Card.styles'
 
 const DailyGoal = () => {
   const [dailyGoal, setDailyGoal] = useState(0)
@@ -26,7 +27,7 @@ const DailyGoal = () => {
   }
 
   return (
-    <DailyGoalWrapper>
+    <Wrapper>
       <StyledText>Set your time goal for today: </StyledText>
       <StyledSlider
         min={0}
@@ -46,22 +47,12 @@ const DailyGoal = () => {
         <span>{dailyGoal}</span> minutes
       </Minutes>
       <Check onClick={syncDailyGoal} />
-    </DailyGoalWrapper>
+    </Wrapper>
   )
 }
 
-const DailyGoalWrapper = styled.div`
-  padding: 0.7em 1em;
-  margin: 2em 0;
-  background-color: ${(props) => props.theme.colors.purple};
-  border-radius: 5px;
-  display: grid;
-  grid-template-rows: 1fr 2fr;
-  grid-template-columns: 4fr 1fr;
-  grid-template-areas:
-    'text minutes'
-    'slider check';
-  place-items: center;
+const Wrapper = styled(Card)`
+  grid-area: goal;
 `
 
 const StyledSlider = styled(Slider)`

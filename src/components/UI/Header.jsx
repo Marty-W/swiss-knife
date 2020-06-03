@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 import { Link } from 'react-router-dom'
+import { GiSwissArmyKnife } from 'react-icons/gi'
 import { AuthContext } from '../../context/authContext'
 import { auth } from '../../utils/firebase'
 
-import { ReactComponent as Knife } from '../../assets/svgs/swiss-army-knife.svg'
-import Button from './Button'
+import Button from './Button.styles'
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext)
@@ -15,52 +15,44 @@ const Header = () => {
   }
 
   return (
-    <LogoWrapper>
-      <Logo />
+    <Wrapper>
+      <GiSwissArmyKnife />
       {currentUser ? (
-        <SignButton onClick={signOutUser}>Log Out</SignButton>
+        <LoginButton onClick={signOutUser}>Sign out</LoginButton>
       ) : (
         <Link to="/auth">
-          <SignButton>Sign In</SignButton>
+          <LoginButton>Sign in</LoginButton>
         </Link>
       )}
-    </LogoWrapper>
+    </Wrapper>
   )
 }
 
-const Logo = styled(Knife)`
-  fill: ${(props) => props.theme.colors.white};
-  width: 2em;
-  height: 2em;
-  position: absolute;
-  top: 1em;
-  left: 1em;
-
-  &:hover {
-    fill: ${(props) => props.theme.colors.red};
-  }
-`
-
-const LogoWrapper = styled.div`
+const Wrapper = styled.div`
   width: 100%;
-  margin-bottom: 4em;
-`
+  grid-area: head;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0.5em;
 
-const SignButton = styled(Button)`
-  position: absolute;
-  right: 1em;
-  top: 1em;
-  padding: 0.4em 1em;
-  margin: 0;
-  border-width: 3px;
-  &:hover {
-    background: ${(props) => props.theme.colors.white};
+  & svg {
+    color: ${(props) => props.theme.colors.tertiary};
+    width: 1.8em;
+    font-size: 2rem;
   }
 
-  a {
-    text-decoration: none;
-    background: inherit;
+  svg:first-child {
+    transform: rotate(-45deg);
+    color: ${(props) => props.theme.colors.accent};
   }
 `
+
+const LoginButton = styled(Button)`
+  border: 1px solid ${(props) => props.theme.colors.accent};
+  padding: 0.5rem 1rem;
+`
+
+// TODO add hover style
 
 export default Header

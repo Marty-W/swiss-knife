@@ -5,7 +5,7 @@ import { FcGoogle } from 'react-icons/fc'
 
 import { auth, Google } from '../../utils/firebase'
 
-import ErrorMsg from '../UI/ErrorMsg'
+import ErrorMsg from '../UI/ErrorMsg.styles'
 
 const Socials = () => {
   const [errorMsg, setErrorMsg] = useState()

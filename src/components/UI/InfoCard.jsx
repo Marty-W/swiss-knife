@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import { AiOutlineClose } from 'react-icons/ai'
-import Card from './Card'
+import Card from './Card.styles'
 
 const InfoCard = ({ children, show, setShow }) => {
   return (

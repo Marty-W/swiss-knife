@@ -14,13 +14,10 @@ const GlobalStyle = createGlobalStyle`
     }
 
     body {
-         font-family: 'Raleway', sans-serif;
-         background: #0F1020;
-         color: #EAF2EF;
-    }
-
-    h1 {
-      font-size: 2rem;
+         font-family: 'Lato', sans-serif;
+         font-size: 14px;
+         background: #101119 ;
+         color: #EFF6EE;
     }
 `
 

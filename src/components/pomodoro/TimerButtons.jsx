@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
 
-import Button from '../UI/Button'
+import Button from '../UI/Button.styles'
 import { PomoContext } from '../../context/pomoContext'
 
 const TimerButtons = () => {

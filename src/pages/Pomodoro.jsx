@@ -2,12 +2,11 @@ import React, { useContext, useState, useEffect } from 'react'
 import styled from 'styled-components/macro'
 
 import TimePicker from '../components/pomodoro/TimePicker'
-import Button from '../components/UI/Button'
 import FocusMode from '../components/pomodoro/FocusMode'
 import Info from '../components/pomodoro/Info'
-import Heading from '../components/UI/Heading'
-import DailyGoal from '../components/pomodoro/DailyGoalSetter'
-import TimeEntries from '../components/pomodoro/TimeEntries'
+import SectionHeading from '../components/UI/SectionHeading.styles'
+import DailyGoalSetter from '../components/pomodoro/DailyGoalSetter'
+import History from '../components/pomodoro/History'
 
 import { PomoContext } from '../context/pomoContext'
 import { AuthContext } from '../context/authContext'
@@ -43,30 +42,38 @@ const Pomodoro = () => {
   return (
     <>
       {isModalOpen && <FocusMode />}
-      <PomoWrapper>
-        <Heading>Pomodoro</Heading>
-        <TimePicker />
-        <StartButton onClick={handlePomoStart}>Start</StartButton>
-        {!isGoalSet && <DailyGoal handleGoalSet={setIsGoalSet} />}
-        <TimeEntries />
-        <Info />
-      </PomoWrapper>
+      <Wrapper>
+        <TimerHeading>Pomodoro</TimerHeading>
+        <TimePicker handlePomoStart={handlePomoStart} />
+        <GoalHeading>Time Goal</GoalHeading>
+        <DailyGoalSetter handleGoalSet={setIsGoalSet} />
+        <HistoryHeading>History</HistoryHeading>
+        <History />
+      </Wrapper>
     </>
   )
 }
 
-const PomoWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  height: 100%;
-  width: 100%;
+const Wrapper = styled.div`
+  padding: 0 0.8em;
+  grid-area: content;
+  display: grid;
+  grid-template-columns: minmax(2.5rem, 3rem) 1fr;
+  grid-template-rows: 30% 20% 40%;
+  grid-template-areas:
+    'timerH timer'
+    'goalH goal'
+    'historyH history';
 `
-
-const StartButton = styled(Button)`
-  margin: 0 auto;
-  padding: 0.4em 2em;
-  color: ${(props) => props.theme.colors.white};
+const TimerHeading = styled(SectionHeading)`
+  grid-area: timerH;
+  align-self: center;
+`
+const GoalHeading = styled(TimerHeading)`
+  grid-area: goalH;
+`
+const HistoryHeading = styled(TimerHeading)`
+  grid-area: historyH;
 `
 
 export default Pomodoro

@@ -3,10 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
-import './index.css'
 
 import GlobalStyle from './theme/global-style'
-import Theme from './context/Theme'
+import Theme from './theme/Theme'
 
 ReactDOM.render(
   <React.StrictMode>

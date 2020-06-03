@@ -3,15 +3,14 @@ import { ThemeProvider } from 'styled-components/macro'
 
 const themeOptions = {
   fonts: {
-    dec: 'Amatic SC',
-    text: 'Raleway',
+    primary: 'Lato',
+    secondary: 'Unica One',
   },
   colors: {
-    grey: '#303036',
-    red: '#CC2936',
-    purple: '#3B3355',
-    white: '#EAF2EF',
-    dark: '#0F1020',
+    primary: '#101119',
+    secondary: '#1F2533',
+    tertiary: '#EFF6EE',
+    accent: '#F02D3A',
   },
 }
 

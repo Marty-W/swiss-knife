@@ -8,6 +8,8 @@ import 'rc-slider/assets/index.css'
 import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
 
+import Card from '../UI/Card.styles'
+
 const DailyGoalSetter = ({ handleGoalSet }) => {
   const [dailyGoal, setDailyGoal] = useState(0)
 
@@ -28,8 +30,8 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
   }
 
   return (
-    <DailyGoalWrapper>
-      <StyledText>Set your time goal for today: </StyledText>
+    <Wrapper>
+      <Text>Set your time goal for today: </Text>
       <StyledSlider
         min={0}
         max={720}
@@ -37,33 +39,31 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
         value={dailyGoal}
         onChange={setDailyGoal}
         trackStyle={{
-          backgroundColor: '#CC2936',
+          backgroundColor: '#F02D3A',
         }}
         handleStyle={{
-          backgroundColor: '#303036',
-          borderColor: '#303036',
+          backgroundColor: '#101119',
+          borderColor: '#101119',
         }}
       />
       <Minutes>
         <span>{dailyGoal}</span> minutes
       </Minutes>
       <Check onClick={syncDailyGoal} />
-    </DailyGoalWrapper>
+    </Wrapper>
   )
 }
 
-const DailyGoalWrapper = styled.div`
-  padding: 0.7em 1em;
-  margin: 2em 0;
-  background-color: ${(props) => props.theme.colors.purple};
-  border-radius: 5px;
+const Wrapper = styled(Card)`
+  grid-area: goal;
   display: grid;
   grid-template-rows: 1fr 2fr;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: auto minmax(1rem, 3rem);
   grid-template-areas:
     'text minutes'
     'slider check';
   place-items: center;
+  padding: 0.5em 1.5em;
 `
 
 const StyledSlider = styled(Slider)`
@@ -72,11 +72,12 @@ const StyledSlider = styled(Slider)`
 
 const Minutes = styled.p`
   grid-area: minutes;
-  align-self: start;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   user-select: none;
   span {
-    color: ${(props) => props.theme.colors.red};
-    display: block;
+    color: ${(props) => props.theme.colors.accent};
     font-weight: bold;
     font-size: 1.5rem;
   }
@@ -87,10 +88,16 @@ const Check = styled(AiFillCheckCircle)`
   font-size: 1.8rem;
   cursor: pointer;
   grid-area: check;
+  margin-left: 0.5em;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.accent};
+  }
 `
-const StyledText = styled.p`
+const Text = styled.p`
   grid-area: text;
   justify-self: start;
+  font-size: 1.3rem;
 `
 
 export default DailyGoalSetter

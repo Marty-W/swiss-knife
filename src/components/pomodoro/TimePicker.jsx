@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
-
-import { GoChevronLeft, GoChevronRight } from 'react-icons/go'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 import { PomoContext } from '../../context/pomoContext'
+
+import Card from '../UI/Card.styles'
+import Button from '../UI/Button.styles'
 
 const TimePicker = () => {
   const [state, dispatch] = useContext(PomoContext)
@@ -26,47 +28,62 @@ const TimePicker = () => {
   }
 
   return (
-    <StyledTimer>
-      <StyledButton
+    <Wrapper>
+      <LeftChevron
         disabled={duration.as('milliseconds') === 0}
         onClick={handleMinus}
       >
-        <GoChevronLeft />
-      </StyledButton>
-      <StyledTicker isBreak={isBreak}>
-        {duration.toFormat('mm:ss')}
-      </StyledTicker>
-      <StyledButton onClick={handlePlus}>
-        <GoChevronRight />
-      </StyledButton>
-    </StyledTimer>
+        <BsChevronLeft />
+      </LeftChevron>
+      <Time isBreak={isBreak}>{duration.toFormat('mm:ss')}</Time>
+      <RightChevron onClick={handlePlus}>
+        <BsChevronRight onClick={handlePlus} />
+      </RightChevron>
+      <StartButton>Start</StartButton>
+    </Wrapper>
   )
 }
 
-const StyledTimer = styled.p`
-  font-size: 2rem;
-  text-align: center;
-  margin: 2em;
+const Wrapper = styled(Card)`
+  grid-area: timer;
+  display: grid;
+  grid-template-columns: minmax(1rem, 3rem) auto minmax(1rem, 3rem);
+  grid-template-rows: 3fr 1fr;
+  place-items: center;
+  grid-template-areas:
+    'lchevron timer rchevron'
+    '. btn .';
 `
 
-const StyledButton = styled.button`
+const StartButton = styled(Button)`
+  background-color: ${(props) => props.theme.colors.accent};
+  grid-area: btn;
+  text-transform: uppercase;
+  letter-spacing: 1.1px;
+`
+
+const LeftChevron = styled.button`
+  grid-area: lchevron;
   cursor: pointer;
   background: none;
   border: none;
-  font-size: 1.5rem;
-  color: ${(props) => props.theme.colors.red};
-
-  //todo repair outline
-  svg:active {
-    outline: none;
-  }
+  font-size: 2.5rem;
+  color: ${(props) => props.theme.colors.tertiary};
+  padding: 0;
 `
 
-const StyledTicker = styled.span`
+const RightChevron = styled(LeftChevron)`
+  grid-area: rchevron;
+`
+
+const Time = styled.span`
+  font-family: ${(props) => props.theme.fonts.secondary};
+  font-size: 3.5rem;
   color: ${(props) => props.theme.colors.white};
   display: inline-block;
-  margin: 0 auto;
   user-select: none;
+
+  //TODO weird centering, timer and chevrons not really in one line
 `
 
 export default TimePicker
