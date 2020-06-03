@@ -64,10 +64,10 @@ const Wrapper = styled.div`
     'timerH timer'
     'goalH goal'
     'historyH history';
+  grid-row-gap: 1.2em;
 `
 const TimerHeading = styled(SectionHeading)`
   grid-area: timerH;
-  align-self: center;
 `
 const GoalHeading = styled(TimerHeading)`
   grid-area: goalH;
