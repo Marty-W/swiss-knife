@@ -19,7 +19,7 @@ const Form = () => {
     e.preventDefault()
     try {
       await auth.createUserWithEmailAndPassword(userEmail, userPassword)
-      history.push('/')
+      history.goBack()
     } catch (err) {
       setErrorMessage(err.message)
     }
@@ -29,7 +29,7 @@ const Form = () => {
     e.preventDefault()
     try {
       await auth.signInWithEmailAndPassword(userEmail, userPassword)
-      history.push('/')
+      history.goBack()
     } catch (err) {
       setErrorMessage(err.message)
     }

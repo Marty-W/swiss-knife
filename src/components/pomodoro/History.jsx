@@ -62,10 +62,11 @@ const TimeEntries = () => {
 }
 
 const Wrapper = styled(Card)`
+  position: relative;
   grid-area: history;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 1fr;
+  grid-auto-rows: minmax(2rem, 3rem);
   place-items: center;
 
   & div:nth-child(odd) {

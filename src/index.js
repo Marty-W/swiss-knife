@@ -1,18 +1,24 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 
 import GlobalStyle from './theme/global-style'
 import Theme from './theme/Theme'
+import { AuthProvider } from './context/authContext'
 
 ReactDOM.render(
   <React.StrictMode>
-    <Theme>
-      <GlobalStyle />
-      <App />
-    </Theme>
+    <Router>
+      <AuthProvider>
+        <Theme>
+          <GlobalStyle />
+          <App />
+        </Theme>
+      </AuthProvider>
+    </Router>
   </React.StrictMode>,
   document.getElementById('root')
 )

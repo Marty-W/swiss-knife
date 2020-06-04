@@ -12,7 +12,7 @@ const Navbar = () => {
 }
 
 const StyledNavbar = styled.nav`
-  position: sticky;
+  grid-area: nav;
   width: 100%;
   bottom: 0;
   background-color: ${(props) => props.theme.colors.primary};

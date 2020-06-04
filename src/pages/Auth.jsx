@@ -14,7 +14,7 @@ const Auth = () => {
   return (
     <Modal type="center">
       <SignInWrapper>
-        <StyledCloseButton onClick={() => history.push('/')} />
+        <StyledCloseButton onClick={() => history.goBack()} />
         <StyledH2>Login</StyledH2>
         <p>login using your socials or your username and password</p>
         <Form />

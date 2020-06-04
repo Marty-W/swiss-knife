@@ -6,24 +6,27 @@ import { PomoContext } from '../../context/pomoContext'
 
 import Card from '../UI/Card.styles'
 import Button from '../UI/Button.styles'
+import Rating from './Rating'
 
-const TimePicker = () => {
+const TimePicker = ({ handlePomoStart }) => {
   const [state, dispatch] = useContext(PomoContext)
   const { duration, isBreak } = state
 
   const handlePlus = () => {
+    const payload = 'plus'
     if (isBreak) {
-      dispatch({ type: 'BREAK_PLUS' })
+      dispatch({ type: 'BREAK', payload })
     } else {
-      dispatch({ type: 'DUR_PLUS' })
+      dispatch({ type: 'DUR', payload })
     }
   }
 
   const handleMinus = () => {
+    const payload = 'minus'
     if (isBreak) {
-      dispatch({ type: 'BREAK_MINUS' })
+      dispatch({ type: 'BREAK', payload })
     } else {
-      dispatch({ type: 'DUR_MINUS' })
+      dispatch({ type: 'DUR', payload })
     }
   }
 
@@ -37,9 +40,10 @@ const TimePicker = () => {
       </LeftChevron>
       <Time isBreak={isBreak}>{duration.toFormat('mm:ss')}</Time>
       <RightChevron onClick={handlePlus}>
-        <BsChevronRight onClick={handlePlus} />
+        <BsChevronRight />
       </RightChevron>
-      <StartButton>Start</StartButton>
+      <StartButton onClick={handlePomoStart}>Start</StartButton>
+      {!isBreak && <Rating dur={duration.as('minutes')} />}
     </Wrapper>
   )
 }
@@ -47,12 +51,12 @@ const TimePicker = () => {
 const Wrapper = styled(Card)`
   grid-area: timer;
   display: grid;
-  grid-template-columns: minmax(1rem, 3rem) auto minmax(1rem, 3rem);
-  grid-template-rows: 3fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
+  grid-template-rows: 2fr 1fr;
   place-items: center;
   grid-template-areas:
     'lchevron timer rchevron'
-    '. btn .';
+    '. btn rating';
 `
 
 const StartButton = styled(Button)`

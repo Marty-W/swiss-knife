@@ -8,6 +8,8 @@ import {
 } from 'react-icons/ai'
 import { IoIosTimer } from 'react-icons/io'
 
+// todo implement navlink, that has active classname for better navigation
+
 const NavItems = () => (
   <Wrapper>
     <Link to="/">

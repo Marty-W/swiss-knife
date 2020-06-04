@@ -26,7 +26,6 @@ const Ticker = () => {
     if (isRunning && !isPaused) {
       setLocalSessionLength((prev) => {
         if (prev.as('milliseconds') > 0) {
-          handleDocumentTitle(prev.minus(1000))
           return prev.minus(1000)
         }
         return prev
@@ -60,10 +59,6 @@ const Ticker = () => {
     } catch (err) {
       console.log(err)
     }
-  }
-
-  const handleDocumentTitle = (timeLeft) => {
-    document.title = timeLeft.toFormat('mm:ss')
   }
 
   return (

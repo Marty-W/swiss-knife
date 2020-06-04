@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import styled from 'styled-components/macro'
-import { Link } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { GiSwissArmyKnife } from 'react-icons/gi'
 import { AuthContext } from '../../context/authContext'
 import { auth } from '../../utils/firebase'
@@ -9,6 +9,7 @@ import Button from './Button.styles'
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext)
+  const history = useHistory()
 
   const signOutUser = () => {
     auth.signOut()
@@ -20,9 +21,7 @@ const Header = () => {
       {currentUser ? (
         <LoginButton onClick={signOutUser}>Sign out</LoginButton>
       ) : (
-        <Link to="/auth">
-          <LoginButton>Sign in</LoginButton>
-        </Link>
+        <LoginButton onClick={() => history.push('/auth')}>Sign in</LoginButton>
       )}
     </Wrapper>
   )
@@ -37,14 +36,12 @@ const Wrapper = styled.div`
   padding: 0 0.5em;
 
   & svg {
-    color: ${(props) => props.theme.colors.tertiary};
-    width: 1.8em;
-    font-size: 2rem;
-  }
-
-  svg:first-child {
     transform: rotate(-45deg);
     color: ${(props) => props.theme.colors.accent};
+    width: 1.8em;
+    font-size: 2rem;
+    align-self: flex-start;
+    margin-top: 0.6em;
   }
 `
 

@@ -5,6 +5,7 @@ import styled from 'styled-components/macro'
 const modalRoot = document.getElementById('modal')
 
 // TODO fix button styling
+// TODO fix close outside of modal
 const Modal = ({ children, type }) => {
   const elRef = useRef(null)
   if (!elRef.current) {

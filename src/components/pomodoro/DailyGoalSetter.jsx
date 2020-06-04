@@ -5,13 +5,14 @@ import Slider from 'rc-slider/lib/Slider'
 
 import 'rc-slider/assets/index.css'
 
+import { DateTime } from 'luxon'
 import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
 
 import Card from '../UI/Card.styles'
 
-const DailyGoalSetter = ({ handleGoalSet }) => {
-  const [dailyGoal, setDailyGoal] = useState(0)
+const DailyGoalSetter = ({ setIsGoalSet }) => {
+  const [dailyGoalValue, setDailyGoalValue] = useState(0)
 
   const { currentUser } = useContext(AuthContext)
 
@@ -19,14 +20,15 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
     if (currentUser) {
       try {
         const { uid } = currentUser
-        await db.doc(`users/${uid}/pomo/stats`).update({
-          dailyGoal,
+        await db.doc(`users/${uid}/pomo/stats`).set({
+          dailyGoal: dailyGoalValue,
+          timestamp: DateTime.local().toMillis(),
         })
+        setIsGoalSet(true)
       } catch (err) {
         console.log(err)
       }
     }
-    handleGoalSet(true)
   }
 
   return (
@@ -36,8 +38,8 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
         min={0}
         max={720}
         step={10}
-        value={dailyGoal}
-        onChange={setDailyGoal}
+        value={dailyGoalValue}
+        onChange={setDailyGoalValue}
         trackStyle={{
           backgroundColor: '#F02D3A',
         }}
@@ -47,7 +49,7 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
         }}
       />
       <Minutes>
-        <span>{dailyGoal}</span> minutes
+        <span>{dailyGoalValue}</span> minutes
       </Minutes>
       <Check onClick={syncDailyGoal} />
     </Wrapper>
@@ -55,7 +57,7 @@ const DailyGoalSetter = ({ handleGoalSet }) => {
 }
 
 const Wrapper = styled(Card)`
-  grid-area: goal;
+  height: 100%;
   display: grid;
   grid-template-rows: 1fr 2fr;
   grid-template-columns: auto minmax(1rem, 3rem);
@@ -97,7 +99,7 @@ const Check = styled(AiFillCheckCircle)`
 const Text = styled.p`
   grid-area: text;
   justify-self: start;
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 `
 
 export default DailyGoalSetter

@@ -1,26 +1,18 @@
 import { Duration } from 'luxon'
 
+// TODO rebuild the reducer
 const pomoReducer = (state, action) => {
-  switch (action.type) {
-    case 'DUR_MINUS':
+  const { type, payload } = action
+  switch (type) {
+    case 'DUR':
       return {
         ...state,
-        duration: state.duration.minus(Duration.fromObject({ minutes: 5 })),
+        duration: state.duration[payload](Duration.fromObject({ minutes: 5 })),
       }
-    case 'DUR_PLUS':
+    case 'BREAK':
       return {
         ...state,
-        duration: state.duration.plus(Duration.fromObject({ minutes: 5 })),
-      }
-    case 'BREAK_PLUS':
-      return {
-        ...state,
-        duration: state.duration.plus(Duration.fromObject({ minutes: 1 })),
-      }
-    case 'BREAK_MINUS':
-      return {
-        ...state,
-        duration: state.duration.minus(Duration.fromObject({ minutes: 1 })),
+        duration: state.duration[payload](Duration.fromObject({ minutes: 1 })),
       }
     case 'POMO_START':
       return {
