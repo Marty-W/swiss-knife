@@ -34,12 +34,13 @@ const Ticker = () => {
     if (localSessionLength.as('milliseconds') === 0) {
       if (!isBreak) {
         pushTimeEntries()
+        addToTimeGoal()
         dispatch({ type: 'POMO_FINISH' })
       } else if (isBreak) {
         dispatch({ type: 'POMO_ABORT' })
       }
     }
-  }, 1000)
+  }, 10)
 
   const createTimeEntries = () => ({
     startTime,
@@ -54,6 +55,18 @@ const Ticker = () => {
       await entriesRef.update({
         timeEntries: firebase.firestore.FieldValue.arrayUnion(
           createTimeEntries()
+        ),
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+  const addToTimeGoal = async () => {
+    try {
+      await db.doc(`users/${currentUser.uid}/pomo/stats`).update({
+        completed: firebase.firestore.FieldValue.increment(
+          duration.as('minutes')
         ),
       })
     } catch (err) {

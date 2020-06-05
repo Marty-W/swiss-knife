@@ -3,6 +3,7 @@ import React, { useState, useEffect, useContext } from 'react'
 import styled from 'styled-components/macro'
 import { DateTime } from 'luxon'
 
+import Card from '../UI/Card.styles'
 import DailyGoalGetter from './DailyGoalGetter'
 import DailyGoalSetter from './DailyGoalSetter'
 
@@ -10,29 +11,31 @@ import { db } from '../../utils/firebase'
 import { AuthContext } from '../../context/authContext'
 
 const DailyGoal = () => {
-  const [isGoalSet, setIsGoalSet] = useState(false)
+  const [isGoalSet, setIsGoalSet] = useState(true)
   const [dailyGoal, setDailyGoal] = useState()
+  const [completed, setCompleted] = useState()
   const { currentUser } = useContext(AuthContext)
 
   useEffect(() => {
-    if (currentUser && isGoalSet) {
+    if (currentUser) {
       return db.doc(`users/${currentUser.uid}/pomo/stats`).onSnapshot((doc) => {
         const dtServer = DateTime.fromMillis(doc.data().timestamp).day
         const dtNow = DateTime.local().day
 
         if (dtServer === dtNow) {
           setDailyGoal(doc.data().dailyGoal)
+          setCompleted(doc.data().completed)
         } else {
           setIsGoalSet(false)
         }
       })
     }
-  }, [isGoalSet, currentUser])
+  }, [currentUser])
 
   return (
     <Wrapper>
-      {isGoalSet ? (
-        <DailyGoalGetter dailyGoal={dailyGoal} />
+      {isGoalSet && dailyGoal ? (
+        <DailyGoalGetter dailyGoal={dailyGoal} completed={completed} />
       ) : (
         <DailyGoalSetter
           dailyGoal={dailyGoal}
@@ -44,7 +47,7 @@ const DailyGoal = () => {
   )
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled(Card)`
   grid-area: goal;
 `
 

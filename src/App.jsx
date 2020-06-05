@@ -13,7 +13,7 @@ import Header from './components/UI/Header'
 import Auth from './pages/Auth'
 import FocusMode from './pages/FocusMode'
 
-// TODO consider moving auth again below header....
+// TODO paths doesnt work, home todos and habits not rendering...
 
 const App = () => {
   return (
@@ -25,9 +25,9 @@ const App = () => {
           <Route exact path="/session" component={FocusMode} />
           <Route exact path="/pomodoro" component={Pomodoro} />
         </PomoContextProvider>
-        <Route exact path="/habits" component={Habits} />
-        <Route exact path="/todo" component={Todo} />
-        <Route exact path="/" component={Home} />
+        <Route path="/habits" component={Habits} />
+        <Route path="/todo" component={Todo} />
+        <Route path="/" component={Home} />
       </Switch>
       <Navbar />
     </BodyWrapper>
