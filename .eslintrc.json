@@ -25,18 +25,6 @@
   "rules": {
     "prettier/prettier": ["error"],
     "semi": 0,
-    "no-restricted-imports": [
-      "error",
-      {
-        "paths": [
-          {
-            "name": "styled-components",
-            "message": "Please import from styled-components/macro."
-          }
-        ],
-        "patterns": ["!styled-components/macro"]
-      }
-    ],
     "react/prop-types": 0,
     "react/jsx-props-no-spreading": 0,
     "no-use-before-define": 0

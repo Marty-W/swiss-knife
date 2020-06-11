@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import styled, { keyframes } from 'styled-components/macro'
+import styled, { keyframes } from 'styled-components'
 import { PomoContext } from '../context/pomoContext'
 
 import Modal from '../components/UI/Modal'

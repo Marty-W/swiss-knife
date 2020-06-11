@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components'
 import { AiOutlineClose } from 'react-icons/ai'
 
 import { useHistory } from 'react-router-dom'

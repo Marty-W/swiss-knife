@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import Slider from 'rc-slider/lib/Slider'
 
@@ -20,7 +20,7 @@ const DailyGoalSetter = ({ setIsGoalSet }) => {
     if (currentUser) {
       try {
         const { uid } = currentUser
-        await db.doc(`users/${uid}/pomo/stats`).set({
+        await db.doc(`users/${uid}/pomo/stats`).update({
           dailyGoal: dailyGoalValue,
           timestamp: DateTime.local().toMillis(),
         })
@@ -66,6 +66,7 @@ const Wrapper = styled(Card)`
     'slider check';
   place-items: center;
   padding: 0.5em 1.5em;
+  border: none;
 `
 
 const StyledSlider = styled(Slider)`

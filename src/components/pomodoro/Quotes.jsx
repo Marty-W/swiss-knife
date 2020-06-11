@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 
 import Redo from '../UI/Redo'
 import ErrorMsg from '../UI/ErrorMsg.styles'

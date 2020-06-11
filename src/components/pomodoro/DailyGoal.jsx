@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import React, { useState, useEffect, useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 import { DateTime } from 'luxon'
 
 import Card from '../UI/Card.styles'
@@ -35,7 +35,11 @@ const DailyGoal = () => {
   return (
     <Wrapper>
       {isGoalSet && dailyGoal ? (
-        <DailyGoalGetter dailyGoal={dailyGoal} completed={completed} />
+        <DailyGoalGetter
+          dailyGoal={dailyGoal}
+          completed={completed}
+          setIsGoalSet={setIsGoalSet}
+        />
       ) : (
         <DailyGoalSetter
           dailyGoal={dailyGoal}

@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 
 import { PomoContext } from '../../context/pomoContext'

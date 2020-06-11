@@ -1,44 +1,54 @@
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components/macro'
+import React from 'react'
+import styled from 'styled-components/'
 import { motion } from 'framer-motion'
 
-const DailyGoalGetter = ({ dailyGoal, completed }) => {
-  const [percentDone, setPercentDone] = useState(0)
+import Bar from './Bar'
 
-  useEffect(() => {
-    const value = Math.floor((completed / dailyGoal) * 100)
-    setPercentDone(value)
-  }, [percentDone, completed, dailyGoal])
+const DailyGoalGetter = ({ dailyGoal, completed, setIsGoalSet }) => (
+  <Wrapper>
+    <Bar max={dailyGoal} value={completed} />
+    <Goal>Daily goal: {dailyGoal}m</Goal>
+    <Completed>Completed: {completed}m</Completed>
+    <TomatoSpan>Tomatoes:</TomatoSpan>
+    <Tomatoes>🍅🍅</Tomatoes>
+    <Edit onClick={() => setIsGoalSet(false)}>Edit</Edit>
+  </Wrapper>
+)
 
-  return (
-    <>
-      <BarWrapper>
-        <span style={{ width: `${percentDone}%` }} />
-      </BarWrapper>
-      {/* <span>{dailyGoal}</span>
-      <span>{completed}</span> */}
-    </>
-  )
-}
+const Wrapper = styled.div`
+  height: 100%;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 2fr 2fr 1fr;
+  grid-template-areas:
+    'goal tomato edit'
+    'completed tomatoes .'
+    'bar bar bar';
+`
+const Completed = styled.span`
+  grid-area: completed;
+`
 
-const BarWrapper = styled.div`
-  height: 20%;
-  position: relative;
-  background: ${(props) => props.theme.colors.primary};
-  border-radius: 25px;
-  padding: 10px;
+const Goal = styled.span`
+  grid-area: goal;
+`
+const TomatoSpan = styled.span`
+  grid-area: tomato;
+`
 
-  & span {
-    display: block;
-    height: 100%;
-    border-top-right-radius: 8px;
-    border-bottom-right-radius: 8px;
-    border-top-left-radius: 20px;
-    border-bottom-left-radius: 20px;
-    background-color: ${(props) => props.theme.colors.accent};
-    position: relative;
-    overflow: hidden;
-  }
+const Tomatoes = styled.div`
+  grid-area: tomatoes;
+`
+
+const Edit = styled.span`
+  grid-area: edit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: ${(props) => props.theme.colors.tertiary};
+  font-family: ${(props) => props.theme.fonts.secondary};
+  justify-self: end;
 `
 
 export default DailyGoalGetter

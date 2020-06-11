@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useState, useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 import { DateTime } from 'luxon'
 import uuid from 'react-uuid'
 

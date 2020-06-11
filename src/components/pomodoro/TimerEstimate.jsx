@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { DateTime } from 'luxon'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 
 import { PomoContext } from '../../context/pomoContext'
 

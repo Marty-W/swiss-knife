@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
-import styled from 'styled-components/macro'
+import styled from 'styled-components/'
 import { Duration } from 'luxon'
 
 import { useInterval } from '../../hooks/useInterval'
