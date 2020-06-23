@@ -13,6 +13,8 @@ import Header from './components/UI/Header'
 import Auth from './pages/Auth'
 import FocusMode from './pages/FocusMode'
 
+//FIXME hacky grid templaterows
+
 const App: React.FC = () => {
   return (
     <BodyWrapper>
@@ -36,7 +38,7 @@ const BodyWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: grid;
-  grid-template-rows: 10% auto 6%;
+  grid-template-rows: 10% 84% 6%;
   grid-template-areas:
     'head'
     'content'

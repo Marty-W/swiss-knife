@@ -7,7 +7,7 @@ import TimePicker from '../components/pomodoro/TimePicker'
 import SectionHeading from '../components/UI/SectionHeading.styles'
 import DailyGoal from '../components/pomodoro/DailyGoal'
 import History from '../components/pomodoro/History'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../context/PomoContext'
 
 const Pomodoro: React.FC = () => {
   const [, dispatch] = usePomo()

@@ -9,7 +9,7 @@ const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User>()
 
   useEffect(() => {
-    auth.onAuthStateChanged((user) => {
+    return auth.onAuthStateChanged((user) => {
       user && setUser(user)
     })
   })

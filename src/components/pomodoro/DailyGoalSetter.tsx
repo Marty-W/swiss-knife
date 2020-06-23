@@ -7,7 +7,7 @@ import { DateTime } from 'luxon'
 import { db } from '../../utils/firebase'
 
 import Card from '../UI/Card.styles'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 
 interface Props {
   setIsGoalSet: React.Dispatch<React.SetStateAction<boolean>>

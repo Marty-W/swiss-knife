@@ -6,8 +6,8 @@ import { useInterval } from '../../hooks/useInterval'
 import { db, firebase } from '../../utils/firebase'
 
 import TimerEstimate from './TimerEstimate'
-import { useCurrentUser } from '~/context/AuthContext'
-import { usePomo } from '~/context/PomoContext'
+import { useCurrentUser } from '../../context/AuthContext'
+import { usePomo } from '../../context/PomoContext'
 
 const Ticker: React.FC = () => {
   const [startTime] = useState(() => Date.now())

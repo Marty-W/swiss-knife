@@ -8,7 +8,7 @@ import DailyGoalGetter from './DailyGoalGetter'
 import DailyGoalSetter from './DailyGoalSetter'
 
 import { db } from '../../utils/firebase'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 
 const DailyGoal: React.FC = () => {
   const [isGoalSet, setIsGoalSet] = useState(true)
@@ -33,6 +33,7 @@ const DailyGoal: React.FC = () => {
         }
       })
     }
+    return
   }, [currentUser])
 
   return (

@@ -2,8 +2,8 @@
 /* eslint-disable consistent-return */
 import { useEffect, useRef } from 'react'
 
-function useInterval(callback, delay) {
-  const savedCallback = useRef()
+function useInterval(callback: () => void, delay: number) {
+  const savedCallback = useRef<Function | null>(null)
 
   useEffect(() => {
     savedCallback.current = callback
@@ -11,12 +11,13 @@ function useInterval(callback, delay) {
 
   useEffect(() => {
     function tick() {
-      savedCallback.current()
+      savedCallback.current && savedCallback.current()
     }
     if (delay !== null) {
       const id = setInterval(tick, delay)
       return () => clearInterval(id)
     }
+    return
   }, [delay])
 }
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { DateTime, Duration } from 'luxon'
 import styled from 'styled-components/'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../../context/PomoContext'
 
 interface Props {
   localSesh: Duration

@@ -7,7 +7,7 @@ import TimePicker from '../components/pomodoro/TimePicker'
 import TimerHeading from '../components/pomodoro/TimerHeading'
 import TimerButtons from '../components/pomodoro/TimerButtons'
 import Quotes from '../components/pomodoro/Quotes'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../context/PomoContext'
 
 const FocusMode: React.FC = () => {
   const [state] = usePomo()

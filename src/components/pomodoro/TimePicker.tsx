@@ -5,7 +5,7 @@ import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import Card from '../UI/Card.styles'
 import Button from '../UI/Button.styles'
 import Rating from './Rating'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../../context/PomoContext'
 
 interface Props {
   handlePomoStart?: () => void

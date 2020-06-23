@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components/'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../../context/PomoContext'
 
 const TimerHeading: React.FC = () => {
   const [state] = usePomo()

@@ -5,7 +5,7 @@ import { GiSwissArmyKnife } from 'react-icons/gi'
 import { auth } from '../../utils/firebase'
 
 import Button from './Button.styles'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 
 const Header: React.FC = () => {
   const currentUser = useCurrentUser()

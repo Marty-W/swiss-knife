@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { db } from '../../utils/firebase'
 import Card from '../UI/Card.styles'
 import Entry from './Entry'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 
 interface EntryInt {
   formattedStartTime: string
@@ -15,8 +15,8 @@ interface EntryInt {
   duration: number
 }
 
-const TimeEntries: React.FC = () => {
-  const [entries, setEntries] = useState<EntryInt[] | undefined>()
+const History: React.FC = () => {
+  const [entries, setEntries] = useState<EntryInt[] | undefined>([])
   const currentUser = useCurrentUser()
 
   useEffect(() => {
@@ -49,6 +49,7 @@ const TimeEntries: React.FC = () => {
         )
       })
     }
+    return
   }, [currentUser])
 
   return (
@@ -80,10 +81,12 @@ const Wrapper = styled(Card)`
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: minmax(2rem, 3rem);
   place-items: center;
+  max-height: 100%;
+  overflow-y: scroll;
 
   & div:nth-child(odd) {
     background-color: ${(props) => props.theme.colors.primary};
   }
 `
 
-export default TimeEntries
+export default History
