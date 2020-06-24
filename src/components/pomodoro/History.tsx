@@ -8,7 +8,6 @@ import { db } from '../../utils/firebase';
 import Card from '../UI/Card.styles';
 import Entry from './Entry';
 import { useCurrentUser } from '../../context/AuthContext';
-import { StringifyOptions } from 'querystring';
 
 interface EntryInt {
   startTime: string;
@@ -30,24 +29,22 @@ const History: React.FC = () => {
     if (currentUser) {
       const { uid } = currentUser;
       return db.doc(`users/${uid}/pomo/timeEntries`).onSnapshot((snapshot) => {
-        const entriesData = snapshot?.data()?.timeEntries;
-        entriesData &&
-          entriesData.map((entry: ServerEntry) => {
-            const formatted = formatEntry(entry);
-            return setEntries((prev) => [...(prev ?? []), formatted]);
-          });
+        const entriesData: ServerEntry[] = snapshot?.data()?.timeEntries;
+        entriesData.map((entry: ServerEntry) => {
+          const formatted = formatEntry(entry);
+          return setEntries((prev) => [...(prev ?? []), formatted]);
+        });
       });
-    } else {
-      setEntries([]);
     }
+    setEntries([]);
   }, [currentUser]);
 
   const formatEntry = (entry: ServerEntry) => {
     const formattedStartTime = DateTime.fromMillis(
-      +entry.startTime
+      +entry.startTime,
     ).toLocaleString(DateTime.TIME_24_SIMPLE);
     const formattedEndTime = DateTime.fromMillis(+entry.endTime).toLocaleString(
-      DateTime.TIME_24_SIMPLE
+      DateTime.TIME_24_SIMPLE,
     );
 
     return {
@@ -99,7 +96,5 @@ const Wrapper = styled(Card)`
     font-weight: bold;
   }
 `;
-
-const HistoryWrapper = styled.div``;
 
 export default History;

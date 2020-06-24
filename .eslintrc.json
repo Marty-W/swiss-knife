@@ -1,0 +1,36 @@
+{
+  "root": true,
+  "env": {
+    "browser": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "tsconfigRootDir": "./",
+    "project": ["./tsconfig.json"]
+  },
+  "plugins": ["@typescript-eslint", "react-hooks", "react", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/recommended-requiring-type-checking",
+    "airbnb-typescript",
+    "airbnb",
+    "airbnb/hooks",
+    "prettier/@typescript-eslint"
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
+  "rules": {
+    "react/prop-types": "off",
+    "react/jsx-filename-extension": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": "off",
+    "@typescript-eslint/no-unsafe-assignment": "off",
+    "operator-linebreak": "off"
+  }
+}
