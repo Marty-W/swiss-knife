@@ -1,19 +1,18 @@
 module.exports = {
-  extends: [
-    'airbnb-typescript',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
-    'plugin:jest/recommended',
-    'prettier',
-    'prettier/react',
-    'prettier/@typescript-eslint',
-    'plugin:prettier/recommended',
-  ],
-  plugins: ['react', '@typescript-eslint'],
   env: {
     browser: true,
     es6: true,
   },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/eslint-recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:@typescript-eslint/recommended-requiring-type-checking',
+    'plugin:react/recommended',
+    'plugin:react-hooks/recommended',
+    'standard',
+    'plugin:prettier/recommended',
+  ],
   globals: {
     Atomics: 'readonly',
     SharedArrayBuffer: 'readonly',
@@ -24,16 +23,12 @@ module.exports = {
       jsx: true,
     },
     ecmaVersion: 2018,
-    sourceType: 'module',
     project: './tsconfig.json',
+    sourceType: 'module',
   },
-  rules: {
-    'linebreak-style': 'off',
-    'prettier/prettier': [
-      'error',
-      {
-        endOfLine: 'auto',
-      },
-    ],
+  plugins: ['react', 'react-hooks', '@typescript-eslint'],
+  settings: {
+    react: { version: 'detect' },
   },
-}
+  rules: {},
+};

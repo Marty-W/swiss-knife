@@ -1,60 +1,60 @@
-import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
-import styled from 'styled-components'
-import { FaUserShield, FaKey } from 'react-icons/fa'
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
+import { FaUserShield, FaKey } from 'react-icons/fa';
 
-import { auth } from '../../utils/firebase'
+import { auth } from '../../utils/firebase';
 
-import Button from '../UI/Button.styles'
-import ErrorMsg from '../UI/ErrorMsg.styles'
+import Button from '../UI/Button.styles';
+import ErrorMsg from '../UI/ErrorMsg.styles';
 
 const Form: React.FC = () => {
-  const [userEmail, setUserEmail] = useState('')
-  const [userPassword, setUserPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  const [userEmail, setUserEmail] = useState('');
+  const [userPassword, setUserPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
-  const history = useHistory()
+  const history = useHistory();
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await auth.createUserWithEmailAndPassword(userEmail, userPassword)
-      history.goBack()
+      await auth.createUserWithEmailAndPassword(userEmail, userPassword);
+      history.goBack();
     } catch (err) {
-      setErrorMessage(err.message)
+      setErrorMessage(err.message);
     }
-  }
+  };
 
   const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
-      await auth.signInWithEmailAndPassword(userEmail, userPassword)
-      history.goBack()
+      await auth.signInWithEmailAndPassword(userEmail, userPassword);
+      history.goBack();
     } catch (err) {
-      setErrorMessage(err.message)
+      setErrorMessage(err.message);
     }
-  }
+  };
   return (
     <StyledForm>
-      <label htmlFor="email">
+      <label htmlFor='email'>
         <FaUserShield />
         <input
-          type="email"
+          type='email'
           onChange={(e) => setUserEmail(e.target.value)}
           value={userEmail}
-          id="email"
-          placeholder="email"
+          id='email'
+          placeholder='email'
           required
         />
       </label>
-      <label htmlFor="password">
+      <label htmlFor='password'>
         <FaKey />
         <input
-          type="password"
+          type='password'
           onChange={(e) => setUserPassword(e.target.value)}
           value={userPassword}
-          id="password"
-          placeholder="password"
+          id='password'
+          placeholder='password'
           required
         />
       </label>
@@ -64,14 +64,14 @@ const Form: React.FC = () => {
       </ButtonWrapper>
       {errorMessage && <ErrorMsg>{errorMessage}</ErrorMsg>}
     </StyledForm>
-  )
-}
+  );
+};
 
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: center;
   margin: 1em 0;
-`
+`;
 const SignButton = styled(Button)`
   width: 40%;
   margin: 0 auto;
@@ -80,7 +80,7 @@ const SignButton = styled(Button)`
     background-color: ${(props) => props.theme.colors.primary};
     color: ${(props) => props.theme.colors.secondary};
   }
-`
+`;
 const SignUpButton = styled(SignButton)`
   background-color: ${(props) => props.theme.colors.accent};
   color: ${(props) => props.theme.colors.primary};
@@ -89,7 +89,7 @@ const SignUpButton = styled(SignButton)`
     color: ${(props) => props.theme.colors.accent};
     background-color: ${(props) => props.theme.colors.primary};
   }
-`
+`;
 
 const StyledForm = styled.form`
   display: flex;
@@ -112,6 +112,6 @@ const StyledForm = styled.form`
     font-size: 1.2rem;
     margin: 0 0.4rem;
   }
-`
+`;
 
-export default Form
+export default Form;

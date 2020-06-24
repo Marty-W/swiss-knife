@@ -1,56 +1,61 @@
 /* eslint-disable consistent-return */
-import React, { useEffect, useState } from 'react'
-import styled from 'styled-components/'
-import { DateTime } from 'luxon'
-import { v4 as uuidv4 } from 'uuid'
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components/';
+import { DateTime } from 'luxon';
+import { v4 as uuidv4 } from 'uuid';
 
-import { db } from '../../utils/firebase'
-import Card from '../UI/Card.styles'
-import Entry from './Entry'
-import { useCurrentUser } from '../../context/AuthContext'
+import { db } from '../../utils/firebase';
+import Card from '../UI/Card.styles';
+import Entry from './Entry';
+import { useCurrentUser } from '../../context/AuthContext';
+import { StringifyOptions } from 'querystring';
 
 interface EntryInt {
-  formattedStartTime: string
-  formattedEndTime: string
-  duration: number
+  startTime: string;
+  endTime: string;
+  duration: number;
+}
+
+interface ServerEntry {
+  startTime: string;
+  endTime: string;
+  durationInMinutes: number;
 }
 
 const History: React.FC = () => {
-  const [entries, setEntries] = useState<EntryInt[] | undefined>([])
-  const currentUser = useCurrentUser()
+  const [entries, setEntries] = useState<EntryInt[] | undefined>();
+  const currentUser = useCurrentUser();
 
   useEffect(() => {
     if (currentUser) {
-      const { uid } = currentUser
+      const { uid } = currentUser;
       return db.doc(`users/${uid}/pomo/timeEntries`).onSnapshot((snapshot) => {
-        const entriesData = snapshot?.data()?.timeEntries
-        entriesData.map(
-          (entry: {
-            startTime: number
-            endTime: number
-            durationInMinutes: number
-          }) => {
-            const formattedStartTime = DateTime.fromMillis(
-              +entry.startTime
-            ).toLocaleString(DateTime.TIME_24_SIMPLE)
-            const formattedEndTime = DateTime.fromMillis(
-              +entry.endTime
-            ).toLocaleString(DateTime.TIME_24_SIMPLE)
-
-            return setEntries((prev) => [
-              ...prev,
-              {
-                formattedStartTime,
-                formattedEndTime,
-                duration: entry.durationInMinutes,
-              },
-            ])
-          }
-        )
-      })
+        const entriesData = snapshot?.data()?.timeEntries;
+        entriesData &&
+          entriesData.map((entry: ServerEntry) => {
+            const formatted = formatEntry(entry);
+            return setEntries((prev) => [...(prev ?? []), formatted]);
+          });
+      });
+    } else {
+      setEntries([]);
     }
-    return
-  }, [currentUser])
+  }, [currentUser]);
+
+  const formatEntry = (entry: ServerEntry) => {
+    const formattedStartTime = DateTime.fromMillis(
+      +entry.startTime
+    ).toLocaleString(DateTime.TIME_24_SIMPLE);
+    const formattedEndTime = DateTime.fromMillis(+entry.endTime).toLocaleString(
+      DateTime.TIME_24_SIMPLE
+    );
+
+    return {
+      startTime: formattedStartTime,
+      endTime: formattedEndTime,
+      duration: entry.durationInMinutes,
+    };
+  };
 
   return (
     <Wrapper>
@@ -58,21 +63,22 @@ const History: React.FC = () => {
       <span>Ended</span>
       <span>Duration(m)</span>
       <span>Rating</span>
+      {!currentUser && <p>Log in to view your past sessions.</p>}
       {entries &&
         entries.map((entry) => {
-          const { formattedStartTime, formattedEndTime, duration } = entry
+          const { startTime, endTime, duration } = entry;
           return (
             <Entry
               key={uuidv4()}
-              start={formattedStartTime}
-              end={formattedEndTime}
+              start={startTime}
+              end={endTime}
               dur={duration}
             />
-          )
+          );
         })}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled(Card)`
   position: relative;
@@ -87,6 +93,13 @@ const Wrapper = styled(Card)`
   & div:nth-child(odd) {
     background-color: ${(props) => props.theme.colors.primary};
   }
-`
 
-export default History
+  & p {
+    grid-column: span 4;
+    font-weight: bold;
+  }
+`;
+
+const HistoryWrapper = styled.div``;
+
+export default History;

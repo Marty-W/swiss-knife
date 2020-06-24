@@ -1,7 +1,7 @@
 import React from 'react'
 import { ThemeProvider } from 'styled-components'
 
-import { DefaultTheme } from 'styled-components'
+import type { DefaultTheme } from 'styled-components'
 
 const themeOptions: DefaultTheme = {
   fonts: {

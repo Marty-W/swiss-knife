@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 
 const Habits: React.FC = () => {
-  return <h1>Habits</h1>
-}
+  // throw new Error('hey there');
+};
 
-export default Habits
+export default Habits;

@@ -1,19 +1,23 @@
-import React from 'react'
-import styled from 'styled-components/'
-import { useHistory } from 'react-router-dom'
-import { GiSwissArmyKnife } from 'react-icons/gi'
-import { auth } from '../../utils/firebase'
+import React from 'react';
+import styled from 'styled-components/';
+import { useHistory } from 'react-router-dom';
+import { GiSwissArmyKnife } from 'react-icons/gi';
+import { auth } from '../../utils/firebase';
 
-import Button from './Button.styles'
-import { useCurrentUser } from '../../context/AuthContext'
+import Button from './Button.styles';
+import { useCurrentUser } from '../../context/AuthContext';
 
 const Header: React.FC = () => {
-  const currentUser = useCurrentUser()
-  const history = useHistory()
+  const currentUser = useCurrentUser();
+  const history = useHistory();
 
-  const signOutUser = () => {
-    auth.signOut()
-  }
+  const signOutUser = async () => {
+    try {
+      await auth.signOut();
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Wrapper>
@@ -24,8 +28,8 @@ const Header: React.FC = () => {
         <LoginButton onClick={() => history.push('/auth')}>Sign in</LoginButton>
       )}
     </Wrapper>
-  )
-}
+  );
+};
 
 const Wrapper = styled.div`
   width: 100%;
@@ -43,13 +47,13 @@ const Wrapper = styled.div`
     align-self: flex-start;
     margin-top: 0.6em;
   }
-`
+`;
 
 const LoginButton = styled(Button)`
   border: 1px solid ${(props) => props.theme.colors.accent};
   padding: 0.5rem 1rem;
-`
+`;
 
 // TODO add hover style
 
-export default Header
+export default Header;
