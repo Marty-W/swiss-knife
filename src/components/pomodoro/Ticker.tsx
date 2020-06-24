@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styled from 'styled-components/';
 import { Duration } from 'luxon';
 
+import styled from 'styled-components';
 import { useInterval } from '../../hooks/useInterval';
 import { db, firebase } from '../../utils/firebase';
-
 import TimerEstimate from './TimerEstimate';
 import { useCurrentUser } from '../../context/AuthContext';
 import { usePomo } from '../../context/PomoContext';
@@ -12,7 +11,7 @@ import { usePomo } from '../../context/PomoContext';
 const Ticker: React.FC = () => {
   const [startTime] = useState(() => Date.now());
   const [localSessionLength, setLocalSessionLength] = useState(() =>
-    Duration.fromMillis(0)
+    Duration.fromMillis(0),
   );
   const currentUser = useCurrentUser();
   const [state, dispatch] = usePomo();
@@ -33,8 +32,8 @@ const Ticker: React.FC = () => {
     }
     if (localSessionLength.as('milliseconds') === 0) {
       if (!isBreak) {
-        pushTimeEntries();
-        addToTimeGoal();
+        pushTimeEntries().catch((err) => console.log(err));
+        addToTimeGoal().catch((err) => console.log(err));
         dispatch({ type: 'POMO_FINISH' });
       } else if (isBreak) {
         dispatch({ type: 'POMO_ABORT' });
@@ -49,28 +48,20 @@ const Ticker: React.FC = () => {
   });
 
   const pushTimeEntries = async () => {
-    try {
-      const entriesRef = db.doc(`users/${currentUser?.uid}/pomo/timeEntries`);
-      await entriesRef.update({
-        timeEntries: firebase.firestore.FieldValue.arrayUnion(
-          createTimeEntries()
-        ),
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    const entriesRef = db.doc(`users/${currentUser?.uid}/pomo/timeEntries`);
+    await entriesRef.update({
+      timeEntries: firebase.firestore.FieldValue.arrayUnion(
+        createTimeEntries(),
+      ),
+    });
   };
 
   const addToTimeGoal = async () => {
-    try {
-      await db.doc(`users/${currentUser?.uid}/pomo/stats`).update({
-        completed: firebase.firestore.FieldValue.increment(
-          duration.as('minutes')
-        ),
-      });
-    } catch (err) {
-      console.log(err);
-    }
+    await db.doc(`users/${currentUser?.uid}/pomo/stats`).update({
+      completed: firebase.firestore.FieldValue.increment(
+        duration.as('minutes'),
+      ),
+    });
   };
 
   return (

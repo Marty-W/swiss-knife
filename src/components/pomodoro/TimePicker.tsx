@@ -1,42 +1,22 @@
 import React from 'react';
 import styled from 'styled-components/';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
 
 import Card from '../UI/Card.styles';
 import Button from '../UI/Button.styles';
 import Rating from './Rating';
-import { usePomo } from '../../context/PomoContext';
+import Timer from './Timer';
 
 interface Props {
   handlePomoStart?: () => void;
 }
 
-const TimePicker: React.FC<Props> = ({ handlePomoStart }) => {
-  const [state, dispatch] = usePomo();
-  const { duration, isBreak } = state;
-
-  const handleDuration = (type: 'plus' | 'minus') => {
-    isBreak
-      ? dispatch({ type: 'BREAK', payload: type })
-      : dispatch({ type: 'DUR', payload: type });
-  };
-
-  return (
-    <Wrapper>
-      <LeftChevron
-        disabled={duration.as('milliseconds') === 0}
-        onClick={() => handleDuration('minus')}>
-        <BsChevronLeft />
-      </LeftChevron>
-      <Time>{duration.toFormat('mm:ss')}</Time>
-      <RightChevron onClick={() => handleDuration('plus')}>
-        <BsChevronRight />
-      </RightChevron>
-      <StartButton onClick={handlePomoStart}>Start</StartButton>
-      {!isBreak && <Rating dur={duration.as('minutes')} />}
-    </Wrapper>
-  );
-};
+const TimePicker: React.FC<Props> = ({ handlePomoStart }) => (
+  <Wrapper>
+    <Timer />
+    <StartButton onClick={handlePomoStart}>Start</StartButton>
+    <Rating />
+  </Wrapper>
+);
 
 const Wrapper = styled(Card)`
   grid-area: timer;
@@ -54,30 +34,6 @@ const StartButton = styled(Button)`
   grid-area: btn;
   text-transform: uppercase;
   letter-spacing: 1.1px;
-`;
-
-const LeftChevron = styled.button`
-  grid-area: lchevron;
-  cursor: pointer;
-  background: none;
-  border: none;
-  font-size: 2.5rem;
-  color: ${(props) => props.theme.colors.tertiary};
-  padding: 0;
-`;
-
-const RightChevron = styled(LeftChevron)`
-  grid-area: rchevron;
-`;
-
-const Time = styled.span`
-  font-family: ${(props) => props.theme.fonts.secondary};
-  font-size: 3.5rem;
-  color: ${(props) => props.theme.colors.tertiary};
-  display: inline-block;
-  user-select: none;
-
-  //TODO weird centering, timer and chevrons not really in one line
 `;
 
 export default TimePicker;
