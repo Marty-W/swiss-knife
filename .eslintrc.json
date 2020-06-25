@@ -6,17 +6,21 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "tsconfigRootDir": "./",
-    "project": ["./tsconfig.json"]
+    "project": ["./tsconfig.json"],
+    "sourceType": "module",
+    "ecmaVersion": 2020
   },
-  "plugins": ["@typescript-eslint", "react-hooks", "react", "import"],
+  "plugins": ["@typescript-eslint", "react-hooks", "react", "prettier"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "airbnb-typescript",
-    "airbnb",
+    "airbnb-typescript/base",
     "airbnb/hooks",
-    "prettier/@typescript-eslint"
+    "plugin:react/recommended",
+    "plugin:jsx-a11y/recommended",
+    "prettier/@typescript-eslint",
+    "plugin:prettier/recommended"
   ],
   "settings": {
     "react": {
@@ -26,11 +30,17 @@
   "rules": {
     "react/prop-types": "off",
     "react/jsx-filename-extension": "off",
-    "import/no-unresolved": "off",
     "import/extensions": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
-    "@typescript-eslint/no-unsafe-assignment": "off",
-    "operator-linebreak": "off"
+    "no-unused-expressions": "off",
+    "@typescript-eslint/no-unused-expressions": [
+      "error",
+      {
+        "allowShortCircuit": true,
+        "allowTernary": true,
+        "allowTaggedTemplates": true
+      }
+    ]
   }
 }

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import Modal from '../components/UI/Modal'
 import Ticker from '../components/pomodoro/Ticker'
-import TimePicker from '../components/pomodoro/TimePicker'
+import FullTimePicker from '../components/pomodoro/FullTimePicker'
 import TimerHeading from '../components/pomodoro/TimerHeading'
 import TimerButtons from '../components/pomodoro/TimerButtons'
 import Quotes from '../components/pomodoro/Quotes'
@@ -17,7 +17,7 @@ const FocusMode: React.FC = () => {
     <Modal>
       <FocusWrapper>
         <TimerHeading />
-        {isRunning ? <Ticker /> : <TimePicker />}
+        {isRunning ? <Ticker /> : <FullTimePicker />}
         <TimerButtons />
         <Quotes />
       </FocusWrapper>

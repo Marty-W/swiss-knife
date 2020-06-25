@@ -1,74 +1,49 @@
-import React from 'react';
-import styled from 'styled-components/';
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import React from 'react'
+import styled from 'styled-components'
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
+import { usePomo } from '~/context/PomoContext'
 
-import Card from '../UI/Card.styles';
-import Button from '../UI/Button.styles';
-import Rating from './Rating';
-import { usePomo } from '../../context/PomoContext';
-
-interface Props {
-  handlePomoStart?: () => void;
-}
-
-const TimePicker: React.FC<Props> = ({ handlePomoStart }) => {
-  const [state, dispatch] = usePomo();
-  const { duration, isBreak } = state;
+const TimePicker: React.FC = () => {
+  const [state, dispatch] = usePomo()
+  const { duration, isBreak } = state
 
   const handleDuration = (type: 'plus' | 'minus') => {
     isBreak
       ? dispatch({ type: 'BREAK', payload: type })
-      : dispatch({ type: 'DUR', payload: type });
-  };
-
+      : dispatch({ type: 'DUR', payload: type })
+  }
   return (
     <Wrapper>
-      <LeftChevron
+      <Chevron
         disabled={duration.as('milliseconds') === 0}
-        onClick={() => handleDuration('minus')}>
+        onClick={() => handleDuration('minus')}
+      >
         <BsChevronLeft />
-      </LeftChevron>
+      </Chevron>
       <Time>{duration.toFormat('mm:ss')}</Time>
-      <RightChevron onClick={() => handleDuration('plus')}>
+      <Chevron onClick={() => handleDuration('plus')}>
         <BsChevronRight />
-      </RightChevron>
-      <StartButton onClick={handlePomoStart}>Start</StartButton>
-      {!isBreak && <Rating dur={duration.as('minutes')} />}
+      </Chevron>
     </Wrapper>
-  );
-};
+  )
+}
 
-const Wrapper = styled(Card)`
+const Wrapper = styled.div`
   grid-area: timer;
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-template-rows: 2fr 1fr;
-  place-items: center;
-  grid-template-areas:
-    'lchevron timer rchevron'
-    '. btn rating';
-`;
+`
 
-const StartButton = styled(Button)`
-  background-color: ${(props) => props.theme.colors.accent};
-  grid-area: btn;
-  text-transform: uppercase;
-  letter-spacing: 1.1px;
-`;
-
-const LeftChevron = styled.button`
-  grid-area: lchevron;
+const Chevron = styled.button`
   cursor: pointer;
   background: none;
   border: none;
   font-size: 2.5rem;
   color: ${(props) => props.theme.colors.tertiary};
   padding: 0;
-`;
 
-const RightChevron = styled(LeftChevron)`
-  grid-area: rchevron;
-`;
+  &:disabled {
+    visibility: hidden;
+  }
+`
 
 const Time = styled.span`
   font-family: ${(props) => props.theme.fonts.secondary};
@@ -78,6 +53,6 @@ const Time = styled.span`
   user-select: none;
 
   //TODO weird centering, timer and chevrons not really in one line
-`;
+`
 
-export default TimePicker;
+export default TimePicker

@@ -9,23 +9,17 @@
   "keywords": [
     "react",
     "typescript",
-    "parcel"
+    "webpack"
   ],
-  "browserslist": [
-    "last 3 and_chr versions",
-    "last 3 chrome versions",
-    "last 3 opera versions",
-    "last 3 ios_saf versions",
-    "last 3 safari versions"
-  ],
+  "browserslist": ">0.2%",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
+    "@types/styled-components": "^5.1.0",
     "firebase": "7.14.6",
     "framer-motion": "^1.11.0",
     "luxon": "^1.23.0",
-    "parcel-bundler": "^1.12.4",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-icons": "^3.10.0",
@@ -37,31 +31,30 @@
     "uuid": "^8.1.0"
   },
   "scripts": {
-    "start": "parcel src/index.html --open",
-    "build": "parcel build src/index.html --out-dir build/release --public-url ./"
+    "start": "parcel ./src/index.html",
+    "build": "parcel ./src/index.html"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
     "@types/firebase": "^3.2.1",
     "@types/luxon": "^1.24.0",
     "@types/node": "^14.0.13",
-    "@types/parcel-env": "^0.0.0",
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "@types/react-router-dom": "^5.1.5",
-    "@types/styled-components": "^5.1.0",
     "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^3.4.0",
     "@typescript-eslint/parser": "^3.4.0",
-    "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^7.3.1",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-config-airbnb-typescript": "^8.0.2",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.1",
-    "eslint-plugin-jsx-a11y": "^6.2.3",
-    "eslint-plugin-react": "^7.19.0",
-    "eslint-plugin-react-hooks": "^2.5.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.0",
+    "eslint-plugin-react-hooks": "^4.0.4",
+    "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.5"
   }

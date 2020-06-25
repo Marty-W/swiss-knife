@@ -1,28 +1,32 @@
-import React from 'react';
-import styled from 'styled-components/';
+import React from 'react'
+import styled from 'styled-components/'
 
 interface Props {
-  dur: number;
+  dur: number
 }
 
 const Rating: React.FC<Props> = ({ dur }) => {
-  let output = '';
+  let output = ''
 
   if (dur < 25 && dur !== 0) {
-    output = '🍅';
+    output = '🍅'
   } else if (dur < 50 && dur !== 0) {
-    output = '🍅🍅';
+    output = '🍅🍅'
   } else if (dur >= 50) {
-    output = '🍅🍅🍅';
+    output = '🍅🍅🍅'
   }
 
   return (
-    <Wrapper>
-      <span>Rating:</span>
-      <span>{output}</span>
-    </Wrapper>
-  );
-};
+    <>
+      {dur > 0 && (
+        <Wrapper>
+          <span>Rating:</span>
+          <span>{output}</span>
+        </Wrapper>
+      )}
+    </>
+  )
+}
 
 const Wrapper = styled.div`
   grid-area: rating;
@@ -31,6 +35,6 @@ const Wrapper = styled.div`
   & span:first-child {
     display: block;
   }
-`;
+`
 
-export default Rating;
+export default Rating

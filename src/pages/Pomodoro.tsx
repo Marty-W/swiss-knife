@@ -1,22 +1,22 @@
-import React from 'react';
-import styled from 'styled-components';
-import { AiOutlineQuestionCircle } from 'react-icons/ai';
-import { useHistory } from 'react-router-dom';
+import React from 'react'
+import styled from 'styled-components'
+import { AiOutlineQuestionCircle } from 'react-icons/ai'
+import { useHistory } from 'react-router-dom'
 
-import TimePicker from '../components/pomodoro/TimePicker';
-import SectionHeading from '../components/UI/SectionHeading.styles';
-import DailyGoal from '../components/pomodoro/DailyGoal';
-import History from '../components/pomodoro/History';
-import { usePomo } from '../context/PomoContext';
+import TimePicker from '../components/pomodoro/FullTimePicker'
+import SectionHeading from '../components/UI/SectionHeading.styles'
+import DailyGoal from '../components/pomodoro/DailyGoal'
+import History from '../components/pomodoro/History'
+import { usePomo } from '../context/PomoContext'
 
 const Pomodoro: React.FC = () => {
-  const [, dispatch] = usePomo();
-  const history = useHistory();
+  const [, dispatch] = usePomo()
+  const history = useHistory()
 
   const handlePomoStart = () => {
-    dispatch({ type: 'POMO_START' });
-    history.push('/session');
-  };
+    dispatch({ type: 'POMO_START' })
+    history.push('/session')
+  }
 
   return (
     <Wrapper>
@@ -28,8 +28,8 @@ const Pomodoro: React.FC = () => {
       <History />
       <InfoToggle />
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   padding: 0 0.8em;
@@ -42,16 +42,16 @@ const Wrapper = styled.div`
     'goalH goal'
     'historyH history';
   grid-row-gap: 2em;
-`;
+`
 const TimerHeading = styled(SectionHeading)`
   grid-area: timerH;
-`;
+`
 const GoalHeading = styled(TimerHeading)`
   grid-area: goalH;
-`;
+`
 const HistoryHeading = styled(TimerHeading)`
   grid-area: historyH;
-`;
+`
 
 const InfoToggle = styled(AiOutlineQuestionCircle)`
   cursor: pointer;
@@ -62,6 +62,6 @@ const InfoToggle = styled(AiOutlineQuestionCircle)`
   font-size: 3rem;
 
   //FIXME sizing
-`;
+`
 
-export default Pomodoro;
+export default Pomodoro

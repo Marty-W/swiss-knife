@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Habits: React.FC = () => {
-  // throw new Error('hey there');
+  return <h1>Hi"</h1>;
 };
 
 export default Habits;
