@@ -1,58 +1,59 @@
 /* eslint-disable consistent-return */
-import React, { useEffect, useState } from 'react';
-import styled from 'styled-components/';
-import { DateTime } from 'luxon';
-import { v4 as uuidv4 } from 'uuid';
+import React, { useEffect, useState } from 'react'
+import styled from 'styled-components/'
+import { DateTime } from 'luxon'
+import { v4 as uuidv4 } from 'uuid'
 
-import { db } from '../../utils/firebase';
-import Card from '../UI/Card.styles';
-import Entry from './Entry';
-import { useCurrentUser } from '../../context/AuthContext';
+import { db } from '../../utils/firebase'
+import Card from '../UI/Card.styles'
+import Entry from './Entry'
+import { useCurrentUser } from '../../context/AuthContext'
 
 interface EntryInt {
-  startTime: string;
-  endTime: string;
-  duration: number;
+  startTime: string
+  endTime: string
+  duration: number
 }
 
 interface ServerEntry {
-  startTime: string;
-  endTime: string;
-  durationInMinutes: number;
+  startTime: string
+  endTime: string
+  durationInMinutes: number
 }
 
 const History: React.FC = () => {
-  const [entries, setEntries] = useState<EntryInt[] | undefined>();
-  const currentUser = useCurrentUser();
+  const [entries, setEntries] = useState<EntryInt[] | undefined>()
+  const currentUser = useCurrentUser()
 
   useEffect(() => {
     if (currentUser) {
-      const { uid } = currentUser;
+      const { uid } = currentUser
       return db.doc(`users/${uid}/pomo/timeEntries`).onSnapshot((snapshot) => {
-        const entriesData: ServerEntry[] = snapshot?.data()?.timeEntries;
+        const entriesData: ServerEntry[] = snapshot?.data()?.timeEntries
         entriesData.map((entry: ServerEntry) => {
-          const formatted = formatEntry(entry);
-          return setEntries((prev) => [...(prev ?? []), formatted]);
-        });
-      });
+          const formatted = formatEntry(entry)
+          return setEntries((prev) => [...(prev ?? []), formatted])
+        })
+      })
     }
-    setEntries([]);
-  }, [currentUser]);
+
+    setEntries([])
+  }, [currentUser])
 
   const formatEntry = (entry: ServerEntry) => {
     const formattedStartTime = DateTime.fromMillis(
       +entry.startTime,
-    ).toLocaleString(DateTime.TIME_24_SIMPLE);
+    ).toLocaleString(DateTime.TIME_24_SIMPLE)
     const formattedEndTime = DateTime.fromMillis(+entry.endTime).toLocaleString(
       DateTime.TIME_24_SIMPLE,
-    );
+    )
 
     return {
       startTime: formattedStartTime,
       endTime: formattedEndTime,
       duration: entry.durationInMinutes,
-    };
-  };
+    }
+  }
 
   return (
     <Wrapper>
@@ -63,7 +64,7 @@ const History: React.FC = () => {
       {!currentUser && <p>Log in to view your past sessions.</p>}
       {entries &&
         entries.map((entry) => {
-          const { startTime, endTime, duration } = entry;
+          const { startTime, endTime, duration } = entry
           return (
             <Entry
               key={uuidv4()}
@@ -71,11 +72,11 @@ const History: React.FC = () => {
               end={endTime}
               dur={duration}
             />
-          );
+          )
         })}
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled(Card)`
   position: relative;
@@ -95,6 +96,6 @@ const Wrapper = styled(Card)`
     grid-column: span 4;
     font-weight: bold;
   }
-`;
+`
 
-export default History;
+export default History

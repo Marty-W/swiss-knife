@@ -17,8 +17,14 @@ const DailyGoalGetter: React.FC<Props> = ({
 }) => (
   <Wrapper>
     <Bar max={dailyGoal} value={completed} />
-    <Goal>Daily goal: {dailyGoal}m</Goal>
-    <Completed>Completed: {completed}m</Completed>
+    <Goal>
+      Daily goal:
+      {dailyGoal}
+    </Goal>
+    <Completed>
+      Completed:
+      {completed}
+    </Completed>
     <TomatoSpan>Tomatoes:</TomatoSpan>
     <span>
       <Tomatoes role="img" aria-label="tomatoes">

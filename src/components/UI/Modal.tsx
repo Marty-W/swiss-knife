@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 import React, { useEffect, useRef } from 'react'
 import { createPortal } from 'react-dom'
 import styled from 'styled-components/'
@@ -5,7 +6,7 @@ import styled from 'styled-components/'
 // TODO fix button styling
 // TODO fix close outside of modal
 
-const modalRoot = document.getElementById('modal')!
+const modalRoot = document.getElementById('modal') as HTMLElement
 
 const Modal: React.FC = ({ children }) => {
   const elRef = useRef(document.createElement('div'))
@@ -14,11 +15,12 @@ const Modal: React.FC = ({ children }) => {
     if (!modalRoot) {
       return
     }
+    const modalDiv = elRef.current
 
-    modalRoot.appendChild(elRef.current)
+    modalRoot.appendChild(modalDiv)
 
     return () => {
-      modalRoot.removeChild(elRef.current)
+      modalRoot.removeChild(modalDiv)
     }
   }, [])
 
@@ -31,7 +33,7 @@ const StyledModal = styled.div`
   left: 0;
   height: 100vh;
   width: 100vw;
-  background-color: rgba(0, 0, 0, 0.95);
+  background-color: rgba(0, 0, 0, 1);
   z-index: 10;
 `
 

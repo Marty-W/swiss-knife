@@ -5,20 +5,20 @@ import Redo from '../UI/Redo'
 import ErrorMsg from '../UI/ErrorMsg.styles'
 
 const Quotes: React.FC = () => {
-  const [quote, setQuote] = useState()
+  const [quote, setQuote] = useState('')
   const [errorMsg, setErrorMsg] = useState()
 
   useEffect(() => {
-    fetchNewQuote()
+    fetchNewQuote().catch((err) => console.log(err))
   }, [])
 
   const fetchNewQuote = async () => {
     try {
       const response = await fetch(
-        'https://programming-quotes-api.herokuapp.com/quotes/random'
+        'https://programming-quotes-api.herokuapp.com/quotes/random',
       )
-      const quoteObj = await response.json()
-      setQuote(quoteObj.en)
+      const body = await response.json()
+      setQuote(body.en)
     } catch (err) {
       setErrorMsg(err)
     }

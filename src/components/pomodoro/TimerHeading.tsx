@@ -16,7 +16,7 @@ const TimerHeading: React.FC = () => {
 }
 
 const StyledTimerHeading = styled.h2`
-  color: ${(props) => props.theme.colors.tertiary};
+  color: ${(props) => props.theme.colors.accent};
   font-size: 2rem;
 `
 
