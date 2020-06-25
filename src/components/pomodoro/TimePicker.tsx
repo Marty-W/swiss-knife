@@ -32,7 +32,6 @@ const Wrapper = styled.div`
   grid-area: timer;
 `
 
-<<<<<<< HEAD
 const Chevron = styled.button`
   cursor: pointer;
   background: none;
@@ -57,6 +56,3 @@ const Time = styled.span`
 `
 
 export default TimePicker
-=======
-export default TimePicker;
->>>>>>> 8e2f3c3248936c9212bd25dcf74e18b904ee65a3

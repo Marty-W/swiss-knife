@@ -1,26 +1,26 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from 'react'
+import styled from 'styled-components'
 
-import Ticker from '../components/pomodoro/Ticker';
-import Timer from '../components/pomodoro/Timer';
-import TimerHeading from '../components/pomodoro/TimerHeading';
-import TimerButtons from '../components/pomodoro/TimerButtons';
-import Quotes from '../components/pomodoro/Quotes';
-import { usePomo } from '../context/PomoContext';
+import Ticker from '../components/pomodoro/Ticker'
+import TimePicker from '../components/pomodoro/TimePicker'
+import TimerHeading from '../components/pomodoro/TimerHeading'
+import TimerButtons from '../components/pomodoro/TimerButtons'
+import Quotes from '../components/pomodoro/Quotes'
+import { usePomo } from '../context/PomoContext'
 
 const Session: React.FC = () => {
-  const [state] = usePomo();
-  const { isRunning } = state;
+  const [state] = usePomo()
+  const { isRunning } = state
 
   return (
     <Wrapper>
       <TimerHeading />
-      {isRunning ? <Ticker /> : <Timer />}
+      {isRunning ? <Ticker /> : <TimePicker />}
       {isRunning && <TimerButtons />}
       <Quotes />
     </Wrapper>
-  );
-};
+  )
+}
 
 const Wrapper = styled.div`
   background: ${(props) => props.theme.colors.primary};
@@ -35,6 +35,6 @@ const Wrapper = styled.div`
   & > * {
     z-index: 10;
   }
-`;
+`
 
-export default Session;
+export default Session

@@ -18,7 +18,7 @@ const Rating: React.FC = () => {
 
   return (
     <>
-      {dur > 0 && (
+      {duration > 0 && (
         <Wrapper>
           <span>Rating:</span>
           <span>{output}</span>

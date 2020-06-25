@@ -22,7 +22,7 @@ const FullTimePicker: React.FC<Props> = ({ handlePomoStart }) => {
       <StartButton onClick={handlePomoStart} disabled={durInMinutes === 0}>
         Start
       </StartButton>
-      {!isBreak && <Rating dur={durInMinutes} />}
+      {!isBreak && <Rating />}
     </Wrapper>
   )
 }
