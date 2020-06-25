@@ -1,9 +1,8 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Duration } from 'luxon';
 
-interface PomoInt {
+export interface PomoInt {
   duration: Duration;
-  isModalOpen: boolean;
   isRunning: boolean;
   isPaused: boolean;
   isBreak: boolean;
@@ -20,7 +19,7 @@ type Actions =
   | { type: 'POMO_FINISH' }
   | { type: 'BREAK_START' };
 
-type Dispatch = (action: Actions) => void;
+export type Dispatch = (action: Actions) => void;
 
 const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
   switch (action.type) {
@@ -41,7 +40,6 @@ const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
     case 'POMO_START':
       return {
         ...state,
-        isModalOpen: true,
         isRunning: true,
         isPomo: true,
         isPaused: false,
@@ -52,7 +50,6 @@ const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
         ...state,
         duration: Duration.fromMillis(0),
         isRunning: false,
-        isModalOpen: false,
         isPomo: false,
         isBreak: false,
       };
@@ -73,7 +70,6 @@ const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
         isPaused: true,
         isRunning: false,
         isPomo: false,
-        isModalOpen: true,
         duration: Duration.fromMillis(0),
       };
     case 'BREAK_START':
@@ -87,4 +83,4 @@ const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
   }
 };
 
-export { pomoReducer, PomoInt, Dispatch };
+export { pomoReducer };

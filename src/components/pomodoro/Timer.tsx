@@ -1,50 +1,48 @@
-import React from 'react'
-import styled from 'styled-components'
-import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
-import { usePomo } from '~/context/PomoContext'
+import React from 'react';
+import styled from 'styled-components/';
+import { BsChevronLeft, BsChevronRight } from 'react-icons/bs';
+import { usePomo } from '../../context/PomoContext';
 
-const TimePicker: React.FC = () => {
-  const [state, dispatch] = usePomo()
-  const { duration, isBreak } = state
+const Timer: React.FC = () => {
+  const [state, dispatch] = usePomo();
+  const { duration, isBreak } = state;
 
   const handleDuration = (type: 'plus' | 'minus') => {
     isBreak
       ? dispatch({ type: 'BREAK', payload: type })
-      : dispatch({ type: 'DUR', payload: type })
-  }
+      : dispatch({ type: 'DUR', payload: type });
+  };
   return (
-    <Wrapper>
-      <Chevron
+    <>
+      <LeftChevron
         disabled={duration.as('milliseconds') === 0}
         onClick={() => handleDuration('minus')}
       >
         <BsChevronLeft />
-      </Chevron>
+      </LeftChevron>
       <Time>{duration.toFormat('mm:ss')}</Time>
-      <Chevron onClick={() => handleDuration('plus')}>
+      <RightChevron onClick={() => handleDuration('plus')}>
         <BsChevronRight />
-      </Chevron>
-    </Wrapper>
-  )
-}
+      </RightChevron>
+    </>
+  );
+};
 
-const Wrapper = styled.div`
-  grid-area: timer;
-`
+export default Timer;
 
-<<<<<<< HEAD
-const Chevron = styled.button`
+const LeftChevron = styled.button`
+  grid-area: lchevron;
   cursor: pointer;
   background: none;
   border: none;
   font-size: 2.5rem;
   color: ${(props) => props.theme.colors.tertiary};
   padding: 0;
+`;
 
-  &:disabled {
-    visibility: hidden;
-  }
-`
+const RightChevron = styled(LeftChevron)`
+  grid-area: rchevron;
+`;
 
 const Time = styled.span`
   font-family: ${(props) => props.theme.fonts.secondary};
@@ -54,9 +52,4 @@ const Time = styled.span`
   user-select: none;
 
   //TODO weird centering, timer and chevrons not really in one line
-`
-
-export default TimePicker
-=======
-export default TimePicker;
->>>>>>> 8e2f3c3248936c9212bd25dcf74e18b904ee65a3
+`;

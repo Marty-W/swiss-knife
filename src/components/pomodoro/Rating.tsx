@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components/'
+import { usePomo } from '../../context/PomoContext'
 
-interface Props {
-  dur: number
-}
+const Rating: React.FC = () => {
+  const [state] = usePomo()
+  const duration = state.duration.as('minutes')
 
-const Rating: React.FC<Props> = ({ dur }) => {
   let output = ''
 
-  if (dur < 25 && dur !== 0) {
+  if (duration < 25 && duration !== 0) {
     output = '🍅'
-  } else if (dur < 50 && dur !== 0) {
+  } else if (duration < 50 && duration !== 0) {
     output = '🍅🍅'
-  } else if (dur >= 50) {
+  } else if (duration >= 50) {
     output = '🍅🍅🍅'
   }
 
