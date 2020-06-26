@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
 import { Switch, Route } from 'react-router-dom'
-
 import { PomoProvider } from './context/PomoContext'
 
 import Navbar from './components/UI/Navbar/Navbar'
@@ -21,13 +20,19 @@ const App: React.FC = () => {
       <Header />
       <Route exact path="/auth" component={Auth} />
       <Switch>
-        <PomoProvider>
-          <Route exact path="/session" component={Session} />
-          <Route exact path="/pomodoro" component={Pomodoro} />
-        </PomoProvider>
-        <Route path="/habits" component={Habits} />
-        <Route path="/todo" component={Todo} />
-        <Route path="/" component={Home} />
+        <Route exact path="/session">
+          <PomoProvider>
+            <Session />
+          </PomoProvider>
+        </Route>
+        <Route exact path="/pomodoro">
+          <PomoProvider>
+            <Pomodoro />
+          </PomoProvider>
+        </Route>
+        <Route exact path="/habits" component={Habits} />
+        <Route exact path="/todo" component={Todo} />
+        <Route exact path="/" component={Home} />
       </Switch>
       <Navbar />
     </BodyWrapper>
@@ -40,9 +45,9 @@ const BodyWrapper = styled.div`
   display: grid;
   grid-template-rows: 10% 84% 6%;
   grid-template-areas:
-    'head'
-    'content'
-    'nav';
+    'head head head'
+    '. content .'
+    'nav nav nav';
 `
 
 export default App

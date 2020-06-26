@@ -10,12 +10,12 @@ const TimerButtons: React.FC = () => {
   const { isPaused, isBreak, isRunning } = state
   const history = useHistory()
 
-  const handlePomoPause = () => {
-    dispatch({ type: isPaused ? 'POMO_CONTINUE' : 'POMO_PAUSE' })
+  const handlePause = () => {
+    dispatch({ type: isPaused ? 'CONTINUE' : 'PAUSE' })
   }
 
-  const handlePomoAbort = () => {
-    dispatch({ type: 'POMO_ABORT' })
+  const handleAbort = () => {
+    dispatch({ type: 'ABORT' })
     history.goBack()
   }
 
@@ -28,10 +28,10 @@ const TimerButtons: React.FC = () => {
       )}
       {!isBreak && (
         <>
-          <Button onClick={handlePomoPause}>
+          <Button onClick={handlePause}>
             {isPaused ? 'Continue' : 'Pause'}
           </Button>
-          <Button onClick={handlePomoAbort}>Abort</Button>
+          <Button onClick={handleAbort}>Abort</Button>
         </>
       )}
     </StyledButtons>

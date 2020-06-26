@@ -1,9 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { useHistory } from 'react-router-dom'
 
-import TimePicker from '../components/pomodoro/FullTimePicker'
+import FullTimePicker from '../components/pomodoro/FullTimePicker'
 import SectionHeading from '../components/UI/SectionHeading.styles'
 import DailyGoal from '../components/pomodoro/DailyGoal'
 import History from '../components/pomodoro/History'
@@ -21,7 +21,7 @@ const Pomodoro: React.FC = () => {
   return (
     <Wrapper>
       <TimerHeading>Pomodoro</TimerHeading>
-      <TimePicker handlePomoStart={handlePomoStart} />
+      <FullTimePicker handlePomoStart={handlePomoStart} />
       <GoalHeading>Time Goal</GoalHeading>
       <DailyGoal />
       <HistoryHeading>History</HistoryHeading>
@@ -32,7 +32,6 @@ const Pomodoro: React.FC = () => {
 }
 
 const Wrapper = styled.div`
-  padding: 0 0.8em;
   grid-area: content;
   display: grid;
   grid-template-columns: minmax(2.5rem, 3rem) 1fr;

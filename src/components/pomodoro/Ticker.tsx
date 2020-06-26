@@ -15,7 +15,7 @@ const Ticker: React.FC = () => {
   )
   const currentUser = useCurrentUser()
   const [state, dispatch] = usePomo()
-  const { duration, isRunning, isPaused, isBreak } = state
+  const { duration, isRunning, isPaused, isBreak, isPomo } = state
 
   useEffect(() => {
     setLocalSessionLength(duration)
@@ -34,10 +34,11 @@ const Ticker: React.FC = () => {
       if (!isBreak && currentUser) {
         pushTimeEntries().catch((err) => console.log(err))
         addToTimeGoal().catch((err) => console.log(err))
-      } else if (isBreak) {
-        dispatch({ type: 'POMO_ABORT' })
       }
-      dispatch({ type: 'POMO_FINISH' })
+
+      isPomo
+        ? dispatch({ type: 'POMO_FINISH' })
+        : dispatch({ type: 'BREAK_FINISH' })
     }
   }, 100)
 

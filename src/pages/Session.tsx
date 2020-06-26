@@ -1,29 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import Modal from '../components/UI/Modal'
-import Ticker from '../components/pomodoro/Ticker'
-import TimePicker from '../components/pomodoro/TimePicker'
-import TimerHeading from '../components/pomodoro/TimerHeading'
-import TimerButtons from '../components/pomodoro/TimerButtons'
-import Quotes from '../components/pomodoro/Quotes'
-import { usePomo } from '../context/PomoContext'
+import { PomoProvider, usePomo } from '../context/PomoContext'
 
-// TODO implement focus mode / break mode !
+import Modal from '../components/UI/Modal'
+import SessionFocus from '../components/pomodoro/SessionFocus'
+import SessionBreak from '../components/pomodoro/SessionBreak'
 
 const Session: React.FC = () => {
   const [state] = usePomo()
-  const { isRunning } = state
+  const { isPomo, isBreak } = state
 
   return (
-    <Modal>
-      <Wrapper>
-        <TimerHeading />
-        {isRunning ? <Ticker /> : <TimePicker />}
-        {isRunning && <TimerButtons />}
-        <Quotes />
-      </Wrapper>
-    </Modal>
+    <PomoProvider>
+      <Modal>
+        <Wrapper>
+          {isPomo && <SessionFocus />}
+          {isBreak && <SessionBreak />}
+        </Wrapper>
+      </Modal>
+    </PomoProvider>
   )
 }
 

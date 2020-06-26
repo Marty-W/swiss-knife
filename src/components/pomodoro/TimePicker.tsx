@@ -9,8 +9,8 @@ const TimePicker: React.FC = () => {
 
   const handleDuration = (type: 'plus' | 'minus') => {
     isBreak
-      ? dispatch({ type: 'BREAK', payload: type })
-      : dispatch({ type: 'DUR', payload: type })
+      ? dispatch({ type: 'BREAK_LENGTH', payload: type })
+      : dispatch({ type: 'FOCUS_LENGTH', payload: type })
   }
   return (
     <Wrapper>

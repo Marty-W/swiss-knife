@@ -13,15 +13,12 @@
       "jsx": true
     }
   },
-  "plugins": ["@typescript-eslint", "prettier", "react"],
+  "plugins": ["@typescript-eslint", "react"],
   "extends": [
-    "airbnb",
     "airbnb-typescript",
-    "airbnb/hooks",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "prettier/@typescript-eslint",
-    "plugin:prettier/recommended"
+    "prettier/@typescript-eslint"
   ],
   "settings": {
     "react": {
@@ -30,13 +27,14 @@
   },
   "rules": {
     "react/prop-types": "off",
-    "import/extensions": "off",
+    "react/react-in-jsx-scope": "off",
+    "react/jsx-one-expression-per-line": "off",
     "no-use-before-define": "off",
     "@typescript-eslint/no-use-before-define": "off",
     "@typescript-eslint/no-unsafe-assignment": "off",
-    "operator-linebreak": "off",
     "@typescript-eslint/no-unused-expressions": "off",
     "@typescript-eslint/no-unused-vars": "off",
+    "arrow-body-style": "off",
     "no-unused-expressions": [
       "error",
       {
