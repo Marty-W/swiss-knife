@@ -1,0 +1,40 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "es6": true,
+        "es2017": true,
+        "es2020": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "parserOptions": {
+        "project": "./tsconfig.json",
+        "sourceType": "module",
+        "ecmaVersion": 2020,
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "extends": [
+        "eslint:recommended",
+        "plugin:react/recommended",
+        "plugin:jsx-a11y/recommended",
+        "plugin:@typescript-eslint/recommended",
+        "prettier/@typescript-eslint",
+        "plugin:prettier/recommended"
+    ],
+    "plugins": ["react", "@typescript-eslint", "prettier"],
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
+    },
+    "rules": {
+        "no-console": "warn",
+        "semi": "off",
+        "no-unused-vars": "off",
+        "@typescript-eslint/indent": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "react/prop-types": "off"
+    }
+}
