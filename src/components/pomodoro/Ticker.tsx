@@ -49,16 +49,18 @@ const Ticker: React.FC = () => {
   })
 
   const pushTimeEntries = async () => {
-    const entriesRef = db.doc(`users/${currentUser?.uid}/pomo/timeEntries`)
-    await entriesRef.update({
-      timeEntries: firebase.firestore.FieldValue.arrayUnion(
-        createTimeEntries(),
-      ),
+    const entriesRef = db
+      .collection(`users/${currentUser?.uid}/pomoEntries/`)
+      .doc()
+    const entry = createTimeEntries()
+    await entriesRef.set({
+      ...entry,
+      id: entriesRef.id,
     })
   }
 
   const addToTimeGoal = async () => {
-    await db.doc(`users/${currentUser?.uid}/pomo/stats`).update({
+    await db.doc(`users/${currentUser?.uid}/pomoStats/stats`).update({
       completed: firebase.firestore.FieldValue.increment(
         duration.as('minutes'),
       ),

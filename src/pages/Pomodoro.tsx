@@ -33,7 +33,7 @@ const Wrapper = styled.div`
   grid-area: content;
   display: grid;
   grid-template-columns: minmax(1.3rem, 2.2rem) 1fr;
-  grid-template-rows: 1fr 18% 2fr;
+  grid-template-rows: 2fr 1.5fr 50%;
   grid-template-areas:
     'timerH timer'
     'goalH goal'

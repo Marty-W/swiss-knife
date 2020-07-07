@@ -64,13 +64,16 @@ const Todo: React.FC = () => {
   return (
     <Wrapper>
       <Header numTasks={4} />
-      <CountBox numTasks={todayTasks.length} type="scheduled" />
-      <CountBox numTasks={stashedTasks.length} type="stashed" />
+      <CountBox tasks={todayTasks as TaskInt[]} type="scheduled" />
+      <CountBox tasks={stashedTasks as TaskInt[]} type="stashed" />
       <TodoNav />
       <TodayDate>{new Date().toLocaleDateString()}</TodayDate>
-      <Toggle show={showCompletedTasks} handleShow={setShowCompletedTasks} />
       <Switch>
         <Route exact path={path}>
+          <Toggle
+            show={showCompletedTasks}
+            handleShow={setShowCompletedTasks}
+          />
           <TaskList tasks={todayTasks as TaskInt[]} />
         </Route>
         <Route exact path={`${path}/stash`}>
@@ -84,9 +87,12 @@ const Todo: React.FC = () => {
 export default Todo
 
 const Wrapper = styled.div`
+  height: 100%;
+  overflow: hidden;
+  overflow-y: scroll;
   grid-area: content;
   display: grid;
-  grid-template-rows: 2fr 1.2fr 0.8fr 0.2fr 6fr;
+  grid-template-rows: 2fr 1.2fr 0.8fr 0.2fr 55%;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 1em;
   grid-template-areas:

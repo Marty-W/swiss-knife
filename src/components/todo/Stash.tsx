@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Stash: React.FC<Props> = ({ tasks }) => {
-  const [pickedToMove, setPickedToMove] = useState<TaskInt[]>([])
+  const [pickedToMove, setPickedToMove] = useState<TaskInt[] | null>(null)
   const user = useCurrentUser()
 
   //FIXME unchecking
@@ -34,7 +34,7 @@ const Stash: React.FC<Props> = ({ tasks }) => {
     if (user) {
       const taskListRef = db.collection(`users/${user.uid}/taskList`)
       try {
-        pickedToMove.map((task) => {
+        pickedToMove?.map((task) => {
           taskListRef.doc(task.id).update({
             timestamp: Date.now(),
           })
@@ -61,9 +61,11 @@ const Stash: React.FC<Props> = ({ tasks }) => {
             />
           )
         })}
-      <Button onClick={moveToToday} disabled={!pickedToMove.length}>
-        Move
-      </Button>
+      {pickedToMove && (
+        <Button onClick={moveToToday} disabled={!pickedToMove.length}>
+          Move
+        </Button>
+      )}
     </Wrapper>
   )
 }

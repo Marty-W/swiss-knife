@@ -1,16 +1,31 @@
 import React from 'react'
 import styled from 'styled-components/macro'
+import { TaskInt } from '../../pages/Todo'
 
 interface Props {
-  numTasks: number
+  tasks: TaskInt[]
   type: 'scheduled' | 'stashed'
 }
 
-const CountBox: React.FC<Props> = ({ numTasks, type }) => {
+const CountBox: React.FC<Props> = ({ tasks, type }) => {
+  const filterDone = (tasks: TaskInt[]) =>
+    tasks.filter((task) => task.done).length
+
   return (
     <Wrapper type={type}>
-      <Count>{numTasks}</Count>
-      <Desc>{type}</Desc>
+      {type === 'scheduled' ? (
+        <>
+          <Count>
+            {filterDone(tasks)}/{tasks.length}
+          </Count>
+          <Desc>Completed</Desc>
+        </>
+      ) : (
+        <>
+          <Count>{tasks.length}</Count>
+          <Desc>{type}</Desc>
+        </>
+      )}
     </Wrapper>
   )
 }
@@ -22,16 +37,14 @@ const Wrapper = styled.div<{ type: string }>`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   border-radius: 4px;
 `
 
 const Count = styled.span`
   font-size: 1.4rem;
-  margin-left: 1em;
 `
 
-const Desc = styled.p`
-  margin-left: 3em;
-`
+const Desc = styled.span``
 
 export default CountBox

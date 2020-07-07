@@ -18,7 +18,7 @@ const DailyGoalSetter: React.FC<Props> = ({ handleGoal }) => {
   const syncDailyGoal = async () => {
     if (user) {
       try {
-        await db.doc(`users/${user.uid}/pomo/stats`).update({
+        await db.doc(`users/${user.uid}/pomoStats/stats`).update({
           dailyGoal: dailyGoalValue,
           timestamp: Date.now(),
         })
@@ -63,7 +63,7 @@ const Wrapper = styled.div`
   height: 100%;
   display: grid;
   grid-template-rows: 1fr 1fr;
-  grid-template-columns: auto 1fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-areas:
     'text minutes'
     'slider check';

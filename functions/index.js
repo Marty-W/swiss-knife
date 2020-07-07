@@ -12,7 +12,7 @@ exports.createUserDb = functions
   .onCreate((user) => {
     const { uid, email, displayName } = user
     const userRef = admin.firestore().collection('users').doc(uid)
-    const pomoStatsRef = userRef.collection('pomo').doc('stats')
+    const pomoStatsRef = userRef.collection('pomoStats')
     const timeEntriesRef = userRef.collection('pomo').doc('timeEntries')
     const taskListRef = userRef.collection('taskList').doc('todos')
 
@@ -24,9 +24,5 @@ exports.createUserDb = functions
     pomoStatsRef.set({
       dailyGoal: 0,
       completed: 0,
-    })
-
-    timeEntriesRef.set({
-      timeEntries: [],
     })
   })

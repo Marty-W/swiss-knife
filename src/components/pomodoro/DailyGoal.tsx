@@ -16,9 +16,11 @@ const DailyGoal: React.FC = () => {
   const [completed, setCompleted] = useState(0)
   const user = useCurrentUser()
 
+  const statsRef = db.doc(`users/${user?.uid}/pomoStats/stats`)
+
   useEffect(() => {
     if (user) {
-      return db.doc(`users/${user.uid}/pomo/stats`).onSnapshot((doc) => {
+      return statsRef.onSnapshot((doc) => {
         const data = doc?.data()
         const dtServer = DateTime.fromMillis(data?.timestamp).day
         const dtNow = DateTime.local().day
@@ -27,11 +29,23 @@ const DailyGoal: React.FC = () => {
           setDailyGoal(data?.dailyGoal)
           setCompleted(data?.completed)
         } else {
+          setCompleted(0)
+          resetGoal()
           setIsGoalSet(false)
         }
       })
     }
   }, [user])
+
+  const resetGoal = async () => {
+    try {
+      await statsRef.update({
+        completed: 0,
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
 
   return (
     <Wrapper>

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components/'
 
 import { Progress } from 'antd'
@@ -26,18 +26,12 @@ const DailyGoalGetter: React.FC<Props> = ({
     />
     <Goal>
       Daily goal:
-      {dailyGoal}
+      <NumSpan>{dailyGoal}</NumSpan>
     </Goal>
     <Completed>
       Completed:
-      {completed}
+      <NumSpan>{completed}</NumSpan>
     </Completed>
-    <TomatoSpan>Tomatoes:</TomatoSpan>
-    <span>
-      <Tomatoes role="img" aria-label="tomatoes">
-        🍅🍅
-      </Tomatoes>
-    </span>
     <Edit onClick={() => handleGoal(false)}>Edit</Edit>
   </Wrapper>
 )
@@ -45,31 +39,34 @@ const DailyGoalGetter: React.FC<Props> = ({
 const Wrapper = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2em;
+  grid-template-rows: 1fr 1fr;
   grid-template-areas:
-    'goal tomato edit'
-    'completed tomatoes .'
+    'goal completed edit'
     'bar bar bar';
+  place-items: center;
 `
 const Bar = styled(Progress)`
   grid-area: bar;
   color: ${(props) => props.theme.colors.tertiary};
+  justify-self: stretch;
 `
 
-const Completed = styled.span`
+const Completed = styled.div`
   grid-area: completed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 `
 
-const Goal = styled.span`
+const Goal = styled(Completed)`
   grid-area: goal;
 `
-const TomatoSpan = styled.span`
-  grid-area: tomato;
-`
 
-const Tomatoes = styled.div`
-  grid-area: tomatoes;
+const NumSpan = styled.span`
+  color: ${(props) => props.theme.colors.accent};
+  margin-top: 0.3em;
+  font-size: 1.3rem;
 `
 
 const Edit = styled.span`
@@ -81,6 +78,7 @@ const Edit = styled.span`
   color: ${(props) => props.theme.colors.tertiary};
   font-family: ${(props) => props.theme.fonts.secondary};
   justify-self: end;
+  align-self: start;
 `
 
 export default DailyGoalGetter
