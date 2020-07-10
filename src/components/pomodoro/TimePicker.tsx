@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../../context/PomoContext'
 
 const TimePicker: React.FC = () => {
   const [state, dispatch] = usePomo()

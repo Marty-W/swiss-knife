@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import Checkbox from './Checkbox'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 import { db } from '../../firebase/firebase'
 import { useRouteMatch } from 'react-router-dom'
 

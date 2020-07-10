@@ -1,22 +1,22 @@
-import React from 'react';
-import styled from 'styled-components/';
+import React from 'react'
+import styled from 'styled-components/'
 
 interface Props {
-  start: string;
-  end: string;
-  dur: number;
+  start: string
+  end: string
+  dur: number
 }
 
 const Entry: React.FC<Props> = ({ start, end, dur }) => {
   const calculateRating = (duration: number) => {
     if (+duration < 25) {
-      return '🍅';
+      return '🍅'
     }
     if (+duration < 50) {
-      return '🍅🍅';
+      return '🍅🍅'
     }
-    return '🍅🍅🍅';
-  };
+    return '🍅🍅🍅'
+  }
   return (
     <StyledEntry>
       <span>{start}</span>
@@ -24,8 +24,8 @@ const Entry: React.FC<Props> = ({ start, end, dur }) => {
       <span> {dur}</span>
       <span> {calculateRating(dur)}</span>
     </StyledEntry>
-  );
-};
+  )
+}
 
 const StyledEntry = styled.div`
   width: 100%;
@@ -38,5 +38,5 @@ const StyledEntry = styled.div`
   svg {
     color: ${(props) => props.theme.colors.accent};
   }
-`;
-export default Entry;
+`
+export default Entry

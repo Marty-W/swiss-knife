@@ -25,8 +25,12 @@ const Auth: React.FC = () => {
 }
 
 const SignInWrapper = styled.div`
+  height: 100%;
   text-align: center;
   line-height: 1.3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 
   p {
     padding: 0 0.9em;

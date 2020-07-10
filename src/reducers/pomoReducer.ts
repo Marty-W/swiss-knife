@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-types */
 import { Duration } from 'luxon'
 
-export interface PomoInt {
+interface PomoInt {
   duration: Duration
   isRunning: boolean
   isPaused: boolean
@@ -98,4 +98,4 @@ const pomoReducer = (state: PomoInt, action: Actions): PomoInt => {
   }
 }
 
-export { pomoReducer }
+export { pomoReducer, PomoInt }

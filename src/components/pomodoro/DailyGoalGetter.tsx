@@ -38,6 +38,7 @@ const DailyGoalGetter: React.FC<Props> = ({
 
 const Wrapper = styled.div`
   height: 100%;
+  width: 100%;
   display: grid;
   grid-template-columns: 1fr 1fr 2em;
   grid-template-rows: 1fr 1fr;

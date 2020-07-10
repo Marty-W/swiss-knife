@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useHistory } from 'react-router-dom'
 import styled from 'styled-components'
 import { FaUserShield, FaKey } from 'react-icons/fa'
@@ -8,30 +8,45 @@ import { auth } from '../../firebase/firebase'
 import Button from '../UI/Button.styles'
 import ErrorMsg from '../UI/ErrorMsg.styles'
 
+//FIXME separate sign in and sign up
+//TODO add display name to sign up and update via user.updateProfile
+
+type inputRef = HTMLInputElement | null
+
 const Form: React.FC = () => {
-  const [userEmail, setUserEmail] = useState('')
-  const [userPassword, setUserPassword] = useState('')
+  const password = useRef<inputRef>(null)
+  const email = useRef<inputRef>(null)
   const [errorMessage, setErrorMessage] = useState('')
 
   const history = useHistory()
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    try {
-      await auth.createUserWithEmailAndPassword(userEmail, userPassword)
-      history.goBack()
-    } catch (err) {
-      setErrorMessage(err.message)
+    if (email.current && password.current) {
+      try {
+        await auth.createUserWithEmailAndPassword(
+          email.current.value,
+          password.current.value,
+        )
+        history.goBack()
+      } catch (err) {
+        setErrorMessage(err.message)
+      }
     }
   }
 
   const handleSignIn = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault()
-    try {
-      await auth.signInWithEmailAndPassword(userEmail, userPassword)
-      history.goBack()
-    } catch (err) {
-      setErrorMessage(err.message)
+    if (email.current && password.current) {
+      try {
+        await auth.signInWithEmailAndPassword(
+          email.current.value,
+          password.current.value,
+        )
+        history.goBack()
+      } catch (err) {
+        setErrorMessage(err.message)
+      }
     }
   }
   return (
@@ -40,8 +55,7 @@ const Form: React.FC = () => {
         <FaUserShield />
         <input
           type="email"
-          onChange={(e) => setUserEmail(e.target.value)}
-          value={userEmail}
+          ref={email}
           id="email"
           placeholder="email"
           required
@@ -51,8 +65,7 @@ const Form: React.FC = () => {
         <FaKey />
         <input
           type="password"
-          onChange={(e) => setUserPassword(e.target.value)}
-          value={userPassword}
+          ref={password}
           id="password"
           placeholder="password"
           required
@@ -77,8 +90,7 @@ const SignButton = styled(Button)`
   margin: 0 auto;
 
   &:hover {
-    background-color: ${(props) => props.theme.colors.primary};
-    color: ${(props) => props.theme.colors.secondary};
+    color: ${(props) => props.theme.colors.accent};
   }
 `
 const SignUpButton = styled(SignButton)`

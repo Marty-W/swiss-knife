@@ -67,12 +67,7 @@ const Ticker: React.FC = () => {
     })
   }
 
-  return (
-    <>
-      <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
-      <TimerEstimate localSesh={localSessionLength} />
-    </>
-  )
+  return <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
 }
 
 export default Ticker

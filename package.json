@@ -8,13 +8,10 @@
   },
   "keywords": [
     "react",
-    "typescript",
-    "webpack"
+    "typescript"
   ],
-  "browserslist": "defaults",
   "dependencies": {
     "@material-ui/core": "^4.11.0",
-    "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",
     "@testing-library/user-event": "^7.1.2",
     "@types/rc-progress": "^2.4.3",
@@ -29,6 +26,7 @@
     "react-icons": "^3.10.0",
     "react-input-slider": "^5.1.7",
     "react-router-dom": "^5.1.2",
+    "react-spinners": "^0.9.0",
     "react-spring": "^8.0.27",
     "styled-components": "^5.0.1",
     "styled-icons": "^10.5.0",
@@ -37,7 +35,7 @@
   },
   "scripts": {
     "start": "parcel ./src/index.html",
-    "build": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html --experimental-scope-hoisting",
     "lint": "eslint 'src/**/*.tsx"
   },
   "devDependencies": {
@@ -56,7 +54,6 @@
     "eslint-plugin-jsx-a11y": "^6.3.1",
     "eslint-plugin-prettier": "^3.1.4",
     "eslint-plugin-react": "^7.20.0",
-    "eslint-plugin-react-hooks": "^2.5.1",
     "parcel-bundler": "^1.12.4",
     "prettier": "^2.0.5",
     "typescript": "^3.9.5"

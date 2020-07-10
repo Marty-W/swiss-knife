@@ -2,8 +2,6 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import 'firebase/firestore'
 
-// TODO dod security rules
-
 const firebaseConfig = {
   apiKey: 'AIzaSyAuiCjW-agJ6NMOSUsLc3jLLvgGKEgcRbk',
   authDomain: 'swiss-knife-61060.firebaseapp.com',
@@ -20,5 +18,7 @@ firebase.initializeApp(firebaseConfig)
 const auth = firebase.auth()
 const db = firebase.firestore()
 const Google = new firebase.auth.GoogleAuthProvider()
+const signInWithGoogle = () => auth.signInWithPopup(Google)
+const signOut = () => auth.signOut()
 
-export { auth, db, Google, firebase }
+export { auth, db, signInWithGoogle, signOut, firebase }

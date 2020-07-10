@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import styled from 'styled-components/'
 import { FcGoogle } from 'react-icons/fc'
 
-import { auth, Google } from '../../firebase/firebase'
+import { signInWithGoogle } from '../../firebase/firebase'
 
 import ErrorMsg from '../UI/ErrorMsg.styles'
 
@@ -11,9 +11,9 @@ const Socials: React.FC = () => {
   const [errorMsg, setErrorMsg] = useState()
   const history = useHistory()
 
-  const signInWithGoogle = async () => {
+  const signIn = async () => {
     try {
-      await auth.signInWithPopup(Google)
+      signInWithGoogle()
       history.push('/')
     } catch (err) {
       setErrorMsg(err.message)
@@ -23,7 +23,7 @@ const Socials: React.FC = () => {
   return (
     <SocialsWrapper>
       {errorMsg && <ErrorMsg>{errorMsg}</ErrorMsg>}
-      <StyledGoogle onClick={signInWithGoogle} />
+      <StyledGoogle onClick={signIn} />
     </SocialsWrapper>
   )
 }

@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import React, { useEffect, useState, useRef } from 'react'
+import React, { useEffect, useState } from 'react'
 import styled from 'styled-components/macro'
 import { DateTime } from 'luxon'
 import { v4 as uuidv4 } from 'uuid'
@@ -22,6 +22,7 @@ const History: React.FC = () => {
   const [entries, setEntries] = useState<EntryInt[]>([])
   const [query, setQuery] = useState<QueryInt>('today')
 
+  //FIXME loading
   useEffect(() => {
     if (user) {
       return db

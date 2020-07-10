@@ -5,7 +5,7 @@ import { IoMdCheckmark } from 'react-icons/io'
 import { db } from '../../firebase/firebase'
 
 import { TaskWrapper } from './Task'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../../context/AuthContext'
 import useClickOutside from '../../hooks/useClickOutside'
 
 interface Props {

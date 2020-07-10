@@ -68,7 +68,6 @@ const Wrapper = styled.div`
     'text minutes'
     'slider check';
   place-items: center;
-  border: none;
 `
 
 const StyledSlider = styled(Slider)`

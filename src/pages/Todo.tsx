@@ -4,12 +4,14 @@ import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
 import Header from '../components/todo/Header'
 import CountBox from '../components/todo/CountBox'
-import TodoNav from '~/components/todo/TodoNav'
+import TodoNav from '../components/todo/TodoNav'
 import Toggle from '../components/todo/Toggle'
-import TaskList from '~/components/todo/TaskList'
+import TaskList from '../components/todo/TaskList'
 import Stash from '../components/todo/Stash'
 import { db } from '../firebase/firebase'
-import { useCurrentUser } from '~/context/AuthContext'
+import { useCurrentUser } from '../context/AuthContext'
+import { checkIfToday } from '../utils/utils'
+import useUserDocument from '~/hooks/useUserDocument'
 
 export interface TaskInt {
   title: string
@@ -31,35 +33,22 @@ const Todo: React.FC = () => {
     if (user) {
       const taskListRef = db.collection(`users/${user?.uid}/taskList`)
       const unsubscribe = taskListRef.orderBy('done').onSnapshot((snap) => {
-        if (snap.size) {
-          const tasksToAdd = snap.docs.map((doc) => doc.data())
-          const tasksToday = tasksToAdd.filter((task) => {
-            if (!showCompletedTasks) {
-              return !task.done && checkIfToday(task.timestamp)
-            }
-            return checkIfToday(task.timestamp)
-          })
-          const tasksStashed = tasksToAdd.filter(
-            (task) => !checkIfToday(task.timestamp) && !task.done,
-          )
+        console.log('fired')
+        const tasksToAdd = snap.docs.map((doc) => doc.data())
+        const tasksToday = tasksToAdd.filter((task) =>
+          checkIfToday(task.timestamp),
+        )
+        const tasksStashed = tasksToAdd.filter(
+          (task) => !checkIfToday(task.timestamp) && !task.done,
+        )
 
-          setTodayTasks(tasksToday)
-          setStashedTasks(tasksStashed)
-        }
+        setTodayTasks(tasksToday)
+        setStashedTasks(tasksStashed)
       })
+
       return () => unsubscribe()
     }
-  }, [user, showCompletedTasks])
-
-  const checkIfToday = (date: number): boolean => {
-    const today = new Date()
-    const taskDate = new Date(date)
-    return (
-      taskDate.getDate() === today.getDate() &&
-      taskDate.getMonth() === today.getMonth() &&
-      taskDate.getFullYear() === today.getFullYear()
-    )
-  }
+  }, [user])
 
   return (
     <Wrapper>
@@ -74,7 +63,10 @@ const Todo: React.FC = () => {
             show={showCompletedTasks}
             handleShow={setShowCompletedTasks}
           />
-          <TaskList tasks={todayTasks as TaskInt[]} />
+          <TaskList
+            tasks={todayTasks as TaskInt[]}
+            showCompleted={showCompletedTasks}
+          />
         </Route>
         <Route exact path={`${path}/stash`}>
           <Stash tasks={stashedTasks as TaskInt[]} />

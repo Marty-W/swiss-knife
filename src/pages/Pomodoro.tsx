@@ -14,7 +14,7 @@ const Pomodoro: React.FC = () => {
 
   const handlePomoStart = () => {
     dispatch({ type: 'POMO_START' })
-    history.push('/session')
+    history.push('/session/focus')
   }
 
   return (

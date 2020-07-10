@@ -13,6 +13,7 @@ import Auth from './pages/Auth'
 import Session from './pages/Session'
 
 // FIXME hacky grid templaterows
+//TODO download error boundary npm pckg
 
 const App: React.FC = () => {
   return (
@@ -20,7 +21,7 @@ const App: React.FC = () => {
       <Header />
       <Route exact path="/auth" component={Auth} />
       <Switch>
-        <Route exact path="/session">
+        <Route path="/session">
           <PomoProvider>
             <Session />
           </PomoProvider>

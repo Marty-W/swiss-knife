@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 import { useHistory } from 'react-router-dom'
 import { GiSwissArmyKnife } from 'react-icons/gi'
 import { AiOutlineQuestionCircle } from 'react-icons/ai'
-import { auth } from '../../firebase/firebase'
+import { signOut } from '../../firebase/firebase'
 
 import Button from './Button.styles'
 import { useCurrentUser } from '../../context/AuthContext'
@@ -12,21 +12,13 @@ const Header: React.FC = () => {
   const currentUser = useCurrentUser()
   const history = useHistory()
 
-  const signOutUser = async () => {
-    try {
-      await auth.signOut()
-    } catch (err) {
-      console.log(err)
-    }
-  }
-
   return (
     <Wrapper>
       <Knife />
       <ButtonWrapper>
         <Hint />
         {currentUser ? (
-          <LoginButton onClick={signOutUser}>Sign out</LoginButton>
+          <LoginButton onClick={() => signOut()}>Sign out</LoginButton>
         ) : (
           <LoginButton onClick={() => history.push('/auth')}>
             Sign in

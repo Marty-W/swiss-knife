@@ -3,13 +3,10 @@ import { auth } from '../firebase/firebase'
 
 type User = firebase.User | undefined | null
 
+//TODO anonymous sign in
+
 const AuthContext = createContext<User | null>(null)
 
-const useCurrentUser = (): User => {
-  const context = useContext(AuthContext)
-
-  return context
-}
 const AuthProvider: React.FC = ({ children }) => {
   const [user, setUser] = useState<User | null>(null)
 
@@ -24,4 +21,4 @@ const AuthProvider: React.FC = ({ children }) => {
   return <AuthContext.Provider value={user}>{children}</AuthContext.Provider>
 }
 
-export { AuthProvider, useCurrentUser }
+export { AuthProvider, AuthContext }

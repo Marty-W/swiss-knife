@@ -1,21 +1,25 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import { usePomo } from '../context/PomoContext'
+import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import Modal from '../components/UI/Modal'
 import SessionFocus from '../components/pomodoro/SessionFocus'
 import SessionBreak from '../components/pomodoro/SessionBreak'
 
 const Session: React.FC = () => {
-  const [state] = usePomo()
-  const { isPomo, isBreak } = state
+  const match = useRouteMatch()
 
   return (
     <Modal>
       <Wrapper>
-        {isPomo && <SessionFocus />}
-        {isBreak && <SessionBreak />}
+        <Switch>
+          <Route path={`${match.path}/focus`}>
+            <SessionFocus />
+          </Route>
+          <Route path={`${match.path}/break`}>
+            <SessionBreak />
+          </Route>
+        </Switch>
       </Wrapper>
     </Modal>
   )

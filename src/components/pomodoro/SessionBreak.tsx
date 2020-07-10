@@ -3,7 +3,7 @@ import styled from 'styled-components/macro'
 
 import Ticker from './Ticker'
 import TimePicker from './TimePicker'
-import { usePomo } from '~/context/PomoContext'
+import { usePomo } from '../../context/PomoContext'
 import TimerButtons from './TimerButtons'
 
 // FIXME break finish should be in reducer
