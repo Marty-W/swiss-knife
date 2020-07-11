@@ -8,16 +8,16 @@ const tickVariants = {
 
 interface Props {
   done: boolean
-  markChecked: () => void
+  onCheck: () => void
 }
 
-const CheckBox: React.FC<Props> = ({ done, markChecked }) => {
+const CheckBox: React.FC<Props> = ({ done, onCheck }) => {
   const [isChecked, setIsChecked] = useState(() => done)
 
   const handleMarkDone = () => {
     if (!done) {
       setIsChecked(!isChecked)
-      markChecked()
+      onCheck()
     }
   }
   return (

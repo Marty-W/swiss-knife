@@ -13,16 +13,14 @@ exports.createUserDb = functions
     const { uid, email, displayName } = user
     const userRef = admin.firestore().collection('users').doc(uid)
     const pomoStatsRef = userRef.collection('pomoStats')
-    const timeEntriesRef = userRef.collection('pomo').doc('timeEntries')
-    const taskListRef = userRef.collection('taskList').doc('todos')
 
     userRef.set({
       name: displayName,
       email,
     })
 
-    pomoStatsRef.set({
-      dailyGoal: 0,
+    pomoStatsRef.doc('stats').set({
       completed: 0,
+      dailyGoal: 0,
     })
   })

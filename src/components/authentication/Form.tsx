@@ -10,6 +10,7 @@ import ErrorMsg from '../UI/ErrorMsg.styles'
 
 //FIXME separate sign in and sign up
 //TODO add display name to sign up and update via user.updateProfile
+//TODO add linking with anonymous sign up
 
 type inputRef = HTMLInputElement | null
 
@@ -17,7 +18,6 @@ const Form: React.FC = () => {
   const password = useRef<inputRef>(null)
   const email = useRef<inputRef>(null)
   const [errorMessage, setErrorMessage] = useState('')
-
   const history = useHistory()
 
   const handleSignUp = async (e: React.MouseEvent<HTMLButtonElement>) => {

@@ -2,25 +2,25 @@ import React from 'react'
 import styled from 'styled-components/macro'
 
 import Checkbox from './Checkbox'
-import { useCurrentUser } from '../../context/AuthContext'
 import { db } from '../../firebase/firebase'
 import { useRouteMatch } from 'react-router-dom'
+import useCurrentUser from '~/hooks/useCurrentUser'
 
 interface Props {
   title: string
   done: boolean
   timestamp: number
   id: string
-  move?: (id: string) => void
+  onCheck?: (id: string) => void
 }
 
-const Task: React.FC<Props> = ({ title, done, id, move }) => {
+const Task: React.FC<Props> = ({ title, done, id, onCheck }) => {
   const user = useCurrentUser()
   const { path } = useRouteMatch()
 
   const handleCheck = () => {
-    if (path === '/todo/stash' && move) {
-      move(id)
+    if (path === '/todo/stash' && onCheck) {
+      onCheck(id)
     } else {
       markTodoDone()
     }
@@ -41,7 +41,7 @@ const Task: React.FC<Props> = ({ title, done, id, move }) => {
 
   return (
     <TaskWrapper done={done}>
-      <SCheckbox done={done} markChecked={handleCheck} />
+      <SCheckbox done={done} onCheck={handleCheck} />
       <TaskTitle>{title}</TaskTitle>
     </TaskWrapper>
   )

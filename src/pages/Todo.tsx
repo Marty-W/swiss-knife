@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import { Switch, Route, useRouteMatch } from 'react-router-dom'
 
@@ -8,10 +8,8 @@ import TodoNav from '../components/todo/TodoNav'
 import Toggle from '../components/todo/Toggle'
 import TaskList from '../components/todo/TaskList'
 import Stash from '../components/todo/Stash'
-import { db } from '../firebase/firebase'
-import { useCurrentUser } from '../context/AuthContext'
-import { checkIfToday } from '../utils/utils'
-import useUserDocument from '~/hooks/useUserDocument'
+import Spinner from '../components/UI/Spinner'
+import useTodos from '../hooks/useTodos'
 
 export interface TaskInt {
   title: string
@@ -20,59 +18,40 @@ export interface TaskInt {
   id: string
 }
 
-type ServerTasks = TaskInt[] | firebase.firestore.DocumentData[] | []
-
 const Todo: React.FC = () => {
-  const [todayTasks, setTodayTasks] = useState<ServerTasks>([])
-  const [stashedTasks, setStashedTasks] = useState<ServerTasks>([])
+  const [tasks, loading, error] = useTodos()
   const [showCompletedTasks, setShowCompletedTasks] = useState(true)
   const { path } = useRouteMatch()
-  const user = useCurrentUser()
-
-  useEffect(() => {
-    if (user) {
-      const taskListRef = db.collection(`users/${user?.uid}/taskList`)
-      const unsubscribe = taskListRef.orderBy('done').onSnapshot((snap) => {
-        console.log('fired')
-        const tasksToAdd = snap.docs.map((doc) => doc.data())
-        const tasksToday = tasksToAdd.filter((task) =>
-          checkIfToday(task.timestamp),
-        )
-        const tasksStashed = tasksToAdd.filter(
-          (task) => !checkIfToday(task.timestamp) && !task.done,
-        )
-
-        setTodayTasks(tasksToday)
-        setStashedTasks(tasksStashed)
-      })
-
-      return () => unsubscribe()
-    }
-  }, [user])
 
   return (
-    <Wrapper>
-      <Header numTasks={4} />
-      <CountBox tasks={todayTasks as TaskInt[]} type="scheduled" />
-      <CountBox tasks={stashedTasks as TaskInt[]} type="stashed" />
-      <TodoNav />
-      <TodayDate>{new Date().toLocaleDateString()}</TodayDate>
-      <Switch>
-        <Route exact path={path}>
-          <Toggle
-            show={showCompletedTasks}
-            handleShow={setShowCompletedTasks}
-          />
-          <TaskList
-            tasks={todayTasks as TaskInt[]}
-            showCompleted={showCompletedTasks}
-          />
-        </Route>
-        <Route exact path={`${path}/stash`}>
-          <Stash tasks={stashedTasks as TaskInt[]} />
-        </Route>
-      </Switch>
-    </Wrapper>
+    <>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <Wrapper>
+          <Header numTasks={4} />
+          <CountBox tasks={tasks.today} type="scheduled" />
+          <CountBox tasks={tasks.stash} type="stashed" />
+          <TodoNav />
+          <TodayDate>{new Date().toLocaleDateString()}</TodayDate>
+          <Switch>
+            <Route exact path={path}>
+              <Toggle
+                show={showCompletedTasks}
+                handleShow={setShowCompletedTasks}
+              />
+              <TaskList
+                tasks={tasks.today}
+                showCompleted={showCompletedTasks}
+              />
+            </Route>
+            <Route exact path={`${path}/stash`}>
+              <Stash tasks={tasks.stash} />
+            </Route>
+          </Switch>
+        </Wrapper>
+      )}
+    </>
   )
 }
 

@@ -5,7 +5,6 @@ type User = firebase.User | undefined | null
 
 const useCurrentUser = (): User => {
   const context = useContext(AuthContext)
-
   return context
 }
 

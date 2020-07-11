@@ -4,7 +4,7 @@ import { AiFillCheckCircle } from 'react-icons/ai'
 import Slider from 'react-input-slider'
 
 import { db } from '../../firebase/firebase'
-import { useCurrentUser } from '../../context/AuthContext'
+import useCurrentUser from '~/hooks/useCurrentUser'
 
 interface Props {
   handleGoal: React.Dispatch<React.SetStateAction<boolean>>

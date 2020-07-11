@@ -1,9 +1,7 @@
-import React, { createContext, useState, useEffect, useContext } from 'react'
+import React, { createContext, useState, useEffect } from 'react'
 import { auth } from '../firebase/firebase'
 
 type User = firebase.User | undefined | null
-
-//TODO anonymous sign in
 
 const AuthContext = createContext<User | null>(null)
 

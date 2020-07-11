@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { useInterval } from '../../hooks/useInterval'
 import { db, firebase } from '../../firebase/firebase'
 import TimerEstimate from './TimerEstimate'
-import { useCurrentUser } from '../../context/AuthContext'
+import useCurrentUser from '../../hooks/useCurrentUser'
 import { usePomo } from '../../context/PomoContext'
 
 const Ticker: React.FC = () => {

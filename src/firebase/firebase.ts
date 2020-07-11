@@ -20,5 +20,12 @@ const db = firebase.firestore()
 const Google = new firebase.auth.GoogleAuthProvider()
 const signInWithGoogle = () => auth.signInWithPopup(Google)
 const signOut = () => auth.signOut()
+const signInAnounymously = async () => {
+  try {
+    await firebase.auth().signInAnonymously()
+  } catch (err) {
+    console.log(err)
+  }
+}
 
-export { auth, db, signInWithGoogle, signOut, firebase }
+export { auth, db, signInWithGoogle, signOut, firebase, signInAnounymously }

@@ -7,7 +7,7 @@ import { v4 as uuidv4 } from 'uuid'
 import { db } from '../../firebase/firebase'
 import Card from '../UI/Card.styles'
 import Entry from './Entry'
-import { useCurrentUser } from '../../context/AuthContext'
+import useCurrentUser from '~/hooks/useCurrentUser'
 
 interface EntryInt {
   startTime: string

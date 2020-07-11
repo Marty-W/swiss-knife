@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 import { TaskInt } from '../../pages/Todo'
+import { BeatLoader } from 'react-spinners'
 
 interface Props {
   tasks: TaskInt[]
@@ -9,24 +10,29 @@ interface Props {
 
 const CountBox: React.FC<Props> = ({ tasks, type }) => {
   const filterDone = (tasks: TaskInt[]) =>
-    tasks.filter((task) => task.done).length
+    tasks?.filter((task) => task.done).length
 
   return (
-    <Wrapper type={type}>
-      {type === 'scheduled' ? (
-        <>
-          <Count>
-            {filterDone(tasks)}/{tasks.length}
-          </Count>
-          <Desc>Completed</Desc>
-        </>
-      ) : (
-        <>
-          <Count>{tasks.length}</Count>
-          <Desc>{type}</Desc>
-        </>
+    <>
+      {tasks && (
+        <Wrapper type={type}>
+          {type === 'scheduled' ? (
+            <>
+              <Count>
+                {filterDone(tasks)}/{tasks.length}
+              </Count>
+              <Desc>Completed</Desc>
+            </>
+          ) : (
+            <>
+              <Count>{tasks.length}</Count>
+              <Desc>{type}</Desc>
+            </>
+          )}
+        </Wrapper>
       )}
-    </Wrapper>
+      )}
+    </>
   )
 }
 

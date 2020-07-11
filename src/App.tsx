@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Switch, Route } from 'react-router-dom'
 import { PomoProvider } from './context/PomoContext'
@@ -11,6 +11,7 @@ import Habits from './pages/Habits'
 import Header from './components/UI/Header'
 import Auth from './pages/Auth'
 import Session from './pages/Session'
+import { auth } from 'firebase'
 
 // FIXME hacky grid templaterows
 //TODO download error boundary npm pckg

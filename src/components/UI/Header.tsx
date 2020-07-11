@@ -6,7 +6,7 @@ import { AiOutlineQuestionCircle } from 'react-icons/ai'
 import { signOut } from '../../firebase/firebase'
 
 import Button from './Button.styles'
-import { useCurrentUser } from '../../context/AuthContext'
+import useCurrentUser from '~/hooks/useCurrentUser'
 
 const Header: React.FC = () => {
   const currentUser = useCurrentUser()
@@ -17,7 +17,7 @@ const Header: React.FC = () => {
       <Knife />
       <ButtonWrapper>
         <Hint />
-        {currentUser ? (
+        {currentUser && !currentUser.isAnonymous ? (
           <LoginButton onClick={() => signOut()}>Sign out</LoginButton>
         ) : (
           <LoginButton onClick={() => history.push('/auth')}>

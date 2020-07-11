@@ -2,9 +2,7 @@
   "root": true,
   "env": {
     "browser": true,
-    "es6": true,
-    "es2017": true,
-    "es2020": true
+    "es6": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -16,7 +14,6 @@
     }
   },
   "extends": [
-    "eslint:recommended",
     "plugin:react/recommended",
     "plugin:jsx-a11y/recommended",
     "plugin:@typescript-eslint/recommended",

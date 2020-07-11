@@ -6,7 +6,7 @@ import ButtonStyle from '../UI/Button.styles'
 import { TaskListWrapper as Wrapper } from './TaskList'
 
 import { TaskInt } from '../../pages/Todo'
-import { useCurrentUser } from '../../context/AuthContext'
+import useCurrentUser from '../../hooks/useCurrentUser'
 import { db } from '../../firebase/firebase'
 
 interface Props {
@@ -14,7 +14,7 @@ interface Props {
 }
 
 const Stash: React.FC<Props> = ({ tasks }) => {
-  const [pickedToMove, setPickedToMove] = useState(tasks)
+  const [pickedToMove, setPickedToMove] = useState<TaskInt[]>([])
   const user = useCurrentUser()
 
   //FIXME unchecking
@@ -57,7 +57,7 @@ const Stash: React.FC<Props> = ({ tasks }) => {
               done={done}
               timestamp={timestamp}
               id={id}
-              move={pickToMove}
+              onCheck={pickToMove}
             />
           )
         })}
