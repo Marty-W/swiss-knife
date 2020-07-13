@@ -9,7 +9,7 @@ import Toggle from '../components/todo/Toggle'
 import TaskList from '../components/todo/TaskList'
 import Stash from '../components/todo/Stash'
 import Spinner from '../components/UI/Spinner'
-import useTodos from '../hooks/useTodos'
+import useTodoData from '../hooks/useTodoData'
 
 export interface TaskInt {
   title: string
@@ -19,7 +19,7 @@ export interface TaskInt {
 }
 
 const Todo: React.FC = () => {
-  const [tasks, loading, error] = useTodos()
+  const [tasks, loading] = useTodoData()
   const [showCompletedTasks, setShowCompletedTasks] = useState(true)
   const { path } = useRouteMatch()
 
@@ -29,7 +29,7 @@ const Todo: React.FC = () => {
         <Spinner />
       ) : (
         <Wrapper>
-          <Header numTasks={4} />
+          <Header numTasks={tasks.today.length} />
           <CountBox tasks={tasks.today} type="scheduled" />
           <CountBox tasks={tasks.stash} type="stashed" />
           <TodoNav />

@@ -22,5 +22,6 @@ exports.createUserDb = functions
     pomoStatsRef.doc('stats').set({
       completed: 0,
       dailyGoal: 0,
+      timestamp: Date.now(),
     })
   })

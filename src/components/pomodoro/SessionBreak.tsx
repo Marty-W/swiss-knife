@@ -5,35 +5,65 @@ import Ticker from './Ticker'
 import TimePicker from './TimePicker'
 import { usePomo } from '../../context/PomoContext'
 import TimerButtons from './TimerButtons'
-
-// FIXME break finish should be in reducer
+import Button from '../UI/Button.styles'
+import SectionHeading from '../UI/SectionHeading.styles'
 
 const SessionBreak: React.FC = () => {
-  const [state, dispatch] = usePomo()
-  const { isPaused, isRunning, isBreakFinished } = state
+  const [, dispatch] = usePomo()
+  const [breakStarted, setBreakStarted] = useState(false)
 
-  const handleSessionStart = () => {
-    if (isBreakFinished) {
-      dispatch({ type: 'POMO_START' })
-    } else {
-      dispatch({ type: 'BREAK_START' })
-    }
-  }
-
-  let sessionHeading = 'Time for a break :)'
-
-  if (isBreakFinished) {
-    sessionHeading = 'Time for another Pomodoro!'
+  const handleBreakStart = () => {
+    setBreakStarted(true)
+    dispatch({ type: 'BREAK_START' })
   }
 
   return (
-    <>
-      <h2>{sessionHeading}</h2>
-      <p>set session length</p>
-      {isRunning ? <TimePicker /> : <Ticker />}
-      <TimerButtons />
-    </>
+    <Wrapper>
+      <Heading>BREAK</Heading>
+      {breakStarted ? <Ticker /> : <TimePicker />}
+      {!breakStarted && (
+        <Instructions>
+          Good job! Go grab some coffee. After the break ends, you will be
+          brought back to homescreen where you can start your next session.
+        </Instructions>
+      )}
+      {breakStarted ? (
+        <TimerButtons />
+      ) : (
+        <Button onClick={handleBreakStart}>Start Break</Button>
+      )}
+    </Wrapper>
   )
 }
+
+export const Wrapper = styled.div`
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: minmax(1.5rem, 2rem) 1fr;
+  grid-template-rows: 1fr 2fr 1fr 1fr;
+  grid-template-areas:
+    'heading .'
+    'timer timer'
+    'instructions instructions'
+    'buttons buttons';
+  place-items: center;
+
+  & button {
+    grid-area: buttons;
+  }
+`
+
+const Instructions = styled.div`
+  grid-area: instructions;
+  padding: 0 1em;
+  line-height: 1.3;
+  font-size: 1.1rem;
+`
+
+const Heading = styled(SectionHeading)`
+  align-self: start;
+  margin-top: 2em;
+`
 
 export default SessionBreak

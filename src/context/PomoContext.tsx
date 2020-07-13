@@ -4,11 +4,9 @@ import { pomoReducer, PomoInt, Dispatch } from '../reducers/pomoReducer'
 
 const initialState = {
   duration: Duration.fromObject({ minutes: 0 }),
-  isRunning: false,
   isPaused: false,
   isBreak: false,
   isPomo: false,
-  isBreakFinished: false,
 }
 
 const PomoStateContext = createContext<PomoInt | undefined>(undefined)

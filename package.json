@@ -23,6 +23,7 @@
     "framer-motion": "^1.11.0",
     "luxon": "^1.23.0",
     "react": "^16.0.0",
+    "react-circular-progressbar": "^2.0.3",
     "react-dom": "^16.0.0",
     "react-error-boundary": "^2.2.3",
     "react-firebase-hooks": "^2.2.0",

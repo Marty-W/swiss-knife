@@ -2,13 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { usePomo } from '../../context/PomoContext'
+import { useLocation } from 'react-router-dom'
 
 const TimePicker: React.FC = () => {
   const [state, dispatch] = usePomo()
-  const { duration, isBreak } = state
+  const { duration } = state
+  const location = useLocation()
 
   const handleDuration = (type: 'plus' | 'minus') => {
-    isBreak
+    location.pathname === '/session/break'
       ? dispatch({ type: 'BREAK_LENGTH', payload: type })
       : dispatch({ type: 'FOCUS_LENGTH', payload: type })
   }

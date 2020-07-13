@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components/'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import Button from '../UI/Button.styles'
 import { usePomo } from '../../context/PomoContext'
 
 const TimerButtons: React.FC = () => {
   const [state, dispatch] = usePomo()
-  const { isPaused, isBreak, isRunning } = state
+  const { isPaused } = state
   const history = useHistory()
 
   const handlePause = () => {
@@ -16,29 +16,19 @@ const TimerButtons: React.FC = () => {
 
   const handleAbort = () => {
     dispatch({ type: 'ABORT' })
-    history.goBack()
+    history.push('/pomodoro')
   }
 
   return (
     <StyledButtons>
-      {isBreak && !isRunning && (
-        <Button onClick={() => dispatch({ type: 'BREAK_START' })}>
-          Start break
-        </Button>
-      )}
-      {!isBreak && (
-        <>
-          <Button onClick={handlePause}>
-            {/* {isPaused ? 'Continue' : 'Pause'} */}
-          </Button>
-          <Button onClick={handleAbort}>Abort</Button>
-        </>
-      )}
+      <Button onClick={handlePause}>{isPaused ? 'Continue' : 'Pause'}</Button>
+      <Button onClick={handleAbort}>Abort</Button>
     </StyledButtons>
   )
 }
 
 const StyledButtons = styled.div`
+  grid-area: buttons;
   width: 100%;
   display: flex;
   justify-content: space-around;

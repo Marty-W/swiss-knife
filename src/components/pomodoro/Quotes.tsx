@@ -39,6 +39,7 @@ const Quotes: React.FC = () => {
 }
 
 const QuotesWrapper = styled.div`
+  grid-area: quotes;
   display: flex;
   flex-direction: column;
   justify-content: center;

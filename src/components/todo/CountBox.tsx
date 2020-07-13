@@ -31,7 +31,6 @@ const CountBox: React.FC<Props> = ({ tasks, type }) => {
           )}
         </Wrapper>
       )}
-      )}
     </>
   )
 }

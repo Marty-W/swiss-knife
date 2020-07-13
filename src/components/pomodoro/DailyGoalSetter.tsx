@@ -1,16 +1,11 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { AiFillCheckCircle } from 'react-icons/ai'
-import Slider from 'react-input-slider'
-
+import { Slider } from '@material-ui/core'
 import { db } from '../../firebase/firebase'
 import useCurrentUser from '~/hooks/useCurrentUser'
 
-interface Props {
-  handleGoal: React.Dispatch<React.SetStateAction<boolean>>
-}
-
-const DailyGoalSetter: React.FC<Props> = ({ handleGoal }) => {
+const DailyGoalSetter: React.FC = () => {
   const [dailyGoalValue, setDailyGoalValue] = useState(0)
 
   const user = useCurrentUser()
@@ -22,7 +17,6 @@ const DailyGoalSetter: React.FC<Props> = ({ handleGoal }) => {
           dailyGoal: dailyGoalValue,
           timestamp: Date.now(),
         })
-        handleGoal(true)
       } catch (err) {
         console.log(err)
       }
@@ -33,23 +27,10 @@ const DailyGoalSetter: React.FC<Props> = ({ handleGoal }) => {
     <Wrapper>
       <Text>Set your time goal for today: </Text>
       <StyledSlider
-        axis="x"
-        xmin={0}
-        xmax={600}
-        xstep={5}
-        onChange={({ x }) => setDailyGoalValue(x)}
-        x={dailyGoalValue}
-        styles={{
-          active: {
-            backgroundColor: '#F02D3A',
-          },
-          track: {
-            backgroundColor: '#EFF6EE',
-          },
-          thumb: {
-            backgroundColor: '#101119',
-          },
-        }}
+        max={720}
+        step={5}
+        value={dailyGoalValue}
+        onChange={(e, num) => setDailyGoalValue(num as number)}
       />
       <Minutes>
         <span>{dailyGoalValue}</span> minutes

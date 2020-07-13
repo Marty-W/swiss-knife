@@ -29,12 +29,6 @@ const Wrapper = styled.div`
   background: ${(props) => props.theme.colors.primary};
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
-
   & > * {
     z-index: 10;
   }

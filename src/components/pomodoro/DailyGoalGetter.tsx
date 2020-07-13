@@ -7,34 +7,36 @@ import { Progress } from 'antd'
 interface Props {
   dailyGoal: number
   completed: number
-  handleGoal: React.Dispatch<React.SetStateAction<boolean>>
+  onReset: () => void
 }
 
 const DailyGoalGetter: React.FC<Props> = ({
   dailyGoal,
   completed,
-  handleGoal,
-}) => (
-  <Wrapper>
-    <Bar
-      percent={Math.floor((completed / dailyGoal) * 100)}
-      type="line"
-      strokeColor="#F02D3A"
-      trailColor="#EFF6EE"
-      strokeLinecap="round"
-      showInfo={true}
-    />
-    <Goal>
-      Daily goal:
-      <NumSpan>{dailyGoal}</NumSpan>
-    </Goal>
-    <Completed>
-      Completed:
-      <NumSpan>{completed}</NumSpan>
-    </Completed>
-    <Edit onClick={() => handleGoal(false)}>Edit</Edit>
-  </Wrapper>
-)
+  onReset,
+}) => {
+  return (
+    <Wrapper>
+      <Bar
+        percent={Math.floor((completed / dailyGoal) * 100)}
+        type="line"
+        strokeColor="#F02D3A"
+        trailColor="#EFF6EE"
+        strokeLinecap="round"
+        showInfo={true}
+      />
+      <Goal>
+        Daily goal:
+        <NumSpan>{dailyGoal}</NumSpan>
+      </Goal>
+      <Completed>
+        Completed:
+        <NumSpan>{completed}</NumSpan>
+      </Completed>
+      <Edit onClick={onReset}>Edit</Edit>
+    </Wrapper>
+  )
+}
 
 const Wrapper = styled.div`
   height: 100%;

@@ -11,10 +11,8 @@ import Habits from './pages/Habits'
 import Header from './components/UI/Header'
 import Auth from './pages/Auth'
 import Session from './pages/Session'
-import { auth } from 'firebase'
 
 // FIXME hacky grid templaterows
-//TODO download error boundary npm pckg
 
 const App: React.FC = () => {
   return (

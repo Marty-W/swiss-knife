@@ -3,15 +3,13 @@ import useUserDocumentRef from './useUserDocumentRef'
 import { DateTime } from 'luxon'
 import { TaskInt } from '~/pages/Todo'
 
-const useTodos = () => {
+//TODO error handling
+
+const useTodoData = () => {
   const userRef = useUserDocumentRef()
   const startOfToday = DateTime.local().startOf('day').toMillis()
   const [todayTasks, todayLoading, todayError] = useCollectionData(
-    userRef
-      .collection('taskList')
-      .orderBy('timestamp')
-      .where('timestamp', '>=', startOfToday)
-      .orderBy('done', 'desc'),
+    userRef.collection('taskList').where('timestamp', '>=', startOfToday),
   )
 
   const [stashedTasks, stashedLoading, stashError] = useCollectionData(
@@ -21,7 +19,7 @@ const useTodos = () => {
       .where('done', '==', false),
   )
 
-  const loading = todayLoading || stashedLoading
+  const loading = todayLoading
   const error = {
     today: todayError,
     stash: stashError,
@@ -34,4 +32,4 @@ const useTodos = () => {
   return [tasks, loading, error] as const
 }
 
-export default useTodos
+export default useTodoData

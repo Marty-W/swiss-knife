@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components/macro'
 import { AiFillPlusCircle } from 'react-icons/ai'
 import Task from './Task'
@@ -13,15 +13,21 @@ interface Props {
 
 const TaskList: React.FC<Props> = ({ tasks, showCompleted }) => {
   const [isNewTask, setIsNewTask] = useState(false)
-  const localTasks = filterCompletedTasks(tasks)
+  const localTasks = handleLocalTasks(tasks)
 
   const removeNewTask = () => setIsNewTask(false)
 
-  function filterCompletedTasks(tasks: TaskInt[]): TaskInt[] {
+  function handleLocalTasks(tasks: TaskInt[]): TaskInt[] {
+    const ordered = tasks.sort((a, b) => {
+      if (a.done > b.done) return 1
+      if (a.done < b.done) return -1
+
+      return 0
+    })
     if (!showCompleted) {
-      return tasks.filter((task) => !task.done)
+      return ordered.filter((task) => !task.done)
     }
-    return tasks
+    return ordered
   }
 
   return (
@@ -62,7 +68,7 @@ const Plus = styled(AiFillPlusCircle)`
   cursor: pointer;
   position: absolute;
   bottom: 2em;
-  right: 1em;
+  right: 0.5em;
 `
 
 export default TaskList

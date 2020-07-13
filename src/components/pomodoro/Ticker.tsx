@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { Duration } from 'luxon'
-
+import React, { useState } from 'react'
+import { CircularProgressbar } from 'react-circular-progressbar'
+import 'react-circular-progressbar/dist/styles.css'
 import styled from 'styled-components'
 import { useInterval } from '../../hooks/useInterval'
 import { db, firebase } from '../../firebase/firebase'
-import TimerEstimate from './TimerEstimate'
 import useCurrentUser from '../../hooks/useCurrentUser'
 import { usePomo } from '../../context/PomoContext'
+import { useHistory } from 'react-router-dom'
 
 const Ticker: React.FC = () => {
-  const [startTime] = useState(() => Date.now())
-  const [localSessionLength, setLocalSessionLength] = useState(() =>
-    Duration.fromMillis(0),
-  )
-  const currentUser = useCurrentUser()
   const [state, dispatch] = usePomo()
-  const { duration, isRunning, isPaused, isBreak, isPomo } = state
-
-  useEffect(() => {
-    setLocalSessionLength(duration)
-  }, [duration])
+  const { duration, isPaused, isBreak, isPomo } = state
+  const [localSessionLength, setLocalSessionLength] = useState(duration)
+  const [startTime] = useState(() => Date.now())
+  const currentUser = useCurrentUser()
+  const history = useHistory()
 
   useInterval(() => {
-    if (isRunning && !isPaused) {
+    if (!isPaused) {
       setLocalSessionLength((prev) => {
         if (prev.as('milliseconds') > 0) {
           return prev.minus(1000)
@@ -36,9 +31,13 @@ const Ticker: React.FC = () => {
         addToTimeGoal().catch((err) => console.log(err))
       }
 
-      isPomo
-        ? dispatch({ type: 'POMO_FINISH' })
-        : dispatch({ type: 'BREAK_FINISH' })
+      if (isPomo) {
+        dispatch({ type: 'POMO_FINISH' })
+        history.push(`/session/break`)
+      } else {
+        dispatch({ type: 'BREAK_FINISH' })
+        history.push('/pomodoro')
+      }
     }
   }, 100)
 
@@ -67,13 +66,32 @@ const Ticker: React.FC = () => {
     })
   }
 
-  return <StyledTicker>{localSessionLength.toFormat('mm:ss')}</StyledTicker>
+  const calculatePercentage = () => {
+    const max = duration.as('millisecond')
+    const now = localSessionLength.as('millisecond')
+
+    return (now / max) * 100
+  }
+
+  return (
+    <ProgressBar
+      value={calculatePercentage()}
+      text={localSessionLength.toFormat('mm:ss')}
+      styles={{
+        path: {
+          stroke: isPomo ? '#F02D3A' : '#008148',
+        },
+        text: {
+          fill: isPomo ? '#F02D3A' : '#008148',
+        },
+      }}
+    />
+  )
 }
 
-export default Ticker
-
-const StyledTicker = styled.span`
-  color: ${(props) => props.theme.colors.tertiary};
-  font-size: 2.3rem;
-  margin: 1em;
+const ProgressBar = styled(CircularProgressbar)`
+  grid-area: timer;
+  padding: 2em;
 `
+
+export default Ticker
