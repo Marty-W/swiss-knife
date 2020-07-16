@@ -39,7 +39,7 @@ const Ticker: React.FC = () => {
         history.push('/pomodoro')
       }
     }
-  }, 100)
+  }, 1000)
 
   const createTimeEntries = () => ({
     startTime,

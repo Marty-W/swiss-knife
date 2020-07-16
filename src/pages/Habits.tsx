@@ -1,7 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react'
+import styled from 'styled-components/macro'
+import Plus from '../components/UI/Plus.styles'
+
+import { Route, useRouteMatch, useHistory } from 'react-router-dom'
+import NewHabit from '../components/habits/NewHabit/NewHabit'
+import HabitList from '~/components/habits/HabitList/HabitList'
 
 const Habits: React.FC = () => {
-  return <h1>Hi"</h1>;
-};
+  const match = useRouteMatch()
+  const history = useHistory()
 
-export default Habits;
+  return (
+    <Wrapper>
+      <Route path={`${match.path}/newHabit`}>
+        <NewHabit />
+      </Route>
+      <HabitList />
+      <Plus onClick={() => history.push(`${match.path}/newHabit`)} />
+    </Wrapper>
+  )
+}
+
+const Wrapper = styled.div`
+  grid-area: content;
+`
+
+export default Habits

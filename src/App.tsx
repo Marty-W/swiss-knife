@@ -30,7 +30,7 @@ const App: React.FC = () => {
             <Pomodoro />
           </PomoProvider>
         </Route>
-        <Route exact path="/habits" component={Habits} />
+        <Route path="/habits" component={Habits} />
         <Route path="/todo" component={Todo} />
         <Route exact path="/" component={Home} />
       </Switch>

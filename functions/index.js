@@ -3,9 +3,6 @@ const admin = require('firebase-admin')
 
 admin.initializeApp()
 
-// TODO maintenance job az budes mit hotovy tasks a habits
-// https://firebase.google.com/docs/functions/schedule-functions
-
 exports.createUserDb = functions
   .region('europe-west2')
   .auth.user()
@@ -24,4 +21,39 @@ exports.createUserDb = functions
       dailyGoal: 0,
       timestamp: Date.now(),
     })
+  })
+
+exports.addTimePoints = functions
+  .region('europe-west2')
+  .pubsub.schedule('50***')
+  .onRun(async () => {
+    const db = admin.firestore()
+
+    const querySnap = await db.collection('users').get()
+
+    const promises = []
+
+    querySnap.forEach((doc) => {
+      const docRef = doc.ref
+      promises.push(docRef.collection('habitList').get())
+    })
+
+    const snapArrays = await Promise.all(promises)
+
+    const promises1 = []
+
+    snapArrays.forEach((snapArr) => {
+      snapArr.forEach((snap) => {
+        promises1.push(
+          snap.ref.update({
+            timePoints: admin.firestore.FieldValue.arrayUnion({
+              date: new Date(),
+              done: false,
+            }),
+          }),
+        )
+      })
+    })
+
+    return Promise.all(promises1)
   })

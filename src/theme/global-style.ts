@@ -1,5 +1,5 @@
-import { createGlobalStyle } from 'styled-components';
-import reset from 'styled-reset';
+import { createGlobalStyle } from 'styled-components'
+import reset from 'styled-reset'
 
 const GlobalStyle = createGlobalStyle`
     ${reset}
@@ -11,6 +11,7 @@ const GlobalStyle = createGlobalStyle`
     html {
         box-sizing: border-box;
         scroll-behavior: smooth;
+        font-size: 100%;
     }
 
     body {
@@ -19,6 +20,6 @@ const GlobalStyle = createGlobalStyle`
          background: #101119 ;
          color: #EFF6EE;
     }
-`;
+`
 
-export default GlobalStyle;
+export default GlobalStyle

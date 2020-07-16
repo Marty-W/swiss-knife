@@ -17,6 +17,8 @@ interface EntryInt {
 
 type QueryInt = 'today' | 'yesterday' | 'all'
 
+//TODO refactor to datefns
+
 const History: React.FC = () => {
   const user = useCurrentUser()
   const [entries, setEntries] = useState<EntryInt[]>([])

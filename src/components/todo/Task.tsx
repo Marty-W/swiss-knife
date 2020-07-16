@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components/macro'
 
-import Checkbox from './Checkbox'
+import Checkbox from '../UI/Checkbox'
 import { db } from '../../firebase/firebase'
 import { useRouteMatch } from 'react-router-dom'
 import useCurrentUser from '~/hooks/useCurrentUser'

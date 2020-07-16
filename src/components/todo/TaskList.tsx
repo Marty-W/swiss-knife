@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
-import styled from 'styled-components/macro'
-import { AiFillPlusCircle } from 'react-icons/ai'
 import Task from './Task'
 import NewTask from './NewTask'
-
+import Plus from '../UI/Plus.styles'
+import styled from 'styled-components/macro'
 import { TaskInt } from '../../pages/Todo'
 
 interface Props {
@@ -60,15 +59,6 @@ export const TaskListWrapper = styled.div`
   grid-auto-rows: minmax(3em, 3.5em);
   overflow: hidden;
   overflow-y: scroll;
-`
-
-const Plus = styled(AiFillPlusCircle)`
-  fill: ${(props) => props.theme.colors.accent};
-  font-size: 2.4rem;
-  cursor: pointer;
-  position: absolute;
-  bottom: 2em;
-  right: 0.5em;
 `
 
 export default TaskList

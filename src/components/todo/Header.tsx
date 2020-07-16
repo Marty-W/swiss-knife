@@ -8,7 +8,9 @@ interface Props {
 const componentName: React.FC<Props> = ({ numTasks }) => (
   <Wrapper>
     <Greeting>Hello There</Greeting>
-    <Overview>You have {numTasks} tasks scheduled for today.</Overview>
+    <Overview>{`You have ${numTasks} ${
+      numTasks > 1 ? 'tasks' : 'task'
+    } scheduled for today.`}</Overview>
   </Wrapper>
 )
 
