@@ -5,7 +5,6 @@ import * as Sentry from '@sentry/react'
 import { ToastProvider } from 'react-toast-notifications'
 import App from './App'
 import { AuthProvider } from './context/AuthContext'
-import 'regenerator-runtime/runtime'
 
 Sentry.init({
   dsn:

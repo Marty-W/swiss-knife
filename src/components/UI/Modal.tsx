@@ -48,7 +48,7 @@ const Modal: React.FC<Props> = ({
               ref={modalRef as React.RefObject<HTMLDivElement>}
               key="card"
               modalHeight={modalHeight}
-              variant={variant ? variant : ''}
+              variant={variant || ''}
             >
               <CloseBtn onClick={() => hide()} />
               {children}

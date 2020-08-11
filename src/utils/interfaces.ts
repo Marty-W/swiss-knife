@@ -56,7 +56,7 @@ export type TPomoDispatch = (action: TPomoReducerActions) => void
 
 export interface IFirebaseHabit {
   color: string
-  timePoints?: firebase.firestore.Timestamp[]
+  timePoints: firebase.firestore.Timestamp[]
   description: string
   id: string
   name: string
@@ -85,7 +85,7 @@ export type TError = FirebaseError | Error
 
 export type TErrorDispatch = (err: TError) => void
 
-//FIREBASE
+// FIREBASE
 
 export type TFQuery =
   | firebase.firestore.QuerySnapshot
