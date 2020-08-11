@@ -1,7 +1,7 @@
 [build]
   command = "yarn build"
-  publish="swissknife/build/"
-  base = "swissknife/"
+  publish="build/"
+  base = "/"
 
 [[redirects]]
   from = "/*"
