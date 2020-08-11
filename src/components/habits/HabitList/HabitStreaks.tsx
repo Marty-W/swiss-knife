@@ -70,7 +70,7 @@ const HabitStreaks: React.FC<Props> = ({ timePoints, habitColor }) => {
         </p>
       </CurrentStreak>
       {streaks.length > 0 &&
-        streaks?.map((streak) => (
+        streaks.map((streak) => (
           <React.Fragment key={uuid()}>
             <Start>{formatDate(streak.end)}</Start>
             <StreakBar

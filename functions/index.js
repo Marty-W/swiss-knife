@@ -9,7 +9,6 @@ exports.createUserDb = functions
   .onCreate((user) => {
     const { uid, email, displayName } = user
     const userRef = admin.firestore().collection('users').doc(uid)
-    const pomoStatsRef = userRef.collection('pomoStats')
 
     userRef.set({
       name: displayName,

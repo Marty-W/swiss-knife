@@ -37,19 +37,18 @@ const TaskList: React.FC<Props> = ({ tasks, showCompleted }) => {
         {isNewTask && (
           <NewTask removeNewTask={removeNewTask} isNewTask={isNewTask} />
         )}
-        {localTasks &&
-          localTasks.map((entry: ITask) => {
-            const { title, id, done, timestamp } = entry
-            return (
-              <Task
-                key={id}
-                title={title}
-                done={done}
-                timestamp={timestamp}
-                id={id}
-              />
-            )
-          })}
+        {localTasks.map((entry: ITask) => {
+          const { title, id, done, timestamp } = entry
+          return (
+            <Task
+              key={id}
+              title={title}
+              done={done}
+              timestamp={timestamp}
+              id={id}
+            />
+          )
+        })}
       </TaskListWrapper>
       {!isNewTask && <Plus onClick={() => setIsNewTask(true)} />}
     </>

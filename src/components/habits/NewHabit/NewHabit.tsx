@@ -22,7 +22,7 @@ const NewHabit: React.FC<Props> = ({ hide }) => {
 
   const submitNewHabit = async () => {
     if (user) {
-      const habitRef = db.collection(`users/${user?.uid}/habitList`).doc()
+      const habitRef = db.collection(`users/${user.uid}/habitList`).doc()
       try {
         await habitRef.set({
           name,

@@ -28,7 +28,7 @@ const Task: React.FC<Props> = ({ title, done, id, onCheck }) => {
 
   const markTodoDone = async () => {
     if (user) {
-      const taskListRef = db.doc(`users/${user?.uid}/taskList/${id}`)
+      const taskListRef = db.doc(`users/${user.uid}/taskList/${id}`)
       try {
         await taskListRef.update({
           done: true,

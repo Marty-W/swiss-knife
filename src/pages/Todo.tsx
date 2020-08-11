@@ -21,9 +21,9 @@ const Todo: React.FC = () => {
         <Spinner />
       ) : (
         <>
-          <Header numTasks={tasks?.today.length} />
-          <CountBox tasks={tasks?.today} type="scheduled" />
-          <CountBox tasks={tasks?.stash} type="stashed" />
+          <Header numTasks={tasks.today.length} />
+          <CountBox tasks={tasks.today} type="scheduled" />
+          <CountBox tasks={tasks.stash} type="stashed" />
           <TodoNav />
           <TodayDate>{new Date().toLocaleDateString()}</TodayDate>
           <Switch>
@@ -33,7 +33,7 @@ const Todo: React.FC = () => {
                 handleShow={setShowCompletedTasks}
               />
               <TaskList
-                tasks={tasks?.today}
+                tasks={tasks.today}
                 showCompleted={showCompletedTasks}
               />
             </Route>
