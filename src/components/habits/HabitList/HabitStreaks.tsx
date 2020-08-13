@@ -76,9 +76,8 @@ const HabitStreaks: React.FC<Props> = ({ timePoints, habitColor }) => {
             <StreakBar
               color={habitColor}
               barWidth={`${(streak.streak / maxStr) * 100}%`}
-            >
-              <div>{streak.streak}</div>
-            </StreakBar>
+            />
+            <div>{streak.streak}</div>
             <End>{formatDate(streak.start)}</End>
           </React.Fragment>
         ))}
