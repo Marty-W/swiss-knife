@@ -78,21 +78,24 @@ export default NewHabit
 
 const Wrapper = styled.div`
   height: 100%;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.4fr 0.4fr 0.3fr;
-  grid-template-areas:
-    'name name'
-    'desc desc'
-    'color btn';
-  align-items: center;
-  grid-row-gap: 1em;
-  & label {
-    font-size: 0.85rem;
-  }
+  & form {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 0.4fr 0.4fr 0.3fr;
+    grid-template-areas:
+      'name name'
+      'desc desc'
+      'color btn';
+    align-items: center;
+    grid-row-gap: 1em;
+    & label {
+      font-size: 0.85rem;
+    }
 
-  & button {
-    justify-self: center;
+    & button {
+      justify-self: center;
+    }
   }
 `
 
