@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import Button from '../UI/Button'
 import CardWithHeader from '../UI/CardWithHeader'
 import Rating from './Rating'

@@ -1,7 +1,7 @@
 import { format } from 'date-fns'
 
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { v4 as uuid } from 'uuid'
 
 interface Props {

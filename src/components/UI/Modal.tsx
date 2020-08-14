@@ -3,7 +3,7 @@ import { useHistory, useRouteMatch } from 'react-router-dom'
 import { IoMdClose } from 'react-icons/io'
 import React from 'react'
 import { createPortal } from 'react-dom'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import useClickOutside from '../../hooks/useClickOutside'
 
 const modalRoot = document.getElementById('modal') as HTMLElement

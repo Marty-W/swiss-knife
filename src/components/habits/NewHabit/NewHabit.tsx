@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 import { TextField } from '@material-ui/core'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { FirebaseError } from 'firebase'
 import Button from '../../UI/Button'
 import ColorPicker from './ColorPicker'
@@ -43,7 +43,7 @@ const NewHabit: React.FC<Props> = ({ hide }) => {
       {error ? (
         <ErrorMsg>{error.message}</ErrorMsg>
       ) : (
-        <>
+        <form onSubmit={submitNewHabit}>
           <MaterialInputName
             id="habit-name"
             label="Name"
@@ -65,10 +65,10 @@ const NewHabit: React.FC<Props> = ({ hide }) => {
             size="small"
             value={description}
           />
-          <HabitBtn onClick={submitNewHabit} variant="primary" color={color}>
+          <HabitBtn variant="primary" color={color}>
             Add new habit
           </HabitBtn>
-        </>
+        </form>
       )}
     </Wrapper>
   )

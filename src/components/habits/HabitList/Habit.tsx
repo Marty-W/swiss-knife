@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { useToasts } from 'react-toast-notifications'
 import { FirebaseError } from 'firebase'
 import { v4 as uuid } from 'uuid'

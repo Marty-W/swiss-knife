@@ -1,7 +1,7 @@
 import { GrFormCheckmark, GrFormClose } from 'react-icons/gr'
 
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 interface Props {
   checked?: boolean

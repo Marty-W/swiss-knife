@@ -1,6 +1,6 @@
 import { AnimateSharedLayout, motion } from 'framer-motion'
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import NavItems from './NavItems'
 
 const Navbar: React.FC = () => (

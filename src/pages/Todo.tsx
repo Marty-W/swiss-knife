@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import CountBox from '../components/todo/CountBox'
 import Header from '../components/todo/Header'
 import Stash from '../components/todo/Stash'

@@ -1,7 +1,7 @@
 import { motion } from 'framer-motion'
 
 import React from 'react'
-import { useTheme } from 'styled-components'
+import { useTheme } from 'styled-components/macro'
 
 const MasterPlanSVG: React.FC = () => {
   const theme = useTheme()

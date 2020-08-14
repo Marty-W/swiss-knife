@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { Slider } from '@material-ui/core'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useToasts } from 'react-toast-notifications'
 import { FirebaseError } from 'firebase'
 import { db } from '../../firebase/firebase'

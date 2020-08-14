@@ -8,7 +8,7 @@ import { IoIosTimer } from 'react-icons/io'
 import { NavLink } from 'react-router-dom'
 import React from 'react'
 import { motion } from 'framer-motion'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 const NavItems: React.FC = () => (
   <Wrapper>

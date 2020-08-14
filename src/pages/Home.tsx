@@ -2,7 +2,7 @@ import { AiOutlineRedo, AiOutlineUnorderedList } from 'react-icons/ai'
 import { IoIosTimer } from 'react-icons/io'
 import React from 'react'
 import { motion } from 'framer-motion'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import MasterPlanSVG from '../components/home/MasterPlanSVG'
 
 const Home: React.FC = () => (

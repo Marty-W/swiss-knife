@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { NavLink, useRouteMatch } from 'react-router-dom'
 
 const TodoNav: React.FC = () => {

@@ -1,7 +1,7 @@
 import { FaKey, FaUserShield } from 'react-icons/fa'
 import React, { useRef, useState } from 'react'
 import BeatLoader from 'react-spinners/BeatLoader'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useToasts } from 'react-toast-notifications'
 import { FirebaseError } from 'firebase'
 import { auth, firebase } from '../../firebase/firebase'

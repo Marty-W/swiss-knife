@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useToasts } from 'react-toast-notifications'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { FirebaseError } from 'firebase'
 import Button from '../UI/Button'
 import Task from './Task'

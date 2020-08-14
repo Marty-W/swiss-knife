@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import Form from '../components/authentication/Form'
 import Socials from '../components/authentication/Socials'
 

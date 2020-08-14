@@ -1,11 +1,14 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { useToasts } from 'react-toast-notifications'
 import { motion } from 'framer-motion'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { FirebaseError } from 'firebase'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { TaskWrapper } from './Task'
 import useUserDocumentRef from '../../hooks/useUserDocumentRef'
+import useCurrentUser from '../../hooks/useCurrentUser'
+import { db } from '../../firebase/firebase'
+import { ITask } from '../../utils/interfaces'
 
 interface Props {
   removeNewTask: () => void
@@ -16,9 +19,8 @@ const NewTask: React.FC<Props> = ({ removeNewTask, isNewTask }) => {
   const [title, setTitle] = useState('')
   const { addToast } = useToasts()
   const inputRef = useRef<null | HTMLInputElement>(null)
-  const taskListRef = useUserDocumentRef(
-    'taskList',
-  ) as firebase.firestore.CollectionReference
+  const user = useCurrentUser()
+  const taskListRef = db.collection(`users/${user?.uid}/taskList`).doc()
 
   useEffect(() => {
     if (inputRef && inputRef.current) {
@@ -31,7 +33,7 @@ const NewTask: React.FC<Props> = ({ removeNewTask, isNewTask }) => {
       return
     }
     try {
-      await taskListRef.add({
+      await taskListRef.set({
         title,
         done: false,
         timestamp: Date.now(),

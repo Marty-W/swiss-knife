@@ -1,4 +1,4 @@
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 const SectionHeading = styled.h2`
   font-family: ${(props) => props.theme.fonts.secondary};

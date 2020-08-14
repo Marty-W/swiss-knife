@@ -1,6 +1,6 @@
 import { GiSwissArmyKnife } from 'react-icons/gi'
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { BsQuestion } from 'react-icons/bs'
 import { useLocation, useHistory } from 'react-router-dom'
 import Auth from '../../pages/Auth'

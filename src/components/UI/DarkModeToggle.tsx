@@ -2,7 +2,7 @@ import { FiMoon, FiSun } from 'react-icons/fi'
 import React, { useState } from 'react'
 
 import { Switch } from '@material-ui/core'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 interface Props {
   themeToggle: () => void

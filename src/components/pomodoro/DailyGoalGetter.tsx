@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/accessible-emoji */
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import ProgressBar from '../UI/ProgressBar'
 
 interface Props {
@@ -14,19 +14,19 @@ const DailyGoalGetter: React.FC<Props> = ({
   completed,
   onGoalSet,
 }) => (
-    <Wrapper>
-      <ProgressBar percentage={Math.floor((completed / dailyGoal) * 100)} />
-      <Goal>
-        <Desc>Daily goal:</Desc>
-        <NumSpan>{dailyGoal}</NumSpan>
-      </Goal>
-      <Completed>
-        <Desc>Completed:</Desc>
-        <NumSpan>{completed}</NumSpan>
-      </Completed>
-      <Edit onClick={() => onGoalSet(false)}>Edit</Edit>
-    </Wrapper>
-  )
+  <Wrapper>
+    <ProgressBar percentage={Math.floor((completed / dailyGoal) * 100)} />
+    <Goal>
+      <Desc>Daily goal:</Desc>
+      <NumSpan>{dailyGoal}</NumSpan>
+    </Goal>
+    <Completed>
+      <Desc>Completed:</Desc>
+      <NumSpan>{completed}</NumSpan>
+    </Completed>
+    <Edit onClick={() => onGoalSet(false)}>Edit</Edit>
+  </Wrapper>
+)
 
 const Wrapper = styled.div`
   height: 100%;

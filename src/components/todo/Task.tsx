@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 import { useRouteMatch } from 'react-router-dom'
 import Checkbox from '../UI/Checkbox'

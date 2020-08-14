@@ -18,6 +18,8 @@ const useTodoData = () => {
   )
   const { addToast } = useToasts()
 
+  console.log(todayTasks)
+
   useEffect(() => {
     if (todayError) {
       addToast(todayError.message, { appearance: 'error' })

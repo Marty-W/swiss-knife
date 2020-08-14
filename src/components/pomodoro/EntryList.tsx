@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
 import { useToasts } from 'react-toast-notifications'
 import { IPomoEntry, THistoryQuery } from '../../utils/interfaces'

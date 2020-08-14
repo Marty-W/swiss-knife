@@ -1,5 +1,5 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { BsChevronLeft, BsChevronRight } from 'react-icons/bs'
 import { useLocation } from 'react-router-dom'
 import { motion } from 'framer-motion'

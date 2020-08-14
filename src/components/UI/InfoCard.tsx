@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 import { useLocation } from 'react-router-dom'
 import { GoLightBulb } from 'react-icons/go'
 import { GiLighthouse } from 'react-icons/gi'

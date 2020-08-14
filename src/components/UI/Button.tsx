@@ -1,10 +1,10 @@
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 import { motion } from 'framer-motion'
 
 interface Props {
-  onClick:
+  onClick?:
     | ((
         event: React.MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
       ) => void)

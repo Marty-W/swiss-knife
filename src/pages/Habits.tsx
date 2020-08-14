@@ -1,7 +1,7 @@
 import { Route, Switch, useRouteMatch } from 'react-router-dom'
 
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import HabitDetail from '../components/habits/HabitList/HabitDetail'
 import HabitList from '../components/habits/HabitList/HabitList'
 import Modal from '../components/UI/Modal'

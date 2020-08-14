@@ -2,7 +2,7 @@ import { useHistory } from 'react-router-dom'
 
 import Button from '../UI/Button'
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { usePomo } from '../../context/PomoContext'
 
 const TimerButtons: React.FC = () => {

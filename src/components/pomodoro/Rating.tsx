@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { usePomo } from '../../context/PomoContext'
 
 const Rating: React.FC = () => {

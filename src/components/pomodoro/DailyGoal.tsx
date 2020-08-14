@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useState } from 'react'
 import { isToday } from 'date-fns'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 import { useDocumentData } from 'react-firebase-hooks/firestore'
 import { IPomoGoal } from '../../utils/interfaces'
 import CardWithHeader from '../UI/CardWithHeader'

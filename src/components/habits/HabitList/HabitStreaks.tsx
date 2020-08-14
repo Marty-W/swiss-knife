@@ -3,7 +3,7 @@
 import { differenceInCalendarDays, format, isToday } from 'date-fns'
 import { v4 as uuid } from 'uuid'
 import React from 'react'
-import styled from 'styled-components/'
+import styled from 'styled-components/macro'
 
 interface Props {
   timePoints: number[]

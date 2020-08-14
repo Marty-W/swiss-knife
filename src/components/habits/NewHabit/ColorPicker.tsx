@@ -1,7 +1,7 @@
 import { CirclePicker, ColorResult } from 'react-color'
 import React, { useState } from 'react'
 
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 interface Props {
   color: string
