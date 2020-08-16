@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, ReactEventHandler, FormEvent } from 'react'
 
 import { TextField } from '@material-ui/core'
 import styled from 'styled-components/macro'
@@ -20,7 +20,8 @@ const NewHabit: React.FC<Props> = ({ hide }) => {
   const [error, setError] = useState<FirebaseError>()
   const user = useCurrentUser()
 
-  const submitNewHabit = async () => {
+  const submitNewHabit = async (e: FormEvent) => {
+    e.preventDefault()
     if (user) {
       const habitRef = db.collection(`users/${user.uid}/habitList`).doc()
       try {
@@ -95,6 +96,7 @@ const Wrapper = styled.div`
 
     & button {
       justify-self: center;
+      grid-area: btn;
     }
   }
 `

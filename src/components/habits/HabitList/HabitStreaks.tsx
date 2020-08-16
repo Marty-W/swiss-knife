@@ -64,10 +64,8 @@ const HabitStreaks: React.FC<Props> = ({ timePoints, habitColor }) => {
       <span>Streaks:</span>
       <CurrentStreak>
         <p>Current streak:</p>
-        <p>
-          {streaks[0] && isToday(streaks[0].start) ? streaks[0].streak : 0}
-          days
-        </p>
+        <p>{streaks[0] && isToday(streaks[0].start) ? streaks[0].streak : 0}</p>
+        <p> days</p>
       </CurrentStreak>
       {streaks.length > 0 &&
         streaks.map((streak) => (
@@ -76,8 +74,9 @@ const HabitStreaks: React.FC<Props> = ({ timePoints, habitColor }) => {
             <StreakBar
               color={habitColor}
               barWidth={`${(streak.streak / maxStr) * 100}%`}
-            />
-            <div>{streak.streak}</div>
+            >
+              <div>{streak.streak}</div>
+            </StreakBar>
             <End>{formatDate(streak.start)}</End>
           </React.Fragment>
         ))}
@@ -108,6 +107,9 @@ const CurrentStreak = styled.div`
   grid-column: 1 / -1;
   grid-row: 2;
   font-size: 1.1rem;
+  & p {
+    margin-bottom: 0.2rem;
+  }
 `
 
 const Start = styled.p`
@@ -129,15 +131,6 @@ const StreakBar = styled.div<{ color: string; barWidth: string }>`
   border-radius: 25px;
   justify-self: center;
   min-width: ${(props) => props.barWidth};
-
-  & div {
-    text-align: center;
-    padding: 0.1em;
-    color: ${(props) => props.theme.colors.primary};
-    width: 1.1rem;
-    border-radius: 50%;
-    background-color: ${(props) => props.theme.colors.tertiary};
-  }
 `
 
 export default HabitStreaks

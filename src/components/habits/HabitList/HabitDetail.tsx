@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useHistory } from 'react-router-dom'
 import { endOfYear, format, startOfYear } from 'date-fns'
 import { useToasts } from 'react-toast-notifications'
 import React from 'react'
@@ -21,12 +21,14 @@ const HabitDetail: React.FC<Props> = ({ hide }) => {
   const theme = useTheme()
   const user = useCurrentUser()
   const { addToast } = useToasts()
+  const history = useHistory()
 
   const deleteHabit = async (habitId: string) => {
     const habitRef = db.doc(`users/${user?.uid}/habitList/${habitId}`)
 
     try {
       await habitRef.delete()
+      history.push('/habits')
       hide()
     } catch (err) {
       addToast((err as FirebaseError).message, { appearance: 'error' })
@@ -66,19 +68,17 @@ const HabitDetail: React.FC<Props> = ({ hide }) => {
           dayBorderColor={theme.colors.secondary}
           monthBorderWidth={0}
           monthLegendOffset={12}
-          theme={{ legends: { text: { color: theme.colors.tertiary } } }}
           tooltip={({ day }) => (
             <strong style={{ color: '#101119' }}>{day}</strong>
           )}
+          theme={{ labels: { text: { fill: '#ffffff' } } }}
         />
       </CalendarWrapper>
-      <DeleteBtn
-        color={color}
-        onClick={() => deleteHabit(id)}
-        variant="primary"
-      >
-        Delete Habit
-      </DeleteBtn>
+      <ButtonWrapper>
+        <Button onClick={() => deleteHabit(id)} variant="primary">
+          Delete Habit
+        </Button>
+      </ButtonWrapper>
     </Wrapper>
   )
 }
@@ -94,6 +94,17 @@ const Wrapper = styled.div`
     'streaks cal'
     'desc cal'
     'button cal';
+
+  & button {
+    grid-area: button;
+  }
+`
+
+const ButtonWrapper = styled.div`
+  grid-area: button;
+  display: flex;
+  justify-content: center;
+  width: 100%;
 `
 
 const CalendarWrapper = styled.div`
@@ -118,11 +129,6 @@ const Description = styled.div`
     font-size: 0.7rem;
     margin-bottom: 0.5rem;
   }
-`
-
-const DeleteBtn = styled(Button)<{ color: string }>`
-  grid-area: button;
-  place-self: center;
 `
 
 export default HabitDetail

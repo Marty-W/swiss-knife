@@ -54,7 +54,7 @@ const History: React.FC = () => {
 const Wrapper = styled(CardWithHeader)`
   grid-area: history;
   position: relative;
-  overflow-y: scroll;
+  overflow-y: auto;
 `
 
 const ColWrapper = styled.div`

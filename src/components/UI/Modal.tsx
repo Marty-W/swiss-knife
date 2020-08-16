@@ -50,7 +50,7 @@ const Modal: React.FC<Props> = ({
               modalHeight={modalHeight}
               variant={variant || ''}
             >
-              <CloseBtn onClick={() => hide()} />
+              {variant !== 'session' && <CloseBtn onClick={() => hide()} />}
               {children}
             </ModalCardWrapper>
           </StyledModal>

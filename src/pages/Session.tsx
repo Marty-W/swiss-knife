@@ -10,7 +10,12 @@ const Session: React.FC = () => {
   const match = useRouteMatch()
   const [isShowing, toggle] = useModal(true)
   return (
-    <Modal isShowing={isShowing} hide={toggle} modalHeight="60vh">
+    <Modal
+      isShowing={isShowing}
+      hide={toggle}
+      modalHeight="60vh"
+      variant="session"
+    >
       <>
         <Switch>
           <Route path={`${match.path}/focus`}>
