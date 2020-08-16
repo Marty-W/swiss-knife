@@ -99,6 +99,10 @@ const Features = styled(motion.ul)`
       margin-right: 0.5em;
     }
   }
+
+  @media (min-width: 1000px) {
+    justify-self: center;
+  }
 `
 
 const Desc = styled.div`
