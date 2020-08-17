@@ -1,24 +1,28 @@
 import 'react-circular-progressbar/dist/styles.css'
 
 import React, { useState } from 'react'
-import { useToasts } from 'react-toast-notifications'
 import { CircularProgressbar } from 'react-circular-progressbar'
 import styled from 'styled-components/macro'
 import { useHistory } from 'react-router-dom'
-import { FirebaseError } from 'firebase'
-import useCurrentUser from '../../hooks/useCurrentUser'
-import { db, firebase } from '../../firebase/firebase'
+import { useErrorHandler } from 'react-error-boundary'
+import { firebase } from '../../firebase/firebase'
 import useInterval from '../../hooks/useInterval'
 import { usePomo } from '../../context/PomoContext'
+import useUserDocumentRef from '../../hooks/useUserDocumentRef'
 
 const Ticker: React.FC = () => {
   const [state, dispatch] = usePomo()
   const { duration, isPaused, isBreak, isPomo } = state
   const [localSessionLength, setLocalSessionLength] = useState(duration)
   const [startTime] = useState(() => Date.now())
-  const { addToast } = useToasts()
-  const currentUser = useCurrentUser()
   const history = useHistory()
+  const errorHandler = useErrorHandler()
+  const entriesRef = useUserDocumentRef(
+    'pomoEntries',
+  ) as firebase.firestore.CollectionReference
+  const goalRef = useUserDocumentRef(
+    'pomoGoal',
+  ) as firebase.firestore.DocumentReference
 
   useInterval(() => {
     if (!isPaused) {
@@ -30,13 +34,9 @@ const Ticker: React.FC = () => {
       })
     }
     if (localSessionLength.as('milliseconds') === 0) {
-      if (!isBreak && currentUser) {
-        pushTimeEntries().catch((err) =>
-          addToast((err as FirebaseError).message, { appearance: 'error' }),
-        )
-        addToTimeGoal().catch((err) =>
-          addToast((err as FirebaseError).message, { appearance: 'error' }),
-        )
+      if (!isBreak) {
+        pushTimeEntries().catch((err) => errorHandler(err))
+        addToTimeGoal().catch((err) => errorHandler(err))
       }
 
       if (isPomo) {
@@ -56,18 +56,16 @@ const Ticker: React.FC = () => {
   })
 
   const pushTimeEntries = async () => {
-    const entriesRef = db
-      .collection(`users/${currentUser?.uid}/pomoEntries/`)
-      .doc()
+    const newEntryDoc = entriesRef.doc()
     const entry = createTimeEntries()
-    await entriesRef.set({
+    await newEntryDoc.set({
       ...entry,
-      id: entriesRef.id,
+      id: newEntryDoc.id,
     })
   }
 
   const addToTimeGoal = async () => {
-    await db.doc(`users/${currentUser?.uid}/pomoGoal/goal`).update({
+    await goalRef.update({
       completed: firebase.firestore.FieldValue.increment(
         duration.as('minutes'),
       ),

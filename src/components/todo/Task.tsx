@@ -1,10 +1,11 @@
 import React from 'react'
 import styled from 'styled-components/macro'
-
+import { useErrorHandler } from 'react-error-boundary'
 import { useRouteMatch } from 'react-router-dom'
 import Checkbox from '../UI/Checkbox'
 import { db } from '../../firebase/firebase'
 import useCurrentUser from '../../hooks/useCurrentUser'
+import useUserDocumentRef from '../../hooks/useUserDocumentRef'
 
 interface Props {
   title: string
@@ -15,27 +16,28 @@ interface Props {
 }
 
 const Task: React.FC<Props> = ({ title, done, id, onCheck }) => {
-  const user = useCurrentUser()
   const { path } = useRouteMatch()
+  const handleError = useErrorHandler()
+  const taskListRef = useUserDocumentRef(
+    'taskList',
+  ) as firebase.firestore.CollectionReference
 
   const handleCheck = () => {
     if (path === '/todo/stash' && onCheck) {
       onCheck(id)
     } else {
-      markTodoDone()
+      void markTodoDone()
     }
   }
 
   const markTodoDone = async () => {
-    if (user) {
-      const taskListRef = db.doc(`users/${user.uid}/taskList/${id}`)
-      try {
-        await taskListRef.update({
-          done: true,
-        })
-      } catch (err) {
-        console.log(err)
-      }
+    const taskToComplete = taskListRef.doc(id)
+    try {
+      await taskToComplete.update({
+        done: true,
+      })
+    } catch (err) {
+      handleError(err)
     }
   }
 

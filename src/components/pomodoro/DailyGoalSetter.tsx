@@ -3,8 +3,7 @@ import React, { useState } from 'react'
 import { AiFillCheckCircle } from 'react-icons/ai'
 import { Slider } from '@material-ui/core'
 import styled from 'styled-components/macro'
-import { useToasts } from 'react-toast-notifications'
-import { FirebaseError } from 'firebase'
+import { useErrorHandler } from 'react-error-boundary'
 import { db } from '../../firebase/firebase'
 import useCurrentUser from '../../hooks/useCurrentUser'
 
@@ -15,7 +14,7 @@ interface Props {
 const DailyGoalSetter: React.FC<Props> = ({ onGoalSet }) => {
   const [dailyGoalValue, setDailyGoalValue] = useState(0)
   const user = useCurrentUser()
-  const { addToast } = useToasts()
+  const errorHandler = useErrorHandler
 
   const syncDailyGoal = async () => {
     try {
@@ -28,7 +27,7 @@ const DailyGoalSetter: React.FC<Props> = ({ onGoalSet }) => {
       )
       onGoalSet(true)
     } catch (err) {
-      addToast((err as FirebaseError).message, { appearance: 'error' })
+      errorHandler(err)
     }
   }
 

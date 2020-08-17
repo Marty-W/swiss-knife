@@ -1,13 +1,11 @@
-import React, { useState, ReactEventHandler, FormEvent } from 'react'
+import React, { useState, FormEvent } from 'react'
 
 import { TextField } from '@material-ui/core'
 import styled from 'styled-components/macro'
-import { FirebaseError } from 'firebase'
+import { useErrorHandler } from 'react-error-boundary'
 import Button from '../../UI/Button'
 import ColorPicker from './ColorPicker'
-import ErrorMsg from '../../UI/ErrorMsg.styles'
-import { db } from '../../../firebase/firebase'
-import useCurrentUser from '../../../hooks/useCurrentUser'
+import useUserDocumentRef from '../../../hooks/useUserDocumentRef'
 
 interface Props {
   hide: () => void
@@ -17,60 +15,56 @@ const NewHabit: React.FC<Props> = ({ hide }) => {
   const [color, setColor] = useState<string>('#f44336')
   const [description, setDescription] = useState('')
   const [name, setName] = useState('')
-  const [error, setError] = useState<FirebaseError>()
-  const user = useCurrentUser()
+  const habitListRef = useUserDocumentRef(
+    'habitList',
+  ) as firebase.firestore.CollectionReference
+  const errorHandler = useErrorHandler()
 
   const submitNewHabit = async (e: FormEvent) => {
     e.preventDefault()
-    if (user) {
-      const habitRef = db.collection(`users/${user.uid}/habitList`).doc()
-      try {
-        await habitRef.set({
-          name,
-          description,
-          color,
-          id: habitRef.id,
-          timePoints: [],
-        })
-        hide()
-      } catch (err) {
-        setError(err)
-      }
+    const habitRef = habitListRef.doc()
+    try {
+      await habitRef.set({
+        name,
+        description,
+        color,
+        id: habitRef.id,
+        timePoints: [],
+      })
+      hide()
+    } catch (err) {
+      errorHandler(err)
     }
   }
 
   return (
     <Wrapper>
-      {error ? (
-        <ErrorMsg>{error.message}</ErrorMsg>
-      ) : (
-        <form onSubmit={submitNewHabit}>
-          <MaterialInputName
-            id="habit-name"
-            label="Name"
-            name="habit-name"
-            onChange={(e) => setName(e.target.value)}
-            placeholder="TV 2hrs"
-            required
-            size="small"
-            value={name}
-          />
-          <ColorPicker color={color} onColorChange={setColor} />
-          <MaterialInputDesc
-            id="habit-desc"
-            label="Description"
-            name="habit-description"
-            onChange={(e) => setDescription(e.target.value)}
-            placeholder=""
-            multiline
-            size="small"
-            value={description}
-          />
-          <HabitBtn variant="primary" color={color}>
-            Add new habit
-          </HabitBtn>
-        </form>
-      )}
+      <form onSubmit={submitNewHabit}>
+        <MaterialInputName
+          id="habit-name"
+          label="Name"
+          name="habit-name"
+          onChange={(e) => setName(e.target.value)}
+          placeholder="TV 2hrs"
+          required
+          size="small"
+          value={name}
+        />
+        <ColorPicker color={color} onColorChange={setColor} />
+        <MaterialInputDesc
+          id="habit-desc"
+          label="Description"
+          name="habit-description"
+          onChange={(e) => setDescription(e.target.value)}
+          placeholder=""
+          multiline
+          size="small"
+          value={description}
+        />
+        <HabitBtn variant="primary" color={color}>
+          Add new habit
+        </HabitBtn>
+      </form>
     </Wrapper>
   )
 }

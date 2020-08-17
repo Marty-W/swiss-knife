@@ -1,15 +1,13 @@
 import { useLocation, useHistory } from 'react-router-dom'
 import { endOfYear, format, startOfYear } from 'date-fns'
-import { useToasts } from 'react-toast-notifications'
 import React from 'react'
-import { FirebaseError } from 'firebase'
 import { ResponsiveCalendar, CalendarDatum } from '@nivo/calendar'
 import styled, { useTheme } from 'styled-components/macro'
+import { useErrorHandler } from 'react-error-boundary'
 import Button from '../../UI/Button'
 import HabitStreaks from './HabitStreaks'
-import { db } from '../../../firebase/firebase'
-import useCurrentUser from '../../../hooks/useCurrentUser'
 import { IHabitDetail } from '../../../utils/interfaces'
+import useUserDocumentRef from '../../../hooks/useUserDocumentRef'
 
 interface Props {
   hide: () => void
@@ -19,19 +17,20 @@ const HabitDetail: React.FC<Props> = ({ hide }) => {
   const { state } = useLocation<IHabitDetail>()
   const { color, name, id, dateArr, description } = state
   const theme = useTheme()
-  const user = useCurrentUser()
-  const { addToast } = useToasts()
   const history = useHistory()
+  const habitRef = useUserDocumentRef(
+    'habitList',
+  ) as firebase.firestore.CollectionReference
+  const errorHandler = useErrorHandler()
 
   const deleteHabit = async (habitId: string) => {
-    const habitRef = db.doc(`users/${user?.uid}/habitList/${habitId}`)
-
+    const habitToDelete = habitRef.doc(habitId)
     try {
-      await habitRef.delete()
+      await habitToDelete.delete()
       history.push('/habits')
       hide()
     } catch (err) {
-      addToast((err as FirebaseError).message, { appearance: 'error' })
+      errorHandler(err)
     }
   }
 

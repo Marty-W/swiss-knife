@@ -109,11 +109,14 @@ const Form: React.FC<Props> = ({ hide }) => {
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-around;
+  margin-bottom: 1rem;
 `
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
+  justify-content: space-evenly;
+  height: 50%;
 
   & label {
     margin: 0.8em 0;

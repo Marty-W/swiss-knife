@@ -33,12 +33,12 @@ const Stash: React.FC<Props> = ({ tasks }) => {
   const moveToToday = async () => {
     if (user) {
       const taskListRef = db.collection(`users/${user.uid}/taskList`)
+      const batch = db.batch()
+      pickedToMove?.map((task) => {
+        batch.update(taskListRef.doc(task.id), { timestamp: Date.now() })
+      })
       try {
-        await pickedToMove?.map((task) => {
-          taskListRef.doc(task.id).update({
-            timestamp: Date.now(),
-          })
-        })
+        await batch.commit()
       } catch (err) {
         addToast((err as FirebaseError).message, { appearance: 'error' })
       }
@@ -61,7 +61,7 @@ const Stash: React.FC<Props> = ({ tasks }) => {
             />
           )
         })}
-      {pickedToMove[0] ? (
+      {pickedToMove ? (
         <MoveButton
           onClick={moveToToday}
           disabled={!pickedToMove.length}

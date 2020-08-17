@@ -16,16 +16,14 @@ const Session: React.FC = () => {
       modalHeight="60vh"
       variant="session"
     >
-      <>
-        <Switch>
-          <Route path={`${match.path}/focus`}>
-            <SessionFocus />
-          </Route>
-          <Route path={`${match.path}/break`}>
-            <SessionBreak />
-          </Route>
-        </Switch>
-      </>
+      <Switch>
+        <Route path={`${match.path}/focus`}>
+          <SessionFocus />
+        </Route>
+        <Route path={`${match.path}/break`}>
+          <SessionBreak />
+        </Route>
+      </Switch>
     </Modal>
   )
 }

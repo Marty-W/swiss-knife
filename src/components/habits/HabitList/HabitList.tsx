@@ -1,49 +1,58 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { useErrorHandler } from 'react-error-boundary'
 import DayRow from './DayRow'
 import Habit from './Habit'
-import { db } from '../../../firebase/firebase'
 import { generateDays } from '../../../utils/utils'
-import useCurrentUser from '../../../hooks/useCurrentUser'
 import { IFirebaseHabit } from '../../../utils/interfaces'
 import Spinner from '../../UI/Spinner'
+import useUserDocumentRef from '../../../hooks/useUserDocumentRef'
 
 interface Props {
   toggleDetail: () => void
 }
 
 const HabitList: React.FC<Props> = ({ toggleDetail }) => {
-  const user = useCurrentUser()
-  const listRef = db.collection(`users/${user?.uid}/habitList`)
-  const [habits, loading] = useCollectionData<IFirebaseHabit>(listRef)
+  const habitList = useUserDocumentRef(
+    'habitList',
+  ) as firebase.firestore.CollectionReference
+  const [habits, loading, error] = useCollectionData<IFirebaseHabit>(habitList)
+  const errorHandler = useErrorHandler()
   const days = generateDays()
+
+  useEffect(() => {
+    error && errorHandler(error)
+  }, [error, errorHandler])
+
   return (
-    <Wrapper>
-      <DayRow days={days} />
-      {!habits?.length && (
-        <CtaText>Create your first habit to see the dashboard.</CtaText>
-      )}
+    <>
       {loading ? (
         <Spinner />
       ) : (
-        habits?.map((habit) => {
-          const { color, name, id, timePoints, description } = habit
-          return (
-            <Habit
-              days={days}
-              color={color}
-              name={name}
-              id={id}
-              key={id}
-              timePoints={timePoints}
-              description={description}
-              toggleDetail={toggleDetail}
-            />
-          )
-        })
+        <Wrapper>
+          <DayRow days={days} />
+          {!habits?.length && (
+            <CtaText>Create your first habit to see the dashboard.</CtaText>
+          )}
+          {habits?.map((habit) => {
+            const { color, name, id, timePoints, description } = habit
+            return (
+              <Habit
+                days={days}
+                color={color}
+                name={name}
+                id={id}
+                key={id}
+                timePoints={timePoints}
+                description={description}
+                toggleDetail={toggleDetail}
+              />
+            )
+          })}
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   )
 }
 

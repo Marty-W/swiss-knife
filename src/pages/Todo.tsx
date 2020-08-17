@@ -16,11 +16,11 @@ const Todo: React.FC = () => {
   const { path } = useRouteMatch()
 
   return (
-    <Wrapper>
+    <>
       {loading ? (
         <Spinner />
       ) : (
-        <>
+        <Wrapper>
           <Header numTasks={tasks.today.length} />
           <CountBox tasks={tasks.today} type="scheduled" />
           <CountBox tasks={tasks.stash} type="stashed" />
@@ -41,9 +41,9 @@ const Todo: React.FC = () => {
               <Stash tasks={tasks?.stash} />
             </Route>
           </Switch>
-        </>
+        </Wrapper>
       )}
-    </Wrapper>
+    </>
   )
 }
 

@@ -4,11 +4,9 @@ import { motion } from 'framer-motion'
 import styled from 'styled-components/macro'
 import { FirebaseError } from 'firebase'
 import { AiFillCheckCircle } from 'react-icons/ai'
+import { useErrorHandler } from 'react-error-boundary'
 import { TaskWrapper } from './Task'
 import useUserDocumentRef from '../../hooks/useUserDocumentRef'
-import useCurrentUser from '../../hooks/useCurrentUser'
-import { db } from '../../firebase/firebase'
-import { ITask } from '../../utils/interfaces'
 
 interface Props {
   removeNewTask: () => void
@@ -19,8 +17,10 @@ const NewTask: React.FC<Props> = ({ removeNewTask, isNewTask }) => {
   const [title, setTitle] = useState('')
   const { addToast } = useToasts()
   const inputRef = useRef<null | HTMLInputElement>(null)
-  const user = useCurrentUser()
-  const taskListRef = db.collection(`users/${user?.uid}/taskList`).doc()
+  const taskListRef = useUserDocumentRef(
+    'taskList',
+  ) as firebase.firestore.CollectionReference
+  const errorHandler = useErrorHandler()
 
   useEffect(() => {
     if (inputRef && inputRef.current) {
@@ -29,15 +29,16 @@ const NewTask: React.FC<Props> = ({ removeNewTask, isNewTask }) => {
   })
 
   const addTask = async () => {
+    const newTask = taskListRef.doc()
     if (!title) {
       return
     }
     try {
-      await taskListRef.set({
+      await newTask.set({
         title,
         done: false,
         timestamp: Date.now(),
-        id: taskListRef.id,
+        id: newTask.id,
       })
       setTitle('')
     } catch (err) {
@@ -49,7 +50,7 @@ const NewTask: React.FC<Props> = ({ removeNewTask, isNewTask }) => {
     e === 'Escape' && removeNewTask()
 
     if (e === 'Enter' || typeof e === 'object') {
-      addTask()
+      addTask().catch((err) => errorHandler(err))
     }
   }
 

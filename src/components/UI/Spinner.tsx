@@ -15,6 +15,9 @@ const Spinner: React.FC = () => {
 export default Spinner
 
 const Wrapper = styled.div`
-  grid-area: content;
-  place-self: center;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `

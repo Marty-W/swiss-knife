@@ -8,7 +8,7 @@ import useCurrentUser from './useCurrentUser'
 import { db } from '../firebase/firebase'
 
 const useUserDocumentRef = (
-  type: 'habitList' | 'taskList' | 'pomoEntries',
+  type: 'habitList' | 'taskList' | 'pomoEntries' | 'pomoGoal',
   option?: 'today' | 'yesterday' | 'all',
 ) => {
   const user = useCurrentUser()
@@ -27,6 +27,10 @@ const useUserDocumentRef = (
         .where('endTime', '>', startOfYesterday().getTime())
         .where('endTime', '<', endOfYesterday().getTime())
     }
+  }
+
+  if (type === 'pomoGoal') {
+    return query.doc()
   }
 
   return query

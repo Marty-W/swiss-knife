@@ -88,7 +88,8 @@ export type TErrorDispatch = (err: TError) => void
 // FIREBASE
 
 export type TFQuery =
-  | firebase.firestore.QuerySnapshot
-  | firebase.firestore.CollectionReference
-  | firebase.firestore.Query
+  | firebase.firestore.QuerySnapshot<firebase.firestore.DocumentData>
+  | firebase.firestore.CollectionReference<firebase.firestore.DocumentData>
+  | firebase.firestore.DocumentReference
+  | firebase.firestore.Query<firebase.firestore.DocumentData>
   | firebase.firestore.DocumentSnapshot

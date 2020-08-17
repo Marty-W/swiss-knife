@@ -1,6 +1,8 @@
 import { Route, Switch, useHistory } from 'react-router-dom'
 import styled, { ThemeProvider } from 'styled-components'
 import React, { Suspense, lazy } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
+import { captureException } from '@sentry/react'
 import { LightTheme, DarkTheme } from './theme/theme'
 import Header, { Knife } from './components/UI/Header'
 import Navbar from './components/UI/Navbar/Navbar'
@@ -10,6 +12,7 @@ import useTheme from './hooks/useTheme'
 import GlobalStyle from './theme/global-style'
 import useCurrentUser from './hooks/useCurrentUser'
 import Spinner from './components/UI/Spinner'
+import ErrorFallback from './components/UI/ErrorFallback'
 
 const Habits = lazy(() => import('./pages/Habits'))
 const Todo = lazy(() => import('./pages/Todo'))
@@ -29,24 +32,29 @@ const App: React.FC = () => {
           <Knife onClick={() => history.push('/')} />
         </Logo>
         {!user ? (
-          <Spinner />
+          <LazySpinner />
         ) : (
-          <Suspense fallback={<Spinner />}>
-            <Switch>
-              <Route path="/session">
-                <PomoProvider>
-                  <Session />
-                </PomoProvider>
-              </Route>
-              <Route path="/pomodoro">
-                <PomoProvider>
-                  <Pomodoro />
-                </PomoProvider>
-              </Route>
-              <Route path="/habits" component={Habits} />
-              <Route path="/todo" component={Todo} />
-              <Route path="/" component={Home} />
-            </Switch>
+          <Suspense fallback={<LazySpinner />}>
+            <ErrorBoundary
+              FallbackComponent={ErrorFallback}
+              onError={(err) => captureException(err)}
+            >
+              <Switch>
+                <Route path="/session">
+                  <PomoProvider>
+                    <Session />
+                  </PomoProvider>
+                </Route>
+                <Route path="/pomodoro">
+                  <PomoProvider>
+                    <Pomodoro />
+                  </PomoProvider>
+                </Route>
+                <Route path="/habits" component={Habits} />
+                <Route path="/todo" component={Todo} />
+                <Route path="/" component={Home} />
+              </Switch>
+            </ErrorBoundary>
           </Suspense>
         )}
         <Navbar />
@@ -56,6 +64,7 @@ const App: React.FC = () => {
 }
 const BodyWrapper = styled.div`
   overflow: hidden;
+  position: relative;
   width: 100vw;
   min-height: 100vh;
   display: grid;
@@ -107,5 +116,7 @@ const Logo = styled.div`
     }
   }
 `
+
+const LazySpinner = styled(Spinner)``
 
 export default App

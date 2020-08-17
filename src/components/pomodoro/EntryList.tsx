@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components/macro'
 import { useCollectionData } from 'react-firebase-hooks/firestore'
-import { useToasts } from 'react-toast-notifications'
+import { useErrorHandler } from 'react-error-boundary'
 import { IPomoEntry, THistoryQuery } from '../../utils/interfaces'
 import useUserDocumentRef from '../../hooks/useUserDocumentRef'
 import Entry from './Entry'
@@ -13,32 +13,38 @@ interface Props {
 }
 
 const EntryList: React.FC<Props> = ({ query }) => {
-  const entriesRef = useUserDocumentRef('pomoEntries', query)
+  const entriesRef = useUserDocumentRef(
+    'pomoEntries',
+    query,
+  ) as firebase.firestore.Query
   const [entries, loading, error] = useCollectionData<IPomoEntry>(entriesRef)
-  const { addToast } = useToasts()
+  const handleError = useErrorHandler()
 
   useEffect(() => {
-    error && addToast(error.message, { appearance: 'error' })
-  }, [error, addToast])
+    error && handleError(error)
+  }, [error, handleError])
   return (
-    <EntriesWrapper>
+    <>
       {loading ? (
         <Spinner />
-      ) : entries?.length ? (
-        entries.map(({ duration, endTime, startTime, id }) => (
-          <Entry key={id} start={startTime} end={endTime} dur={duration} />
-        ))
       ) : (
-        <InfoText>Finish your first session to see your entry.</InfoText>
+        <EntriesWrapper>
+          {entries?.length ? (
+            entries.map(({ duration, endTime, startTime, id }) => (
+              <Entry key={id} start={startTime} end={endTime} dur={duration} />
+            ))
+          ) : (
+            <InfoText>Finish your first session to see your entry.</InfoText>
+          )}
+        </EntriesWrapper>
       )}
-    </EntriesWrapper>
+    </>
   )
 }
 export default EntryList
 
 const EntriesWrapper = styled.div`
   display: grid;
-  height: 100%;
   overflow: hidden;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(auto-fill, minmax(2.5rem, 1fr));

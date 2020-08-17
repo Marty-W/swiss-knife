@@ -63,6 +63,7 @@ const ColWrapper = styled.div`
   grid-row: 2;
   display: flex;
   justify-content: space-evenly;
+  margin-bottom: 1rem;
 `
 
 const Options = styled.div`

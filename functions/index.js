@@ -10,7 +10,7 @@ exports.createUserDb = functions
     const { uid, email, displayName } = user
     const userRef = admin.firestore().collection('users').doc(uid)
 
-    userRef.set({
+    return userRef.set({
       name: displayName,
       email,
       pomoGoal: {
