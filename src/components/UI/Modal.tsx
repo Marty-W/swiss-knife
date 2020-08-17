@@ -83,7 +83,7 @@ const ModalCardWrapper = styled(motion.div)<{
   padding: 1em;
   background-color: ${(props) =>
     props.variant === 'info'
-      ? props.theme.colors.accent
+      ? props.theme.colors.secondary
       : props.theme.colors.secondary};
   border-radius: 10px;
   left: 50%;

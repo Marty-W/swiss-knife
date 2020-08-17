@@ -64,14 +64,14 @@ const Wrapper = styled.div`
 
 const Minus = styled(BsChevronLeft)`
   position: absolute;
-  left: 1rem;
+  left: 0;
   cursor: pointer;
 `
 
 const Plus = styled(BsChevronRight)`
   cursor: pointer;
   position: absolute;
-  right: 1rem;
+  right: 0;
 `
 
 const Text = styled.p`

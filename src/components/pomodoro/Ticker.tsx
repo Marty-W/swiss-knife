@@ -65,11 +65,14 @@ const Ticker: React.FC = () => {
   }
 
   const addToTimeGoal = async () => {
-    await goalRef.update({
-      completed: firebase.firestore.FieldValue.increment(
-        duration.as('minutes'),
-      ),
-    })
+    await goalRef.set(
+      {
+        completed: firebase.firestore.FieldValue.increment(
+          duration.as('minutes'),
+        ),
+      },
+      { merge: true },
+    )
   }
 
   const calculatePercentage = () => {

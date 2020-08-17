@@ -47,7 +47,8 @@ const EntriesWrapper = styled.div`
   display: grid;
   overflow: hidden;
   grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(auto-fill, minmax(2.5rem, 1fr));
+  grid-template-rows: 3rem;
+  grid-auto-rows: 3rem;
   place-items: center;
   & div:nth-child(even) {
     background-color: ${(props) => props.theme.colors.primary};

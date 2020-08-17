@@ -89,7 +89,7 @@ const InfoCard: React.FC<Props> = () => {
 }
 
 const Wrapper = styled.div`
-  color: #eff6ee;
+  color: ${(props) => props.theme.colors.tertiary};
   height: 100%;
   padding: 1.5rem;
 `
@@ -115,7 +115,7 @@ const Rows = styled.div`
 `
 
 const Row = styled(motion.div)`
-  background-color: #f23d4c;
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 7px;
   display: grid;
   grid-template-columns: 1.2rem 1fr;

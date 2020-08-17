@@ -30,7 +30,7 @@ const useUserDocumentRef = (
   }
 
   if (type === 'pomoGoal') {
-    return query.doc()
+    return query.doc('goal')
   }
 
   return query

@@ -50,14 +50,9 @@ const StyledButton = styled(motion.button)<{
   display: inline-block;
   padding: 0.46rem 1.6rem;
   border-radius: 0.4rem;
-  color: ${(props) =>
-    props.themeVariant === 'dark'
-      ? props.theme.colors.tertiary
-      : props.theme.colors.primary};
+  color: #eff6ee;
   background-color: ${(props) =>
-    props.variant === 'primary'
-      ? props.theme.colors.accent
-      : props.theme.colors.primary};
+    props.variant === 'primary' ? props.theme.colors.accent : '#141316'};
   text-align: center;
   cursor: pointer;
   border: none;
