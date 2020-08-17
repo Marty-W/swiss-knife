@@ -117,6 +117,8 @@ const Logo = styled.div`
   }
 `
 
-const LazySpinner = styled(Spinner)``
+const LazySpinner = styled(Spinner)`
+  grid-area: content;
+`
 
 export default App
