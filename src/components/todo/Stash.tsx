@@ -77,8 +77,8 @@ const Stash: React.FC<Props> = ({ tasks }) => {
 }
 
 const MoveButton = styled(Button)`
+  width: 20%;
   margin: 0 auto;
-
   &:disabled {
     filter: grayscale(100%);
   }

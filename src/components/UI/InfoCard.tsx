@@ -103,6 +103,11 @@ const CardHeader = styled.div`
   & svg {
     height: 2.5rem;
     width: 2.5rem;
+    margin-right: 1rem;
+
+    & path {
+      fill: ${(props) => props.theme.colors.accent};
+    }
   }
 `
 

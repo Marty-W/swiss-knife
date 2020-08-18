@@ -3,8 +3,6 @@ import styled from 'styled-components/macro'
 import { useErrorHandler } from 'react-error-boundary'
 import { useRouteMatch } from 'react-router-dom'
 import Checkbox from '../UI/Checkbox'
-import { db } from '../../firebase/firebase'
-import useCurrentUser from '../../hooks/useCurrentUser'
 import useUserDocumentRef from '../../hooks/useUserDocumentRef'
 
 interface Props {

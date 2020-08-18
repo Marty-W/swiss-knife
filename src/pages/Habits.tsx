@@ -28,7 +28,7 @@ const Habits: React.FC = () => {
         </Route>
       </Switch>
       <HabitList toggleDetail={toggleDetail} />
-      <Modal isShowing={newIsShowing} hide={toggleNew} modalHeight="40vh">
+      <Modal isShowing={newIsShowing} hide={toggleNew} modalHeight="30vh">
         <NewHabit hide={toggleNew} />
       </Modal>
       <Plus onClick={toggleNew} />
