@@ -38,7 +38,7 @@ I created this app to show off my skills but also because I've always been findi
 
 ## About the project
 
-This app is built with React (the one with hooks). It's using modern react features, i.e. Context, Reducers, Portals, Error Boundaries and some custom hooks. In the beginning, I've used Javascript and then slowly migrated to Typescript for additional type-safety. 
+This app is built with React (the one with hooks). It's using modern react features, i.e. Context, Reducers, Portals, Error Boundaries, Code Splitting and some custom hooks. In the beginning, I've used Javascript and then slowly migrated to Typescript for additional type-safety. 
 
 Context is essential mainly for the Pomodoro module and is working in hand with a reducer to operate the state of a current session. This way, I can dispatch actions from all components bellow the Context.Provider and also consume its state.
 
