@@ -45,7 +45,7 @@ const Wrapper = styled.div`
   grid-template-rows: 2fr 1fr;
   place-items: center;
   grid-template-areas:
-    '. timer .'
+    'timer timer timer'
     '. btn rating';
 `
 

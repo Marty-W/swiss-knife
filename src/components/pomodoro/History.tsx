@@ -9,7 +9,7 @@ import EntryList from './EntryList'
 const History: React.FC = () => {
   const [query, setQuery] = useState<THistoryQuery>('today')
   return (
-    <Wrapper header="History" gridArea="history">
+    <CardWithHeader header="History" gridArea="history">
       <HistoryWrapper>
         <Options
           onChange={(e) =>
@@ -49,19 +49,14 @@ const History: React.FC = () => {
         </ColWrapper>
         <EntryList query={query} />
       </HistoryWrapper>
-    </Wrapper>
+    </CardWithHeader>
   )
 }
 
-const Wrapper = styled(CardWithHeader)`
-  grid-area: history;
-  position: relative;
-  overflow-y: auto;
-`
 const HistoryWrapper = styled.div`
   display: grid;
   height: 100%;
-  grid-template-rows: 2rem 1fr 0.1fr;
+  grid-template-rows: 2rem 1fr 2rem;
   grid-template-columns: 1fr;
 `
 

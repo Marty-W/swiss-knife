@@ -30,7 +30,7 @@ const Wrapper = styled.div`
   grid-area: content;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 2fr 1.8fr 50%;
+  grid-template-rows: 1fr 1fr 2.3fr;
   grid-template-areas:
     'timer'
     'goal'
