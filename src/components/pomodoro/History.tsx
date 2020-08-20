@@ -74,6 +74,10 @@ const Options = styled.div`
   justify-content: end;
   align-items: center;
   margin-bottom: 1rem;
+
+  input[type='radio']:checked {
+    background-color: ${(props) => props.theme.colors.accent};
+  }
 `
 
 export default History

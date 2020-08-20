@@ -1,20 +1,16 @@
-import { AnimateSharedLayout, motion } from 'framer-motion'
 import React from 'react'
 import styled from 'styled-components/macro'
 import NavItems from './NavItems'
 
 const Navbar: React.FC = () => (
-  <AnimateSharedLayout>
-    <StyledNavbar>
-      <NavItems />
-    </StyledNavbar>
-  </AnimateSharedLayout>
+  <StyledNavbar>
+    <NavItems />
+  </StyledNavbar>
 )
 
-const StyledNavbar = styled(motion.nav)`
+const StyledNavbar = styled.nav`
   grid-area: nav;
   position: relative;
-  z-index: 10;
   background-color: ${(props) => props.theme.colors.secondary};
   @media (min-width: 520px) {
     max-width: 80px;

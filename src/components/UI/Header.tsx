@@ -3,8 +3,8 @@ import React from 'react'
 import styled from 'styled-components/macro'
 import { BsQuestion } from 'react-icons/bs'
 import { useLocation, useHistory } from 'react-router-dom'
+import { AiOutlineLogin, AiOutlineLogout } from 'react-icons/ai'
 import Auth from '../../pages/Auth'
-import Button from './Button'
 import DarkModeToggle from './DarkModeToggle'
 import Modal from './Modal'
 import { signOut } from '../../firebase/firebase'
@@ -33,13 +33,15 @@ const Header: React.FC<Props> = ({ themeToggle }) => {
         <Question onClick={toggleInfo} pathname={pathname} />
         <DarkModeToggle themeToggle={themeToggle} />
         {currentUser && !currentUser.isAnonymous ? (
-          <Button onClick={() => signOut()} variant="primary">
-            Sign out
-          </Button>
+          <AuthButton onClick={() => signOut()}>
+            <AiOutlineLogout />
+            <span>sign out</span>
+          </AuthButton>
         ) : (
-          <Button onClick={() => toggleAuth()} variant="primary">
-            Sign in
-          </Button>
+          <AuthButton onClick={() => toggleAuth()}>
+            <AiOutlineLogin />
+            <span>sign in</span>
+          </AuthButton>
         )}
       </ButtonWrapper>
       <Modal isShowing={isAuthShowing} hide={toggleAuth} modalHeight="50vh">
@@ -63,6 +65,12 @@ const Wrapper = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 0 1rem;
+
+  @media (min-width: 1000px) {
+    padding: 0;
+    display: initial;
+    background-color: ${(props) => props.theme.colors.secondary};
+  }
 `
 
 const Logo = styled.div`
@@ -92,19 +100,49 @@ export const Knife = styled(GiSwissArmyKnife)`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
-  width: 60%;
   max-width: 300px;
+  min-height: 50%;
+  flex: 1;
+
+  @media (min-width: 1000px) {
+    min-height: 70%;
+    flex-direction: column;
+    justify-content: space-around;
+  }
 `
 const Question = styled(BsQuestion)<{ pathname: string }>`
   width: 1.5rem;
   height: 1.5rem;
   cursor: pointer;
   display: ${(props) => (props.pathname === '/' ? 'none' : 'block')};
+  fill: ${(props) => props.theme.colors.tertiary};
 
   &:hover {
     fill: ${(props) => props.theme.colors.accent};
+  }
+`
+
+const AuthButton = styled.button`
+  background: none;
+  border: none;
+  padding: 0;
+  color: ${(props) => props.theme.colors.accent};
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  min-width: auto;
+  min-height: 100%;
+
+  & svg {
+    height: 100%;
+    margin-right: 0.5rem;
+  }
+
+  &:hover {
+    color: ${(props) => props.theme.colors.tertiary};
+    cursor: pointer;
   }
 `
 

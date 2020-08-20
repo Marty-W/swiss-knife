@@ -41,12 +41,11 @@ const Wrapper = styled.div`
   position: relative;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 0.2fr 0.1fr 0.3fr 0.3fr 0.2fr 40vh;
+  grid-template-rows: 0.2fr 0.1fr 0.3fr 0.3fr 50%;
   grid-template-areas:
     'header header'
     'subheader subheader'
     'desc desc'
-    'features features'
     'features features'
     'svg svg';
 
@@ -57,14 +56,14 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 1000px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     grid-template-rows: 0.3fr 0.1fr repeat(3, 1fr);
     grid-template-areas:
-      'header header header header'
-      'subheader subheader subheader subheader'
-      'desc desc svg svg'
-      'features features svg svg'
-      '. . svg svg';
+      'header header'
+      'subheader subheader'
+      'desc svg'
+      'features svg'
+      '. svg';
   }
 `
 
@@ -87,8 +86,7 @@ const Features = styled(motion.ul)`
   margin: 0;
   padding: 0;
   grid-area: features;
-  justify-self: start;
-  align-self: center;
+  place-self: center;
   & li {
     display: flex;
     align-items: center;
@@ -102,6 +100,7 @@ const Features = styled(motion.ul)`
 
   @media (min-width: 1000px) {
     justify-self: center;
+    align-self: start;
   }
 `
 
@@ -111,6 +110,10 @@ const Desc = styled.div`
   padding: 0 1rem;
   line-height: 1.3;
   align-self: center;
+
+  @media (min-width: 1000px) {
+    font-size: 1.2rem;
+  }
 `
 
 const SvgWrapper = styled.div`

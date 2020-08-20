@@ -28,7 +28,6 @@ const Pomodoro: React.FC = () => {
 
 const Wrapper = styled.div`
   grid-area: content;
-  position: relative;
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 2fr 1.8fr 50%;
@@ -39,13 +38,22 @@ const Wrapper = styled.div`
   grid-row-gap: 2rem;
 
   @media (min-width: 1000px) {
-    grid-template-columns: 0.3fr 1fr 1fr 0.6fr 0.3fr;
-    grid-template-rows: repeat(4, 1fr);
+    margin-bottom: 5rem;
+    grid-template-columns: 10rem 1fr 10rem;
     grid-template-areas:
-      '. timer svg svg .'
-      '. goal svg svg .'
-      '. history history history .'
-      '. history history history .';
+      '. timer .'
+      '. goal .'
+      '. history .';
+  }
+
+  @media (min-width: 1400px) {
+    grid-row-gap: 0;
+    grid-template-columns: 0.2fr 1fr 0.2fr 0.7fr 0.2fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas:
+      '. timer . history .'
+      '. svg . history .'
+      '. goal . history .';
   }
 `
 

@@ -41,11 +41,11 @@ export default FullTimePicker
 const Wrapper = styled.div`
   height: 100%;
   display: grid;
-  grid-template-columns: 1fr 2.5fr 1fr;
+  grid-template-columns: 1fr 3fr 1fr;
   grid-template-rows: 2fr 1fr;
   place-items: center;
   grid-template-areas:
-    'timer timer timer'
+    '. timer .'
     '. btn rating';
 `
 

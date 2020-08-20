@@ -54,7 +54,6 @@ const Wrapper = styled.div`
   }
 
   @media (min-width: 1000px) {
-    height: 100%;
     justify-content: center;
     margin-top: 0;
   }
@@ -62,7 +61,7 @@ const Wrapper = styled.div`
 
 const NavItem = motion.custom(styled(NavLink)`
   @media (min-width: 520px) {
-    margin-bottom: 2rem;
+    margin-bottom: 4rem;
   }
 
   &.active {

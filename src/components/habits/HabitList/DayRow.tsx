@@ -9,20 +9,23 @@ interface Props {
 }
 
 const DayRow: React.FC<Props> = ({ days }) => (
-  <Wrapper>
-    {days.map((day, index) => {
-      const parsedDate = format(day, 'd')
-      const parsedMonth = format(day, 'LLL')
-      return index === 0 ? (
-        <Today key={uuid()}>Today</Today>
-      ) : (
-        <DayWrapper key={uuid()}>
-          <Date>{parsedDate}</Date>
-          <Month>{parsedMonth}</Month>
-        </DayWrapper>
-      )
-    })}
-  </Wrapper>
+  <>
+    <Filler />
+    <Wrapper>
+      {days.map((day, index) => {
+        const parsedDate = format(day, 'd')
+        const parsedMonth = format(day, 'LLL')
+        return index === 0 ? (
+          <Today key={uuid()}>Today</Today>
+        ) : (
+          <DayWrapper key={uuid()}>
+            <Date>{parsedDate}</Date>
+            <Month>{parsedMonth}</Month>
+          </DayWrapper>
+        )
+      })}
+    </Wrapper>
+  </>
 )
 
 const Wrapper = styled.div`
@@ -35,7 +38,15 @@ const Wrapper = styled.div`
   grid-auto-columns: 0px;
   overflow: hidden;
   background-color: ${(props) => props.theme.colors.secondary};
-  border-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top-right-radius: 8px;
+`
+
+const Filler = styled.div`
+  background-color: ${(props) => props.theme.colors.secondary};
+  grid-column: 1 / span 1;
+  border-bottom-left-radius: 8px;
+  border-top-left-radius: 8px;
 `
 
 const DayWrapper = styled.div`

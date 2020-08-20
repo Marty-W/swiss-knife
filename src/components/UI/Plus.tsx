@@ -27,6 +27,10 @@ const PlusSVG = styled(motion.svg)`
   height: 3rem;
   bottom: 0;
   right: 0;
+
+  @media (min-width: 1000px) {
+    bottom: 5rem;
+  }
 `
 
 export default Plus

@@ -63,10 +63,9 @@ const App: React.FC = () => {
   )
 }
 const BodyWrapper = styled.div`
-  overflow: hidden;
   position: relative;
   width: 100vw;
-  min-height: 100vh;
+  height: 100vh;
   display: grid;
   grid-template-rows: 7vh 1fr 7vh;
   grid-row-gap: 1rem;
@@ -78,23 +77,21 @@ const BodyWrapper = styled.div`
 
   @media (min-width: 520px) {
     grid-row-gap: 0;
-    grid-template-columns: minmax(50px, 80px) 0.2fr 3fr 0.2fr;
-    grid-template-rows: 3rem 1rem 2fr 3rem;
+    grid-template-columns: minmax(50px, 80px) 0.1fr 1.5fr 0.1fr;
+    grid-template-rows: 5rem 2fr 5rem;
     grid-template-areas:
-      'logo head head head'
-      'nav . . .'
+      'logo . head head'
       'nav . content .'
       'nav . . .';
   }
 
   @media (min-width: 1000px) {
     grid-template-columns: 15rem 2rem 1fr 2rem;
-    grid-template-rows: 4rem 1rem 2fr 4rem;
+    grid-template-rows: 0.3fr 2fr 0.8fr;
     grid-template-areas:
-      'logo head head head'
-      'nav . . .'
+      'logo . . .'
       'nav . content .'
-      'nav . . . ';
+      'head . content .';
   }
 `
 

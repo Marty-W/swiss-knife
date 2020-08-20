@@ -34,7 +34,6 @@ const TimePicker: React.FC = () => {
 
 const Wrapper = styled.div`
   grid-area: timer;
-  place-self: center;
 `
 
 const Chevron = styled(motion.button)`
