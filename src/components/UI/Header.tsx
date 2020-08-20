@@ -136,13 +136,24 @@ const AuthButton = styled.button`
   min-height: 100%;
 
   & svg {
-    height: 100%;
+    width: 1.2rem;
+    height: 1.2rem;
+    display: block;
     margin-right: 0.5rem;
   }
 
   &:hover {
     color: ${(props) => props.theme.colors.tertiary};
     cursor: pointer;
+  }
+
+  @media (min-width: 1000px) {
+    font-size: 1.3rem;
+
+    & svg {
+      height: 2rem;
+      width: 2rem;
+    }
   }
 `
 
