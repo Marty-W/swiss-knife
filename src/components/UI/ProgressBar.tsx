@@ -27,7 +27,7 @@ export default ProgressBar
 
 const Bar = styled.div`
   grid-area: bar;
-  background-color: ${(props) => props.theme.colors.secondary};
+  background-color: ${(props) => props.theme.colors.primary};
   border-radius: 20px;
   position: relative;
   height: 2em;
